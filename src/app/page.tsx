@@ -208,7 +208,7 @@ export default function Home() {
         />
       </div>
       
-      <main className="min-h-screen relative" style={{ position: 'relative', zIndex: 1 }}>
+            <main className="min-h-screen relative" style={{ position: 'relative', zIndex: 1 }}>
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl">
         {/* Header */}
