@@ -45,7 +45,21 @@ ${prompt}
 
 Output ONLY compressed text, nothing else:`;
 
+    // Check if API key is configured
+    if (!process.env.GOOGLE_GENAI_API_KEY || process.env.GOOGLE_GENAI_API_KEY === 'your_api_key_here') {
+      console.warn('⚠️ GOOGLE_GENAI_API_KEY not configured, using simple compression fallback');
+      const fallback = this.simpleCompress(prompt, targetRatio);
+      return {
+        original: prompt,
+        compressed: fallback,
+        compressionRatio: ((prompt.length - fallback.length) / prompt.length) * 100,
+        estimatedTokenSavings: Math.floor((prompt.length - fallback.length) * 0.25),
+        semanticScore: 85,
+      };
+    }
+
     try {
+      console.log(`🤖 Calling Gemini API for compression (${originalTokens} tokens)...`);
       const response = await ai.generate({
         model: gemini15Flash,
         prompt: compressionPrompt,
@@ -54,6 +68,7 @@ Output ONLY compressed text, nothing else:`;
           maxOutputTokens: Math.max(4096, originalTokens * 2),
         },
       });
+      console.log(`✅ Gemini API responded`);
 
       let compressed = response.text.trim();
       
