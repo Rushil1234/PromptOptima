@@ -9,64 +9,77 @@ export interface SymbolMapping {
 }
 
 export const SYNTHLANG_SYMBOLS: SymbolMapping[] = [
-  // Core Actions
-  { symbol: '⟐', concept: 'CREATE', description: 'Generate, create, make, build', category: 'action' },
-  { symbol: '⟑', concept: 'ANALYZE', description: 'Examine, study, analyze, investigate', category: 'action' },
-  { symbol: '⟒', concept: 'TRANSFORM', description: 'Convert, change, transform, modify', category: 'action' },
-  { symbol: '⟓', concept: 'DELETE', description: 'Remove, delete, eliminate', category: 'action' },
-  { symbol: '⟔', concept: 'UPDATE', description: 'Update, modify, change, edit', category: 'action' },
+  // Core Actions - Using Japanese Kanji
+  { symbol: '作', concept: 'CREATE', description: 'Generate, create, make, build, produce, construct, develop', category: 'action' },
+  { symbol: '析', concept: 'ANALYZE', description: 'Examine, study, analyze, investigate, research, review', category: 'action' },
+  { symbol: '変', concept: 'TRANSFORM', description: 'Convert, change, transform, modify, alter, adjust', category: 'action' },
+  { symbol: '削', concept: 'DELETE', description: 'Remove, delete, eliminate, erase, clear', category: 'action' },
+  { symbol: '更', concept: 'UPDATE', description: 'Update, modify, change, edit, revise, refresh', category: 'action' },
+  { symbol: '読', concept: 'READ', description: 'Read, load, retrieve, fetch, get, access', category: 'action' },
+  { symbol: '書', concept: 'WRITE', description: 'Write, save, store, record, output', category: 'action' },
+  { symbol: '送', concept: 'SEND', description: 'Send, transmit, post, submit, deliver', category: 'action' },
+  { symbol: '受', concept: 'RECEIVE', description: 'Receive, get, accept, obtain', category: 'action' },
   
-  // Data Types
-  { symbol: '◆', concept: 'TEXT', description: 'Text, string, content', category: 'type' },
-  { symbol: '◇', concept: 'NUMBER', description: 'Number, integer, value', category: 'type' },
-  { symbol: '◈', concept: 'LIST', description: 'List, array, collection', category: 'type' },
-  { symbol: '◉', concept: 'OBJECT', description: 'Object, structure, entity', category: 'type' },
-  { symbol: '◊', concept: 'BOOLEAN', description: 'True/false, boolean', category: 'type' },
+  // Data Types - Japanese Kanji
+  { symbol: '文', concept: 'TEXT', description: 'Text, string, content, document, message', category: 'type' },
+  { symbol: '数', concept: 'NUMBER', description: 'Number, integer, value, count, quantity', category: 'type' },
+  { symbol: '表', concept: 'LIST', description: 'List, array, collection, table, sequence', category: 'type' },
+  { symbol: '物', concept: 'OBJECT', description: 'Object, structure, entity, item, thing', category: 'type' },
+  { symbol: '真', concept: 'BOOLEAN', description: 'True, false, boolean, binary', category: 'type' },
+  { symbol: '日', concept: 'DATE', description: 'Date, time, datetime, timestamp', category: 'type' },
   
-  // Modifiers
-  { symbol: '⊕', concept: 'WITH', description: 'Including, with, containing', category: 'modifier' },
-  { symbol: '⊖', concept: 'WITHOUT', description: 'Excluding, without, omitting', category: 'modifier' },
-  { symbol: '⊗', concept: 'MULTIPLE', description: 'Multiple, many, several', category: 'modifier' },
-  { symbol: '⊙', concept: 'SINGLE', description: 'Single, one, unique', category: 'modifier' },
+  // Modifiers - Japanese Kanji
+  { symbol: '有', concept: 'WITH', description: 'Including, with, containing, having, plus', category: 'modifier' },
+  { symbol: '無', concept: 'WITHOUT', description: 'Excluding, without, omitting, lacking, minus', category: 'modifier' },
+  { symbol: '多', concept: 'MULTIPLE', description: 'Multiple, many, several, numerous', category: 'modifier' },
+  { symbol: '単', concept: 'SINGLE', description: 'Single, one, unique, individual, sole', category: 'modifier' },
+  { symbol: '全', concept: 'ALL', description: 'All, every, complete, entire, total', category: 'modifier' },
+  { symbol: '新', concept: 'NEW', description: 'New, fresh, latest, recent', category: 'modifier' },
+  { symbol: '旧', concept: 'OLD', description: 'Old, previous, former, past', category: 'modifier' },
   
-  // Logic
-  { symbol: '∧', concept: 'AND', description: 'And, also, plus', category: 'logic' },
-  { symbol: '∨', concept: 'OR', description: 'Or, alternatively', category: 'logic' },
-  { symbol: '¬', concept: 'NOT', description: 'Not, negation', category: 'logic' },
-  { symbol: '→', concept: 'THEN', description: 'Then, result, output', category: 'logic' },
-  { symbol: '↔', concept: 'IFF', description: 'If and only if, bidirectional', category: 'logic' },
+  // Logic - Mix of Japanese and symbols for clarity
+  { symbol: '且', concept: 'AND', description: 'And, also, plus, in addition', category: 'logic' },
+  { symbol: '或', concept: 'OR', description: 'Or, alternatively, either', category: 'logic' },
+  { symbol: '非', concept: 'NOT', description: 'Not, negation, opposite, inverse', category: 'logic' },
+  { symbol: '故', concept: 'THEN', description: 'Then, therefore, result, output, so', category: 'logic' },
+  { symbol: '条', concept: 'IF', description: 'If, condition, when, in case', category: 'logic' },
   
-  // Common Concepts
-  { symbol: '☰', concept: 'FUNCTION', description: 'Function, method, procedure', category: 'concept' },
-  { symbol: '☱', concept: 'CLASS', description: 'Class, type, structure', category: 'concept' },
-  { symbol: '☲', concept: 'API', description: 'API, interface, endpoint', category: 'concept' },
-  { symbol: '☳', concept: 'DATABASE', description: 'Database, storage, data', category: 'concept' },
-  { symbol: '☴', concept: 'USER', description: 'User, person, account', category: 'concept' },
-  { symbol: '☵', concept: 'ERROR', description: 'Error, exception, problem', category: 'concept' },
-  { symbol: '☶', concept: 'SUCCESS', description: 'Success, complete, done', category: 'concept' },
-  { symbol: '☷', concept: 'PROCESS', description: 'Process, workflow, pipeline', category: 'concept' },
+  // Common Concepts - Japanese Kanji
+  { symbol: '関', concept: 'FUNCTION', description: 'Function, method, procedure, operation', category: 'concept' },
+  { symbol: '類', concept: 'CLASS', description: 'Class, type, category, kind, structure', category: 'concept' },
+  { symbol: '接', concept: 'API', description: 'API, interface, endpoint, connection', category: 'concept' },
+  { symbol: '庫', concept: 'DATABASE', description: 'Database, storage, data, repository', category: 'concept' },
+  { symbol: '者', concept: 'USER', description: 'User, person, account, customer, client', category: 'concept' },
+  { symbol: '誤', concept: 'ERROR', description: 'Error, exception, problem, issue, bug', category: 'concept' },
+  { symbol: '成', concept: 'SUCCESS', description: 'Success, complete, done, finished', category: 'concept' },
+  { symbol: '処', concept: 'PROCESS', description: 'Process, workflow, pipeline, procedure', category: 'concept' },
+  { symbol: '系', concept: 'SYSTEM', description: 'System, platform, infrastructure', category: 'concept' },
   
-  // Domain Specific
-  { symbol: '✦', concept: 'FORMAT', description: 'Format, style, structure', category: 'domain' },
-  { symbol: '✧', concept: 'VALIDATE', description: 'Validate, verify, check', category: 'domain' },
-  { symbol: '✩', concept: 'OPTIMIZE', description: 'Optimize, improve, enhance', category: 'domain' },
-  { symbol: '✪', concept: 'SUMMARIZE', description: 'Summarize, condense, brief', category: 'domain' },
-  { symbol: '✫', concept: 'EXPLAIN', description: 'Explain, describe, clarify', category: 'domain' },
-  { symbol: '✬', concept: 'COMPARE', description: 'Compare, contrast, diff', category: 'domain' },
-  { symbol: '✭', concept: 'FILTER', description: 'Filter, select, choose', category: 'domain' },
-  { symbol: '✮', concept: 'SORT', description: 'Sort, order, arrange', category: 'domain' },
+  // Domain Specific - Japanese Kanji
+  { symbol: '形', concept: 'FORMAT', description: 'Format, style, structure, layout, pattern', category: 'domain' },
+  { symbol: '検', concept: 'VALIDATE', description: 'Validate, verify, check, confirm, test', category: 'domain' },
+  { symbol: '最', concept: 'OPTIMIZE', description: 'Optimize, improve, enhance, maximize', category: 'domain' },
+  { symbol: '要', concept: 'SUMMARIZE', description: 'Summarize, condense, brief, abstract', category: 'domain' },
+  { symbol: '説', concept: 'EXPLAIN', description: 'Explain, describe, clarify, detail', category: 'domain' },
+  { symbol: '比', concept: 'COMPARE', description: 'Compare, contrast, diff, match', category: 'domain' },
+  { symbol: '選', concept: 'FILTER', description: 'Filter, select, choose, pick, find', category: 'domain' },
+  { symbol: '順', concept: 'SORT', description: 'Sort, order, arrange, organize, rank', category: 'domain' },
+  { symbol: '計', concept: 'CALCULATE', description: 'Calculate, compute, count, total', category: 'domain' },
+  { symbol: '探', concept: 'SEARCH', description: 'Search, find, lookup, query, seek', category: 'domain' },
   
-  // Quantifiers
-  { symbol: '①', concept: 'FIRST', description: 'First, initial, start', category: 'quantifier' },
-  { symbol: '⑤', concept: 'FEW', description: 'Few, some, several', category: 'quantifier' },
-  { symbol: '⑩', concept: 'MANY', description: 'Many, numerous, lots', category: 'quantifier' },
-  { symbol: '∞', concept: 'ALL', description: 'All, every, complete', category: 'quantifier' },
+  // Quantifiers - Japanese Kanji
+  { symbol: '初', concept: 'FIRST', description: 'First, initial, start, beginning', category: 'quantifier' },
+  { symbol: '終', concept: 'LAST', description: 'Last, final, end, conclusion', category: 'quantifier' },
+  { symbol: '少', concept: 'FEW', description: 'Few, some, several, little', category: 'quantifier' },
+  { symbol: '大', concept: 'LARGE', description: 'Large, big, major, great', category: 'quantifier' },
+  { symbol: '小', concept: 'SMALL', description: 'Small, little, minor, tiny', category: 'quantifier' },
   
-  // Time
-  { symbol: '⏱', concept: 'NOW', description: 'Now, current, present', category: 'time' },
-  { symbol: '⏲', concept: 'BEFORE', description: 'Before, previous, past', category: 'time' },
-  { symbol: '⏳', concept: 'AFTER', description: 'After, next, future', category: 'time' },
-  { symbol: '⏰', concept: 'WHEN', description: 'When, time, moment', category: 'time' },
+  // Time - Japanese Kanji
+  { symbol: '今', concept: 'NOW', description: 'Now, current, present, today', category: 'time' },
+  { symbol: '前', concept: 'BEFORE', description: 'Before, previous, past, earlier, ago', category: 'time' },
+  { symbol: '後', concept: 'AFTER', description: 'After, next, future, later, following', category: 'time' },
+  { symbol: '時', concept: 'WHEN', description: 'When, time, moment, period', category: 'time' },
+  { symbol: '間', concept: 'DURING', description: 'During, while, throughout, between', category: 'time' },
 ];
 
 export class SynthLangEngine {
@@ -79,38 +92,71 @@ export class SynthLangEngine {
   }
 
   /**
-   * Compress a prompt using SynthLang symbols
+   * Compress a prompt using SynthLang symbols (Japanese Kanji-inspired)
    */
   compress(prompt: string): string {
     let compressed = prompt;
 
-    // Sort by concept length (longest first) to avoid partial matches
+    // Sort by description length (longest first) to avoid partial matches
     const sortedSymbols = [...SYNTHLANG_SYMBOLS].sort(
-      (a, b) => b.concept.length - a.concept.length
+      (a, b) => b.description.length - a.description.length
     );
 
-    // Replace concepts with symbols
+    // Replace concepts with Kanji symbols
     for (const { symbol, concept, description } of sortedSymbols) {
+      // Split description into individual terms
+      const terms = description.split(', ').map(t => t.trim());
+      
+      // Create patterns for each term
       const patterns = [
-        concept,
         concept.toLowerCase(),
-        ...description.split(', '),
+        ...terms,
       ];
 
       for (const pattern of patterns) {
-        const regex = new RegExp(`\\b${pattern}\\b`, 'gi');
+        // More flexible matching - handles variations
+        const regex = new RegExp(`\\b${this.escapeRegex(pattern)}(s|es|ed|ing)?\\b`, 'gi');
         compressed = compressed.replace(regex, symbol);
       }
     }
 
-    // Additional compression rules
+    // Additional aggressive compression rules
     compressed = compressed
+      // Remove politeness markers
       .replace(/\bplease\b/gi, '')
       .replace(/\bcould you\b/gi, '')
       .replace(/\bwould you\b/gi, '')
       .replace(/\bi want to\b/gi, '')
       .replace(/\bi need to\b/gi, '')
       .replace(/\bcan you\b/gi, '')
+      .replace(/\bwould like to\b/gi, '')
+      .replace(/\bi would like\b/gi, '')
+      
+      // Remove articles
+      .replace(/\bthe\b/gi, '')
+      .replace(/\ba\b/gi, '')
+      .replace(/\ban\b/gi, '')
+      
+      // Remove auxiliary verbs
+      .replace(/\bis\b/gi, '')
+      .replace(/\bare\b/gi, '')
+      .replace(/\bam\b/gi, '')
+      .replace(/\bwas\b/gi, '')
+      .replace(/\bwere\b/gi, '')
+      .replace(/\bhas\b/gi, '')
+      .replace(/\bhave\b/gi, '')
+      .replace(/\bhad\b/gi, '')
+      
+      // Remove common prepositions when context is clear
+      .replace(/\bof\b/gi, '')
+      .replace(/\bto\b/gi, '→')
+      .replace(/\bfrom\b/gi, '←')
+      .replace(/\bfor\b/gi, '')
+      .replace(/\bin\b/gi, '')
+      .replace(/\bon\b/gi, '')
+      .replace(/\bat\b/gi, '')
+      
+      // Collapse multiple spaces
       .replace(/\s+/g, ' ')
       .trim();
 

@@ -18,12 +18,14 @@ A sophisticated, dual-strategy optimization layer that acts as intelligent middl
 - Achieves **60-80% token reduction**
 - Works on any type of prompt
 
-#### 2. **SynthLang Symbolic System** ⟐
-- Specialized symbolic language inspired by Japanese Kanji
-- Custom compact glyphs represent complex concepts
-- Single symbols for entire instructions
+#### 2. **SynthLang Symbolic System** 作
+- Specialized symbolic language using **actual Japanese Kanji characters**
+- Inspired by how Kanji compresses meaning into single characters
+- Single Kanji represent entire concepts and actions
+- **60+ Kanji mappings** covering common programming and data operations
 - Achieves **80-90% token reduction**
-- Best for high-frequency, domain-specific tasks
+- Best for structured tasks and repetitive operations
+- Works completely **offline** - no API required
 
 ### Beautiful Glassmorphic UI
 - **Frosted glass panels** with layered depth
