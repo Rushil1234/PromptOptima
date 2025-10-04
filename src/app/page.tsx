@@ -377,13 +377,15 @@ export default function Home() {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Enter your prompt here... (e.g., 'Please analyze this text and provide a comprehensive summary with key points and insights about the main themes')"
-            className="input-field h-48 resize-none font-normal"
+            className="input-field h-48 resize-none font-normal relative z-50"
+            style={{ zIndex: 50 }}
           />
-          <div className="flex flex-col sm:flex-row gap-3 mt-4">
+          <div className="flex flex-col sm:flex-row gap-3 mt-4 relative z-50">
             <button
               onClick={handleCompress}
               disabled={loading || !prompt.trim()}
-              className="btn-primary flex-1 flex items-center justify-center gap-2"
+              className="btn-primary flex-1 flex items-center justify-center gap-2 relative z-50"
+              style={{ zIndex: 50 }}
             >
               {loading ? (
                 <>
@@ -400,7 +402,8 @@ export default function Home() {
             <button
               onClick={handleAnalyze}
               disabled={analyzing || !prompt.trim()}
-              className="btn-secondary flex items-center justify-center gap-2"
+              className="btn-secondary flex items-center justify-center gap-2 relative z-50"
+              style={{ zIndex: 50 }}
             >
               {analyzing ? (
                 <>
