@@ -1,12 +1,16 @@
 {
   "name": "llm-optimizer",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "description": "Production-ready dual-strategy LLM compression with 500+ Kanji symbols, tokenizer training, and comprehensive testing",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "synthlang": "node scripts/synthlang-cli.js",
+    "test": "npm run synthlang -- test",
+    "benchmark": "npm run synthlang -- benchmark"
   },
   "dependencies": {
     "@genkit-ai/ai": "^0.5.0",
