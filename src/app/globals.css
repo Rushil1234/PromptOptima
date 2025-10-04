@@ -16,6 +16,16 @@
 }
 
 /* Faulty Terminal Background - Glitch effect with scanlines */
+/* 🎨 CUSTOMIZATION: Adjust these CSS variables to change the effect */
+:root {
+  --terminal-color: 0, 255, 136;  /* RGB for cyan-green (change to 255,0,0 for red) */
+  --scanline-opacity: 0.08;        /* Scanlines visibility (0.03-0.15) */
+  --flicker-opacity: 0.05;         /* Screen flicker intensity (0.02-0.1) */
+  --grid-opacity: 0.06;            /* Grid line visibility (0.02-0.1) */
+  --glitch-brightness: 1.2;        /* Glitch line brightness (0.8-1.5) */
+  --vignette-strength: 0.4;        /* Edge darkening (0.2-0.6) */
+}
+
 .terminal-background {
   position: fixed;
   inset: 0;
@@ -25,48 +35,49 @@
   background: linear-gradient(to bottom, #0a0a0a 0%, #0f0f0f 100%);
 }
 
-/* Scanlines effect (CRT monitor) */
+/* Scanlines effect (CRT monitor) - MORE VISIBLE */
 .terminal-background::before {
   content: '';
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 255, 136, 0.03) 0px,
+    rgba(var(--terminal-color), var(--scanline-opacity)) 0px,
     transparent 1px,
     transparent 2px,
-    rgba(0, 255, 136, 0.03) 3px
+    rgba(var(--terminal-color), var(--scanline-opacity)) 3px
   );
   animation: scanlines 8s linear infinite;
   pointer-events: none;
 }
 
-/* Screen flicker effect */
+/* Screen flicker effect - MORE VISIBLE */
 .terminal-background::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 255, 136, 0.02);
+  background: rgba(var(--terminal-color), var(--flicker-opacity));
   animation: flicker 0.15s infinite;
   pointer-events: none;
 }
 
-/* Glitch lines */
+/* Glitch lines - ENHANCED & MOUSE REACTIVE */
 .glitch-line {
   position: absolute;
   width: 100%;
-  height: 2px;
+  height: 3px;  /* Increased from 2px */
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 255, 136, 0.8) 20%,
-    rgba(0, 255, 200, 0.6) 50%,
-    rgba(0, 255, 136, 0.8) 80%,
+    rgba(var(--terminal-color), calc(var(--glitch-brightness) * 0.9)) 20%,
+    rgba(var(--terminal-color), calc(var(--glitch-brightness) * 0.7)) 50%,
+    rgba(var(--terminal-color), calc(var(--glitch-brightness) * 0.9)) 80%,
     transparent 100%
   );
   opacity: 0;
-  filter: blur(1px);
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  filter: blur(1.5px);  /* Slightly more blur for glow */
+  box-shadow: 0 0 15px rgba(var(--terminal-color), 0.6);  /* Stronger glow */
+  transition: transform 0.3s ease-out;  /* Smooth mouse interaction */
 }
 
 .glitch-line-1 {
@@ -89,19 +100,38 @@
   animation: glitch-slide-5 4.5s ease-in-out infinite 2s;
 }
 
-/* Terminal grid overlay */
+/* Terminal grid overlay - MORE VISIBLE & MOUSE REACTIVE */
 .terminal-grid {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(0, 255, 136, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 136, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(var(--terminal-color), var(--grid-opacity)) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--terminal-color), var(--grid-opacity)) 1px, transparent 1px);
   background-size: 50px 50px;
   animation: grid-shift 20s linear infinite;
   pointer-events: none;
+  transition: transform 0.5s ease-out;  /* Mouse interaction */
 }
 
-/* Vignette effect */
+/* Mouse glow effect */
+.mouse-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--terminal-color), 0.15) 0%,
+    rgba(var(--terminal-color), 0.08) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(40px);
+  transition: transform 0.2s ease-out;
+  transform: translate(-50%, -50%);
+}
+
+/* Vignette effect - ADJUSTABLE */
 .terminal-vignette {
   position: absolute;
   inset: 0;
@@ -109,7 +139,7 @@
     ellipse at center,
     transparent 0%,
     transparent 50%,
-    rgba(0, 0, 0, 0.3) 100%
+    rgba(0, 0, 0, var(--vignette-strength)) 100%
   );
   pointer-events: none;
 }

@@ -183,18 +183,42 @@ export default function Home() {
     alert('Copied to clipboard!');
   };
 
+  // Mouse tracking for interactive background
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <>
-      {/* Faulty Terminal Background Effect */}
+      {/* Faulty Terminal Background Effect - MOUSE REACTIVE */}
       <div className="terminal-background">
+        {/* Mouse glow that follows cursor */}
+        <div 
+          className="mouse-glow"
+          style={{
+            left: `${mousePos.x}px`,
+            top: `${mousePos.y}px`,
+          }}
+        />
         {/* Glitch lines */}
         <div className="glitch-line glitch-line-1"></div>
         <div className="glitch-line glitch-line-2"></div>
         <div className="glitch-line glitch-line-3"></div>
         <div className="glitch-line glitch-line-4"></div>
         <div className="glitch-line glitch-line-5"></div>
-        {/* Terminal grid overlay */}
-        <div className="terminal-grid"></div>
+        {/* Terminal grid overlay - shifts based on mouse */}
+        <div 
+          className="terminal-grid"
+          style={{
+            transform: `translate(${mousePos.x * 0.02}px, ${mousePos.y * 0.02}px)`,
+          }}
+        />
         {/* Vignette effect */}
         <div className="terminal-vignette"></div>
       </div>
