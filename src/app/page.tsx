@@ -206,37 +206,42 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-primary-500/10 border border-primary-500/20 rounded-full px-4 py-2 mb-6">
-            <span className="relative flex h-2 w-2">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-500/10 to-purple-500/10 border border-primary-400/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-xl">
+            <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gradient-to-r from-primary-400 to-purple-400"></span>
             </span>
-            <span className="text-sm font-semibold text-primary-400">AI-Powered Optimization</span>
+            <span className="text-sm font-semibold bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">AI-Powered Optimization</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold text-dark-50 mb-6 tracking-tight">
-            LLM Optimizer
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-white via-primary-200 to-purple-200 bg-clip-text text-transparent">
+              LLM Optimizer
+            </span>
           </h1>
-          <p className="text-xl md:text-2xl text-dark-300 font-medium max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-xl md:text-2xl text-dark-300 font-medium max-w-3xl mx-auto mb-10 leading-relaxed">
             Intelligent middleware for prompt compression using{' '}
-            <span className="text-primary-400 font-semibold">dual-strategy optimization</span>
+            <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent font-bold">
+              multi-strategy optimization
+            </span>
           </p>
-          <div className="flex flex-wrap justify-center gap-3 mb-6">
-            <span className="badge bg-emerald-500/10 border-emerald-500/20 text-emerald-400">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border border-emerald-400/20 text-emerald-300 backdrop-blur-xl">
               ⚡ Up to 95% token reduction
             </span>
-            <span className="badge bg-cyan-500/10 border-cyan-500/20 text-cyan-400">
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-400/20 text-cyan-300 backdrop-blur-xl">
               🎯 95%+ semantic preservation
             </span>
-            <span className="badge bg-accent-500/10 border-accent-500/20 text-accent-400">
-              🚀 AI-powered chat + compression
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-purple-500/10 to-pink-600/10 border border-purple-400/20 text-purple-300 backdrop-blur-xl">
+              🚀 4 compression strategies
             </span>
           </div>
           <a
             href="/analytics"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-primary-500/50 hover:shadow-xl hover:shadow-primary-500/60 hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-purple-500 hover:from-primary-600 hover:to-purple-600 text-white font-bold rounded-2xl transition-all duration-300 shadow-2xl shadow-primary-500/30 hover:shadow-primary-500/50 hover:scale-105 active:scale-95 relative overflow-hidden group"
           >
-            📊 View Analytics Dashboard
+            <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></span>
+            <span className="relative">📊 View Analytics Dashboard</span>
           </a>
         </motion.div>
 
@@ -500,20 +505,20 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <MetricCard
                 label="Compression Ratio"
-                value={result.compressionRatio.toFixed(1)}
+                value={result.compressionRatio != null ? result.compressionRatio.toFixed(1) : '0'}
                 suffix="%"
                 icon="📉"
                 color="success"
               />
               <MetricCard
                 label="Tokens Saved"
-                value={result.estimatedTokenSavings}
+                value={result.estimatedTokenSavings || 0}
                 icon="💾"
                 color="info"
               />
               <MetricCard
                 label="Semantic Preservation"
-                value={result.semanticScore.toFixed(1)}
+                value={result.semanticScore != null ? result.semanticScore.toFixed(1) : '0'}
                 suffix="%"
                 icon="🎯"
                 color="accent"

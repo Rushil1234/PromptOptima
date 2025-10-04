@@ -19,7 +19,21 @@ export default function GlassPanel({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className={`${hover ? 'card-hover' : 'card'} ${className} p-6`}
+      className={`
+        ${hover ? 'card-hover' : 'card'} 
+        ${className} 
+        p-6
+        bg-gradient-to-br from-dark-800/40 via-dark-800/30 to-dark-900/40
+        backdrop-blur-2xl
+        border border-white/5
+        shadow-2xl shadow-black/20
+        relative
+        overflow-hidden
+        before:absolute before:inset-0 
+        before:bg-gradient-to-br before:from-primary-500/5 before:to-transparent
+        before:opacity-0 hover:before:opacity-100
+        before:transition-opacity before:duration-500
+      `}
     >
       {children}
     </motion.div>
