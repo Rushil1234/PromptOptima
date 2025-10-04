@@ -186,26 +186,26 @@ export default function Home() {
 
   return (
     <>
-      {/* WebGL Faulty Terminal Background - Authentic shader-based effect */}
+      {/* WebGL Faulty Terminal Background - Subtle, low-key effect */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <FaultyTerminal
-          scale={1.5}
+          scale={1.8}
           gridMul={[2, 1]}
-          digitSize={1.2}
-          timeScale={1}
+          digitSize={1.5}
+          timeScale={0.5}
           pause={false}
-          scanlineIntensity={1}
-          glitchAmount={1}
-          flickerAmount={1}
-          noiseAmp={1}
+          scanlineIntensity={0.3}
+          glitchAmount={0.4}
+          flickerAmount={0.3}
+          noiseAmp={0.5}
           chromaticAberration={0}
-          dither={0}
-          curvature={0}
+          dither={0.2}
+          curvature={0.1}
           tint="#00ff88"
           mouseReact={true}
-          mouseStrength={0.5}
+          mouseStrength={0.8}
           pageLoadAnimation={false}
-          brightness={1}
+          brightness={0.25}
         />
       </div>
       
