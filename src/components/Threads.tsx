@@ -133,7 +133,7 @@ const Threads: React.FC<ThreadsProps> = ({
   color = [1, 1, 1], 
   amplitude = 1, 
   distance = 0, 
-  enableMouseInteraction = true,
+  enableMouseInteraction = false,
   className = '',
   style,
   ...rest 
@@ -147,15 +147,34 @@ const Threads: React.FC<ThreadsProps> = ({
 
     const renderer = new Renderer({ alpha: true, antialias: true });
     const gl = renderer.gl;
-    gl.clearColor(0.04, 0.04, 0.04, 1.0);
+    gl.clearColor(0.0, 0.0, 0.0, 0.0);  // Transparent clear color for alpha blending
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    
+    // Set canvas size before appending
+    const { clientWidth, clientHeight } = container;
+    renderer.setSize(clientWidth, clientHeight);
+    
     container.appendChild(gl.canvas);
     
-    // Ensure canvas is visible
+    // Ensure canvas is visible with aggressive styling
     gl.canvas.style.display = 'block';
     gl.canvas.style.width = '100%';
     gl.canvas.style.height = '100%';
+    gl.canvas.style.position = 'absolute';
+    gl.canvas.style.top = '0';
+    gl.canvas.style.left = '0';
+    gl.canvas.style.opacity = '1';
+    gl.canvas.style.visibility = 'visible';
+    gl.canvas.style.zIndex = '1';
+    
+    console.log('Threads initialized:', { 
+      width: clientWidth, 
+      height: clientHeight, 
+      color, 
+      canvasSize: { w: gl.canvas.width, h: gl.canvas.height },
+      alpha: gl.getContextAttributes()?.alpha
+    });
 
     const geometry = new Triangle(gl);
     const program = new Program(gl, {
@@ -177,7 +196,9 @@ const Threads: React.FC<ThreadsProps> = ({
 
     function resize() {
       const { clientWidth, clientHeight } = container;
+      
       renderer.setSize(clientWidth, clientHeight);
+
       program.uniforms.iResolution.value.r = clientWidth;
       program.uniforms.iResolution.value.g = clientHeight;
       program.uniforms.iResolution.value.b = clientWidth / clientHeight;
@@ -218,6 +239,8 @@ const Threads: React.FC<ThreadsProps> = ({
       renderer.render({ scene: mesh });
       animationFrameId.current = requestAnimationFrame(update);
     }
+    
+    console.log('Threads render loop starting...');
     animationFrameId.current = requestAnimationFrame(update);
 
     return () => {

@@ -26,9 +26,9 @@ export async function POST(request: NextRequest) {
 
     const engine = new LLMLinguaEngine();
     
-    // Set a timeout for the compression
+    // Set a timeout for the compression (2 minutes for large prompts)
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Compression timeout after 30 seconds')), 30000)
+      setTimeout(() => reject(new Error('Compression timeout after 2 minutes')), 120000)
     );
 
     const result = await Promise.race([

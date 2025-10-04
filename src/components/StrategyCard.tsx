@@ -26,6 +26,7 @@ export default function StrategyCard({
       whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
+      style={{ backgroundColor: '#000' }}
       className={`
         relative cursor-pointer transition-all duration-500 p-6 rounded-2xl
         bg-gradient-to-br from-dark-800/40 via-dark-800/30 to-dark-900/40

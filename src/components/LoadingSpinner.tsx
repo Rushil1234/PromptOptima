@@ -15,7 +15,7 @@ export default function LoadingSpinner({ size = 'md', text }: LoadingSpinnerProp
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 py-8">
+    <div className="flex flex-col items-center justify-center gap-4 py-8" style={{ backgroundColor: 'transparent' }}>
       <motion.div
         className={`${sizeClasses[size]} relative`}
         animate={{ rotate: 360 }}

@@ -186,6 +186,18 @@ export default function Home() {
 
   return (
     <>
+      {/* Black background layer to prevent white flash */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: -2,
+        background: '#000000',
+        backgroundColor: '#000000'
+      }} />
+      
       {/* WebGL Threads Background - Smooth flowing lines with mouse interaction */}
       <div style={{ 
         position: 'fixed', 
@@ -195,20 +207,17 @@ export default function Home() {
         bottom: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        transform: 'translateZ(0)',
-        willChange: 'transform',
-        isolation: 'isolate',
         backgroundColor: '#0a0a0a'
       }}>
         <Threads
-          color={[0.5, 0.2, 0.9]}  // Deep purple (RGB 0-1 scale)
-          amplitude={1.0}
+          color={[0.8, 0.4, 1.0]}  // Bright purple (RGB 0-1 scale)
+          amplitude={1.5}
           distance={0}
           enableMouseInteraction={false}
         />
       </div>
       
-      <main className="min-h-screen relative" style={{ position: 'relative', zIndex: 1 }}>
+      <main className="min-h-screen relative" style={{ position: 'relative', zIndex: 1, backgroundColor: '#000', background: '#000' }}>
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl">
         {/* Header */}
@@ -351,8 +360,8 @@ export default function Home() {
           </div>
           <button
             onClick={() => setShowSymbols(!showSymbols)}
-            className="relative z-[30] text-sm text-primary-400 hover:text-primary-300 transition-colors font-semibold flex items-center gap-2 cursor-pointer pointer-events-auto"
-            style={{ position: 'relative', zIndex: 30 }}
+            className="relative z-[50] text-sm text-primary-400 hover:text-primary-300 transition-colors font-semibold flex items-center gap-2 cursor-pointer mt-6"
+            style={{ position: 'relative', zIndex: 50 }}
           >
             <span>{showSymbols ? '▼' : '▶'}</span>
             {showSymbols ? 'Hide' : 'Show'} SynthLang Symbol Reference
@@ -377,13 +386,15 @@ export default function Home() {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Enter your prompt here... (e.g., 'Please analyze this text and provide a comprehensive summary with key points and insights about the main themes')"
-            className="input-field h-48 resize-none font-normal"
+            className="input-field h-48 resize-none font-normal relative z-[50]"
+            style={{ position: 'relative', zIndex: 50 }}
           />
-          <div className="flex flex-col sm:flex-row gap-3 mt-4">
+          <div className="flex flex-col sm:flex-row gap-3 mt-4 relative z-[50]">
             <button
               onClick={handleCompress}
               disabled={loading || !prompt.trim()}
-              className="btn-primary flex-1 flex items-center justify-center gap-2"
+              className="btn-primary flex-1 flex items-center justify-center gap-2 relative z-[50] cursor-pointer"
+              style={{ position: 'relative', zIndex: 50 }}
             >
               {loading ? (
                 <>
@@ -400,7 +411,8 @@ export default function Home() {
             <button
               onClick={handleAnalyze}
               disabled={analyzing || !prompt.trim()}
-              className="btn-secondary flex items-center justify-center gap-2"
+              className="btn-secondary flex items-center justify-center gap-2 relative z-[50] cursor-pointer"
+              style={{ position: 'relative', zIndex: 50 }}
             >
               {analyzing ? (
                 <>
@@ -444,7 +456,8 @@ export default function Home() {
                   )}
                   <button
                     onClick={() => setError(null)}
-                    className="mt-4 text-sm text-red-400 hover:text-red-300 font-semibold"
+                    className="mt-4 text-sm text-red-400 hover:text-red-300 font-semibold relative z-[50] cursor-pointer"
+                    style={{ position: 'relative', zIndex: 50 }}
                   >
                     Dismiss
                   </button>
@@ -487,7 +500,8 @@ export default function Home() {
                   </div>
                   <button
                     onClick={() => setSuggestion(null)}
-                    className="mt-4 text-sm text-primary-400 hover:text-primary-300 font-semibold"
+                    className="mt-4 text-sm text-primary-400 hover:text-primary-300 font-semibold relative z-[50] cursor-pointer"
+                    style={{ position: 'relative', zIndex: 50 }}
                   >
                     Dismiss
                   </button>

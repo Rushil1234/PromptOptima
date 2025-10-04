@@ -215,6 +215,7 @@ export default function Chatbot({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            style={{ backgroundColor: '#000' }}
             className="mb-4 p-4 bg-dark-900/50 rounded-lg border border-dark-700"
           >
             <h3 className="text-sm font-semibold text-dark-300 mb-3">Optimization Settings</h3>
@@ -414,6 +415,7 @@ export default function Chatbot({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
+            style={{ backgroundColor: '#000' }}
             className="mb-2 p-2 bg-yellow-500/10 border border-yellow-500/30 rounded-lg flex items-center justify-between"
           >
             <div className="flex items-center gap-2 text-sm text-yellow-300">
@@ -431,20 +433,22 @@ export default function Chatbot({
       </AnimatePresence>
 
       {/* Input */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 relative z-[50]">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Type your message... (Press Enter to send)"
           disabled={loading}
-          className="flex-1 px-4 py-3 bg-dark-900/50 border border-dark-700 rounded-xl text-dark-100 placeholder-dark-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 px-4 py-3 bg-dark-900/50 border border-dark-700 rounded-xl text-dark-100 placeholder-dark-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 resize-none disabled:opacity-50 disabled:cursor-not-allowed relative z-[50]"
+          style={{ position: 'relative', zIndex: 50 }}
           rows={2}
         />
         <button
           onClick={handleSend}
           disabled={!input.trim() || loading}
-          className="px-6 py-3 bg-gradient-to-br from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95"
+          className="px-6 py-3 bg-gradient-to-br from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95 relative z-[50] cursor-pointer"
+          style={{ position: 'relative', zIndex: 50 }}
         >
           {loading ? '⏳' : '🚀'}
         </button>

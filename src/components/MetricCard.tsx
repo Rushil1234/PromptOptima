@@ -29,6 +29,7 @@ export default function MetricCard({
       initial={{ scale: 0.95, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.3 }}
+      style={{ backgroundColor: '#000' }}
       className="card p-6 flex flex-col items-center justify-center text-center space-y-2"
     >
       {icon && (
