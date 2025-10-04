@@ -97,9 +97,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 5: Generate response using Gemini with decoded prompt
+    // ALWAYS instruct AI to respond in English for consistent user experience
     const systemPrompt = `You are a helpful, knowledgeable AI assistant. 
 Provide clear, concise, and accurate responses.
-${language !== 'english' ? `Respond in ${language}.` : ''}`;
+Always respond in English, regardless of the input language.`;
 
     const contextPrompt = history.length > 0
       ? `Previous conversation:\n${history.map((msg: any) => `${msg.role}: ${msg.content}`).join('\n')}\n\n`
@@ -118,22 +119,12 @@ ${language !== 'english' ? `Respond in ${language}.` : ''}`;
     });
 
     let responseText = response.text || 'Sorry, I could not generate a response.';
-    let originalLanguageResponse = responseText;
-
-    // Step 6: ALWAYS translate response to English (even if reasoning was in another language)
-    if (language !== 'english') {
-      responseText = await languageTranslator.translateToEnglish(
-        responseText,
-        language as any
-      );
-    }
 
     // Calculate total tokens saved
     const totalTokensSaved = languageTokensSaved + synthLangTokensSaved;
 
     return NextResponse.json({
-      response: responseText, // Always in English
-      originalLanguageResponse: language !== 'english' ? originalLanguageResponse : undefined, // Original reasoning
+      response: responseText, // Always in English (instructed in system prompt)
       originalPrompt,
       translatedPrompt: language !== 'english' ? translatedPrompt : undefined,
       compressedPrompt: useSynthLang ? compressedPrompt : undefined,
