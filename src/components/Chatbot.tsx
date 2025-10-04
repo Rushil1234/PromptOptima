@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import GlassPanel from './GlassPanel';
 import CopyButton from './CopyButton';
 import { ToastContainer } from './Toast';
@@ -278,8 +280,78 @@ export default function Chatbot({
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <div className="text-sm leading-relaxed whitespace-pre-wrap flex-1">
-                      {message.content}
+                    <div className="text-sm leading-relaxed flex-1">
+                      {message.role === 'assistant' ? (
+                        <div className="prose prose-invert prose-sm max-w-none">
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                            // Style code blocks
+                            code: ({ node, inline, className, children, ...props }: any) => {
+                              const match = /language-(\w+)/.exec(className || '');
+                              return inline ? (
+                                <code className="bg-dark-900 px-1.5 py-0.5 rounded text-primary-400 text-xs" {...props}>
+                                  {children}
+                                </code>
+                              ) : (
+                                <code className="block bg-dark-900 p-3 rounded-lg text-xs overflow-x-auto" {...props}>
+                                  {children}
+                                </code>
+                              );
+                            },
+                            // Style links
+                            a: ({ node, children, ...props }: any) => (
+                              <a className="text-primary-400 hover:text-primary-300 underline" target="_blank" rel="noopener noreferrer" {...props}>
+                                {children}
+                              </a>
+                            ),
+                            // Style lists
+                            ul: ({ node, children, ...props }: any) => (
+                              <ul className="list-disc list-inside space-y-1 my-2" {...props}>{children}</ul>
+                            ),
+                            ol: ({ node, children, ...props }: any) => (
+                              <ol className="list-decimal list-inside space-y-1 my-2" {...props}>{children}</ol>
+                            ),
+                            // Style headings
+                            h1: ({ node, children, ...props }: any) => (
+                              <h1 className="text-lg font-bold mt-4 mb-2" {...props}>{children}</h1>
+                            ),
+                            h2: ({ node, children, ...props }: any) => (
+                              <h2 className="text-base font-bold mt-3 mb-2" {...props}>{children}</h2>
+                            ),
+                            h3: ({ node, children, ...props }: any) => (
+                              <h3 className="text-sm font-bold mt-2 mb-1" {...props}>{children}</h3>
+                            ),
+                            // Style blockquotes
+                            blockquote: ({ node, children, ...props }: any) => (
+                              <blockquote className="border-l-4 border-primary-500/50 pl-3 italic my-2 text-dark-300" {...props}>
+                                {children}
+                              </blockquote>
+                            ),
+                            // Style tables
+                            table: ({ node, children, ...props }: any) => (
+                              <div className="overflow-x-auto my-2">
+                                <table className="min-w-full border border-dark-700" {...props}>{children}</table>
+                              </div>
+                            ),
+                            th: ({ node, children, ...props }: any) => (
+                              <th className="border border-dark-700 px-2 py-1 bg-dark-800 text-left" {...props}>{children}</th>
+                            ),
+                            td: ({ node, children, ...props }: any) => (
+                              <td className="border border-dark-700 px-2 py-1" {...props}>{children}</td>
+                            ),
+                            // Style paragraphs
+                            p: ({ node, children, ...props }: any) => (
+                              <p className="my-2" {...props}>{children}</p>
+                            ),
+                          }}
+                          >
+                            {message.content}
+                          </ReactMarkdown>
+                        </div>
+                      ) : (
+                        <div className="whitespace-pre-wrap">{message.content}</div>
+                      )}
                     </div>
                     <CopyButton
                       text={message.content}
