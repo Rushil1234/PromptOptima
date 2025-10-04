@@ -43,6 +43,7 @@ export class SynthLangDecoder {
    */
   decode(text: string): string {
     let decoded = '';
+    let lastWasSymbol = false;
     
     // Process each character
     for (let i = 0; i < text.length; i++) {
@@ -50,15 +51,21 @@ export class SynthLangDecoder {
       const mapping = this.symbolMap.get(char);
       
       if (mapping) {
-        // Add space before if not first word
-        if (decoded.length > 0 && !decoded.endsWith(' ')) {
+        // Add space before symbol if needed
+        if (decoded.length > 0 && !decoded.endsWith(' ') && !/[,.\s]$/.test(decoded)) {
           decoded += ' ';
         }
         // Add the lowercase natural form
         decoded += this.extractNaturalForm(mapping);
+        lastWasSymbol = true;
       } else {
+        // Add space after symbol before non-symbol text (except punctuation/whitespace)
+        if (lastWasSymbol && char !== ' ' && !/[,.\s]/.test(char)) {
+          decoded += ' ';
+        }
         // Keep non-symbol characters as-is
         decoded += char;
+        lastWasSymbol = false;
       }
     }
     
