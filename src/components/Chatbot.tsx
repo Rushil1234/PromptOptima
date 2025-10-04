@@ -181,35 +181,17 @@ export default function Chatbot({
   return (
     <GlassPanel className="flex flex-col h-[600px]">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4 pb-4 border-b border-dark-700">
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold text-dark-50 flex items-center gap-2">
-            🤖 AI Chat Assistant
-          </h2>
-          <p className="text-sm text-dark-400 mt-1">
-            💡 <strong>Smart Token Optimization:</strong> This chatbot uses advanced compression to reduce token usage by up to <span className="text-primary-400 font-semibold">95%</span>
-          </p>
-          <div className="mt-2 text-xs text-dark-500 space-y-1">
-            <p>✨ <strong>SynthLang Compression:</strong> Converts verbose text to symbolic tokens (60-93% reduction)</p>
-            <p>🌍 <strong>Language Switching:</strong> Translates to token-efficient languages like Japanese/Chinese (40% reduction)</p>
-            <p>✏️ <strong>Auto Spell-Check:</strong> Fixes typos to improve compression quality</p>
-          </div>
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className="p-2 rounded-lg bg-dark-800/50 hover:bg-dark-700 transition-colors text-dark-300"
-            title="Settings"
-          >
-            ⚙️
-          </button>
-          <button
-            onClick={clearChat}
-            className="p-2 rounded-lg bg-dark-800/50 hover:bg-dark-700 transition-colors text-dark-300"
-            title="Clear chat"
-          >
-            🗑️
-          </button>
+      <div className="mb-4 pb-4 border-b border-dark-700">
+        <h2 className="text-2xl font-bold text-dark-50 flex items-center gap-2">
+          🤖 AI Chat Assistant
+        </h2>
+        <p className="text-sm text-dark-400 mt-1">
+          💡 <strong>Smart Token Optimization:</strong> This chatbot uses advanced compression to reduce token usage by up to <span className="text-primary-400 font-semibold">95%</span>
+        </p>
+        <div className="mt-2 text-xs text-dark-500 space-y-1">
+          <p>✨ <strong>SynthLang Compression:</strong> Converts verbose text to symbolic tokens (60-93% reduction)</p>
+          <p>🌍 <strong>Language Switching:</strong> Translates to token-efficient languages like Japanese/Chinese (40% reduction)</p>
+          <p>✏️ <strong>Auto Spell-Check:</strong> Fixes typos to improve compression quality</p>
         </div>
       </div>
 
