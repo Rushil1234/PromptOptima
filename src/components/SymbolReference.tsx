@@ -1,47 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { SYNTHLANG_SYMBOLS } from '@/lib/synthlang';
 
 export default function SymbolReference() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const categories = [...new Set(SYNTHLANG_SYMBOLS.map(s => s.category))];
-  const filteredSymbols = selectedCategory
-    ? SYNTHLANG_SYMBOLS.filter(s => s.category === selectedCategory)
-    : SYNTHLANG_SYMBOLS;
-
   return (
     <div className="space-y-6 relative z-[50]">
-      <div className="flex flex-wrap gap-2 relative z-[50]">
-        <button
-          onClick={() => setSelectedCategory(null)}
-          className={`relative z-[50] px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
-            selectedCategory === null
-              ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
-              : 'bg-dark-700/50 text-dark-300 hover:bg-dark-700 hover:text-dark-100'
-          }`}
-        >
-          All Symbols
-        </button>
-        {categories.map(category => (
-          <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className={`relative z-[50] px-4 py-2 rounded-lg text-sm font-semibold transition-all capitalize cursor-pointer ${
-              selectedCategory === category
-                ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
-                : 'bg-dark-700/50 text-dark-300 hover:bg-dark-700 hover:text-dark-100'
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+      <div className="flex items-center gap-3">
+        <h3 className="text-lg font-semibold text-dark-200">
+          All Symbols <span className="text-dark-400 text-sm">({SYNTHLANG_SYMBOLS.length} total)</span>
+        </h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-96 overflow-y-auto scrollbar-thin pr-2">
-        {filteredSymbols.map((symbol, index) => (
+        {SYNTHLANG_SYMBOLS.map((symbol, index) => (
           <motion.div
             key={symbol.symbol}
             initial={{ opacity: 0, y: 10 }}
