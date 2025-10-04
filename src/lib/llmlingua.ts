@@ -15,6 +15,12 @@ export class LLMLinguaEngine {
    */
   async compress(prompt: string, targetRatio: number = 0.5): Promise<CompressionResult> {
     const originalTokens = this.estimateTokens(prompt);
+    
+    // Limit prompt size for API
+    const maxInputTokens = 6000;
+    if (originalTokens > maxInputTokens) {
+      throw new Error(`Prompt exceeds maximum length of ${maxInputTokens} tokens (estimated ${originalTokens} tokens). Please reduce the prompt size or use a different compression strategy.`);
+    }
 
     const compressionPrompt = `You are an expert at compressing text while preserving semantic meaning.
 
@@ -29,6 +35,9 @@ Rules:
 5. Keep technical terms and specific details
 6. Maintain logical flow and relationships
 7. Preserve numbers, dates, and specific identifiers
+8. Remove redundant phrases and repetition
+9. Eliminate filler words like "very", "actually", "basically"
+10. Condense verbose expressions
 
 Original prompt:
 """
@@ -43,25 +52,34 @@ Provide ONLY the compressed version, no explanation:`;
         prompt: compressionPrompt,
         config: {
           temperature: 0.3,
-          maxOutputTokens: Math.max(2048, originalTokens * 3),
+          maxOutputTokens: Math.max(4096, originalTokens * 2),
         },
       });
 
       const compressed = response.text.trim();
-      const compressedTokens = this.estimateTokens(compressed);
+      
+      // Remove common artifacts that Gemini might add
+      const cleanedCompressed = compressed
+        .replace(/^["']|["']$/g, '') // Remove quotes
+        .replace(/^Compressed version:\s*/i, '')
+        .replace(/^Here is the compressed version:\s*/i, '')
+        .trim();
+
+      const compressedTokens = this.estimateTokens(cleanedCompressed);
       const compressionRatio = ((originalTokens - compressedTokens) / originalTokens) * 100;
-      const semanticScore = await this.calculateSemanticSimilarity(prompt, compressed);
+      const semanticScore = await this.calculateSemanticSimilarity(prompt, cleanedCompressed);
 
       return {
         original: prompt,
-        compressed,
+        compressed: cleanedCompressed,
         compressionRatio,
         estimatedTokenSavings: originalTokens - compressedTokens,
         semanticScore,
       };
     } catch (error) {
       console.error('Compression error:', error);
-      throw new Error('Failed to compress prompt');
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      throw new Error(`LLMLingua compression failed: ${errorMessage}`);
     }
   }
 

@@ -15,18 +15,13 @@ export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState<'24h' | '7d' | '30d'>('24h');
   const [loading, setLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
-
-  useEffect(() => {
-    fetchAnalytics();
-    
-    if (autoRefresh) {
-      const interval = setInterval(fetchAnalytics, 10000); // Refresh every 10s
-      return () => clearInterval(interval);
-    }
-  }, [autoRefresh, timeRange]);
+  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchAnalytics = async () => {
     try {
+      if (!loading) setRefreshing(true);
+      
       const [overviewRes, timeSeriesRes] = await Promise.all([
         fetch('/api/analytics?type=overview'),
         fetch(`/api/analytics?type=timeseries&hours=${timeRange === '24h' ? 24 : timeRange === '7d' ? 168 : 720}`)
@@ -37,12 +32,28 @@ export default function AnalyticsPage() {
 
       setAnalytics(analyticsData);
       setTimeSeriesData(timeSeriesResult.data);
+      setLastUpdate(new Date());
       setLoading(false);
+      setRefreshing(false);
     } catch (error) {
       console.error('Failed to fetch analytics:', error);
       setLoading(false);
+      setRefreshing(false);
     }
   };
+
+  useEffect(() => {
+    fetchAnalytics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeRange]);
+
+  useEffect(() => {
+    if (autoRefresh) {
+      const interval = setInterval(fetchAnalytics, 10000); // Refresh every 10s
+      return () => clearInterval(interval);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoRefresh]);
 
   if (loading || !analytics) {
     return (
@@ -98,43 +109,72 @@ export default function AnalyticsPage() {
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">
-                📊 Analytics Dashboard
-              </h1>
-              <p className="text-dark-300">
-                Real-time performance metrics and cost analytics
-              </p>
+              <div className="flex items-center gap-3 mb-2">
+                <h1 className="text-4xl font-bold text-white">
+                  📊 Analytics Dashboard
+                </h1>
+                {refreshing && (
+                  <div className="flex items-center gap-2 text-primary-400 text-sm">
+                    <div className="animate-spin h-4 w-4 border-2 border-primary-400 border-t-transparent rounded-full"></div>
+                    <span>Refreshing...</span>
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-4">
+                <p className="text-dark-300">
+                  Real-time performance metrics and cost analytics
+                </p>
+                {lastUpdate && (
+                  <span className="text-dark-500 text-sm">
+                    Last updated: {lastUpdate.toLocaleTimeString()}
+                  </span>
+                )}
+              </div>
             </div>
             
-            <div className="flex gap-4">
-              {/* Time Range Selector */}
-              <div className="flex gap-2 bg-dark-800/50 rounded-xl p-2">
-                {(['24h', '7d', '30d'] as const).map((range) => (
-                  <button
-                    key={range}
-                    onClick={() => setTimeRange(range)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                      timeRange === range
-                        ? 'bg-primary-500 text-white'
-                        : 'text-dark-300 hover:text-white hover:bg-dark-700'
-                    }`}
-                  >
-                    {range}
-                  </button>
-                ))}
-              </div>
+            <div className="flex flex-col gap-4">
+              <div className="flex gap-2">
+                {/* Time Range Selector */}
+                <div className="flex gap-2 bg-dark-800/50 rounded-xl p-2">
+                  {(['24h', '7d', '30d'] as const).map((range) => (
+                    <button
+                      key={range}
+                      onClick={() => setTimeRange(range)}
+                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                        timeRange === range
+                          ? 'bg-primary-500 text-white'
+                          : 'text-dark-300 hover:text-white hover:bg-dark-700'
+                      }`}
+                    >
+                      {range}
+                    </button>
+                  ))}
+                </div>
 
-              {/* Auto Refresh Toggle */}
-              <button
-                onClick={() => setAutoRefresh(!autoRefresh)}
-                className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                  autoRefresh
-                    ? 'bg-green-500/20 text-green-400 border border-green-500/50'
-                    : 'bg-dark-800/50 text-dark-300 border border-dark-700'
-                }`}
-              >
-                {autoRefresh ? '🔄 Live' : '⏸️ Paused'}
-              </button>
+                {/* Auto Refresh Toggle */}
+                <button
+                  onClick={() => setAutoRefresh(!autoRefresh)}
+                  className={`px-4 py-2 rounded-xl font-medium transition-all relative ${
+                    autoRefresh
+                      ? 'bg-green-500/20 text-green-400 border border-green-500/50'
+                      : 'bg-dark-800/50 text-dark-300 border border-dark-700'
+                  }`}
+                >
+                  {autoRefresh && (
+                    <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                  )}
+                  {autoRefresh ? '🔄 Live' : '⏸️ Paused'}
+                </button>
+              </div>
+              
+              {autoRefresh && (
+                <div className="text-right text-xs text-dark-500">
+                  Auto-refresh every 10 seconds
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
