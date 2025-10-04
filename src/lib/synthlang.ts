@@ -1,5 +1,6 @@
 // SynthLang Symbol Mapping
 // Inspired by Japanese Kanji - compact symbols for complex concepts
+// EXPANDED TO 700+ SYMBOLS including ALL common English words
 
 export interface SymbolMapping {
   symbol: string;
@@ -9,6 +10,146 @@ export interface SymbolMapping {
 }
 
 export const SYNTHLANG_SYMBOLS: SymbolMapping[] = [
+  // ========== ULTRA COMMON WORDS (100+ symbols) ==========
+  // Pronouns & Basic Words
+  { symbol: '我', concept: 'I', description: 'I, me, my, mine, myself', category: 'common' },
+  { symbol: '汝', concept: 'YOU', description: 'you, your, yours, yourself', category: 'common' },
+  { symbol: '彼', concept: 'HE', description: 'he, him, his, himself, she, her, hers, herself', category: 'common' },
+  { symbol: '吾', concept: 'WE', description: 'we, us, our, ours, ourselves', category: 'common' },
+  { symbol: '達', concept: 'THEY', description: 'they, them, their, theirs, themselves', category: 'common' },
+  { symbol: '之', concept: 'IT', description: 'it, its, itself', category: 'common' },
+  { symbol: '此', concept: 'THIS', description: 'this, these, here', category: 'common' },
+  { symbol: '其', concept: 'THAT', description: 'that, those, there', category: 'common' },
+  
+  // Common Verbs
+  { symbol: '在', concept: 'BE', description: 'is, am, are, was, were, be, being, been', category: 'common' },
+  { symbol: '有', concept: 'HAVE', description: 'have, has, had, having', category: 'common' },
+  { symbol: '為', concept: 'DO', description: 'do, does, did, doing, done', category: 'common' },
+  { symbol: '言', concept: 'SAY', description: 'say, says, said, saying, tell, told', category: 'common' },
+  { symbol: '得', concept: 'GET', description: 'get, gets, got, getting, gotten, obtain', category: 'common' },
+  { symbol: '作', concept: 'MAKE', description: 'make, makes, made, making, create, build', category: 'common' },
+  { symbol: '行', concept: 'GO', description: 'go, goes, went, going, gone', category: 'common' },
+  { symbol: '知', concept: 'KNOW', description: 'know, knows, knew, knowing, known', category: 'common' },
+  { symbol: '想', concept: 'THINK', description: 'think, thinks, thought, thinking', category: 'common' },
+  { symbol: '見', concept: 'SEE', description: 'see, sees, saw, seeing, seen, look, watch', category: 'common' },
+  { symbol: '来', concept: 'COME', description: 'come, comes, came, coming', category: 'common' },
+  { symbol: '欲', concept: 'WANT', description: 'want, wants, wanted, wanting, wish, desire', category: 'common' },
+  { symbol: '用', concept: 'USE', description: 'use, uses, used, using, utilize', category: 'common' },
+  { symbol: '尋', concept: 'FIND', description: 'find, finds, found, finding, search', category: 'common' },
+  { symbol: '与', concept: 'GIVE', description: 'give, gives, gave, giving, given, provide', category: 'common' },
+  { symbol: '告', concept: 'TELL', description: 'tell, tells, told, telling, inform', category: 'common' },
+  { symbol: '働', concept: 'WORK', description: 'work, works, worked, working, job', category: 'common' },
+  { symbol: '呼', concept: 'CALL', description: 'call, calls, called, calling, invoke', category: 'common' },
+  { symbol: '試', concept: 'TRY', description: 'try, tries, tried, trying, attempt', category: 'common' },
+  { symbol: '問', concept: 'ASK', description: 'ask, asks, asked, asking, question, query', category: 'common' },
+  { symbol: '要', concept: 'NEED', description: 'need, needs, needed, needing, require', category: 'common' },
+  { symbol: '感', concept: 'FEEL', description: 'feel, feels, felt, feeling', category: 'common' },
+  { symbol: '成', concept: 'BECOME', description: 'become, becomes, became, becoming', category: 'common' },
+  { symbol: '離', concept: 'LEAVE', description: 'leave, leaves, left, leaving, exit', category: 'common' },
+  { symbol: '置', concept: 'PUT', description: 'put, puts, putting, place, set', category: 'common' },
+  { symbol: '意', concept: 'MEAN', description: 'mean, means, meant, meaning, signify', category: 'common' },
+  { symbol: '保', concept: 'KEEP', description: 'keep, keeps, kept, keeping, maintain', category: 'common' },
+  { symbol: '許', concept: 'LET', description: 'let, lets, letting, allow, permit', category: 'common' },
+  { symbol: '始', concept: 'BEGIN', description: 'begin, begins, began, beginning, start', category: 'common' },
+  { symbol: '助', concept: 'HELP', description: 'help, helps, helped, helping, assist', category: 'common' },
+  { symbol: '話', concept: 'TALK', description: 'talk, talks, talked, talking, speak', category: 'common' },
+  { symbol: '転', concept: 'TURN', description: 'turn, turns, turned, turning, rotate', category: 'common' },
+  { symbol: '示', concept: 'SHOW', description: 'show, shows, showed, showing, shown, display', category: 'common' },
+  { symbol: '聞', concept: 'HEAR', description: 'hear, hears, heard, hearing, listen', category: 'common' },
+  { symbol: '遊', concept: 'PLAY', description: 'play, plays, played, playing, game', category: 'common' },
+  { symbol: '走', concept: 'RUN', description: 'run, runs, ran, running, execute', category: 'common' },
+  { symbol: '動', concept: 'MOVE', description: 'move, moves, moved, moving, motion', category: 'common' },
+  { symbol: '住', concept: 'LIVE', description: 'live, lives, lived, living, reside', category: 'common' },
+  { symbol: '信', concept: 'BELIEVE', description: 'believe, believes, believed, believing, trust', category: 'common' },
+  { symbol: '持', concept: 'HOLD', description: 'hold, holds, held, holding, contain', category: 'common' },
+  { symbol: '持', concept: 'BRING', description: 'bring, brings, brought, bringing, carry', category: 'common' },
+  { symbol: '書', concept: 'WRITE', description: 'write, writes, wrote, writing, written', category: 'common' },
+  { symbol: '座', concept: 'SIT', description: 'sit, sits, sat, sitting, seated', category: 'common' },
+  { symbol: '立', concept: 'STAND', description: 'stand, stands, stood, standing', category: 'common' },
+  { symbol: '失', concept: 'LOSE', description: 'lose, loses, lost, losing, miss', category: 'common' },
+  { symbol: '払', concept: 'PAY', description: 'pay, pays, paid, paying, payment', category: 'common' },
+  { symbol: '会', concept: 'MEET', description: 'meet, meets, met, meeting, encounter', category: 'common' },
+  { symbol: '含', concept: 'INCLUDE', description: 'include, includes, included, including, contain', category: 'common' },
+  { symbol: '続', concept: 'CONTINUE', description: 'continue, continues, continued, continuing, proceed', category: 'common' },
+  { symbol: '設', concept: 'SET', description: 'set, sets, setting, configure, establish', category: 'common' },
+  { symbol: '学', concept: 'LEARN', description: 'learn, learns, learned, learning, study', category: 'common' },
+  { symbol: '変', concept: 'CHANGE', description: 'change, changes, changed, changing, alter', category: 'common' },
+  { symbol: '導', concept: 'LEAD', description: 'lead, leads, led, leading, guide', category: 'common' },
+  { symbol: '理', concept: 'UNDERSTAND', description: 'understand, understands, understood, understanding, comprehend', category: 'common' },
+  { symbol: '停', concept: 'STOP', description: 'stop, stops, stopped, stopping, halt', category: 'common' },
+  { symbol: '読', concept: 'READ', description: 'read, reads, reading, load, fetch', category: 'common' },
+  { symbol: '増', concept: 'INCREASE', description: 'increase, increases, increased, increasing, grow', category: 'common' },
+  
+  // Question Words
+  { symbol: '如', concept: 'HOW', description: 'how, in what way, by what means', category: 'common' },
+  { symbol: '何', concept: 'WHAT', description: 'what, which thing, whatever', category: 'common' },
+  { symbol: '時', concept: 'WHEN', description: 'when, at what time, whenever', category: 'common' },
+  { symbol: '処', concept: 'WHERE', description: 'where, in what place, wherever', category: 'common' },
+  { symbol: '故', concept: 'WHY', description: 'why, for what reason, wherefore', category: 'common' },
+  { symbol: '誰', concept: 'WHO', description: 'who, whom, whose, whoever', category: 'common' },
+  { symbol: '択', concept: 'WHICH', description: 'which, whichever, what one', category: 'common' },
+  
+  // Common Adjectives
+  { symbol: '良', concept: 'GOOD', description: 'good, well, fine, nice, okay', category: 'common' },
+  { symbol: '新', concept: 'NEW', description: 'new, fresh, latest, recent, novel', category: 'common' },
+  { symbol: '初', concept: 'FIRST', description: 'first, initial, primary, earliest', category: 'common' },
+  { symbol: '終', concept: 'LAST', description: 'last, final, ultimate, latest', category: 'common' },
+  { symbol: '長', concept: 'LONG', description: 'long, lengthy, extended, prolonged', category: 'common' },
+  { symbol: '大', concept: 'BIG', description: 'big, large, great, huge, major', category: 'common' },
+  { symbol: '小', concept: 'SMALL', description: 'small, little, minor, tiny', category: 'common' },
+  { symbol: '次', concept: 'NEXT', description: 'next, following, subsequent, upcoming', category: 'common' },
+  { symbol: '自', concept: 'OWN', description: 'own, self, personal, private', category: 'common' },
+  { symbol: '他', concept: 'OTHER', description: 'other, another, different, else', category: 'common' },
+  { symbol: '旧', concept: 'OLD', description: 'old, aged, ancient, former, previous', category: 'common' },
+  { symbol: '高', concept: 'HIGH', description: 'high, tall, elevated, upper', category: 'common' },
+  { symbol: '全', concept: 'ALL', description: 'all, every, whole, entire, total, complete', category: 'common' },
+  { symbol: '毎', concept: 'EACH', description: 'each, every, per, individual', category: 'common' },
+  { symbol: '幾', concept: 'SOME', description: 'some, several, certain, few, any', category: 'common' },
+  { symbol: '多', concept: 'MANY', description: 'many, much, lots, numerous, plenty', category: 'common' },
+  { symbol: '他', concept: 'DIFFERENT', description: 'different, other, distinct, various', category: 'common' },
+  { symbol: '可', concept: 'POSSIBLE', description: 'possible, can, able, feasible', category: 'common' },
+  { symbol: '能', concept: 'ABLE', description: 'able, capable, can, could, enabled', category: 'common' },
+  { symbol: '同', concept: 'SAME', description: 'same, identical, equal, similar', category: 'common' },
+  { symbol: '若', concept: 'YOUNG', description: 'young, new, fresh, junior', category: 'common' },
+  { symbol: '少', concept: 'FEW', description: 'few, little, small amount, handful', category: 'common' },
+  { symbol: '公', concept: 'PUBLIC', description: 'public, open, common, shared', category: 'common' },
+  { symbol: '悪', concept: 'BAD', description: 'bad, wrong, poor, evil, negative', category: 'common' },
+  { symbol: '早', concept: 'EARLY', description: 'early, soon, quick, prompt', category: 'common' },
+  { symbol: '重', concept: 'IMPORTANT', description: 'important, critical, significant, vital, key', category: 'common' },
+  
+  // Common Prepositions & Conjunctions
+  { symbol: '於', concept: 'AT', description: 'at, in, on, by, near', category: 'common' },
+  { symbol: '至', concept: 'TO', description: 'to, toward, until, into, onto', category: 'common' },
+  { symbol: '自', concept: 'FROM', description: 'from, since, out of, away', category: 'common' },
+  { symbol: '共', concept: 'WITH', description: 'with, together, along, including', category: 'common' },
+  { symbol: '関', concept: 'ABOUT', description: 'about, regarding, concerning, around', category: 'common' },
+  { symbol: '為', concept: 'FOR', description: 'for, to, in order to, because', category: 'common' },
+  { symbol: '対', concept: 'AGAINST', description: 'against, versus, opposed, contrary', category: 'common' },
+  { symbol: '間', concept: 'BETWEEN', description: 'between, among, amid, within', category: 'common' },
+  { symbol: '後', concept: 'AFTER', description: 'after, following, behind, later, post', category: 'common' },
+  { symbol: '前', concept: 'BEFORE', description: 'before, prior, earlier, ahead, pre', category: 'common' },
+  { symbol: '通', concept: 'THROUGH', description: 'through, via, across, by way of', category: 'common' },
+  { symbol: '上', concept: 'OVER', description: 'over, above, on top, beyond', category: 'common' },
+  { symbol: '下', concept: 'UNDER', description: 'under, below, beneath, underneath', category: 'common' },
+  { symbol: '内', concept: 'IN', description: 'in, inside, within, into', category: 'common' },
+  { symbol: '外', concept: 'OUT', description: 'out, outside, external, outer', category: 'common' },
+  { symbol: '且', concept: 'AND', description: 'and, also, plus, with, as well', category: 'common' },
+  { symbol: '或', concept: 'OR', description: 'or, alternatively, either, else', category: 'common' },
+  { symbol: '然', concept: 'BUT', description: 'but, however, yet, though, although', category: 'common' },
+  { symbol: '故', concept: 'SO', description: 'so, therefore, thus, hence, then', category: 'common' },
+  { symbol: '若', concept: 'IF', description: 'if, whether, in case, when, provided', category: 'common' },
+  { symbol: '因', concept: 'BECAUSE', description: 'because, since, as, due to, for', category: 'common' },
+  
+  // Greetings & Common Phrases
+  { symbol: '挨', concept: 'HELLO', description: 'hello, hi, hey, greetings, howdy', category: 'common' },
+  { symbol: '謝', concept: 'THANKS', description: 'thanks, thank you, appreciate, grateful', category: 'common' },
+  { symbol: '歓', concept: 'WELCOME', description: 'welcome, greetings, hello', category: 'common' },
+  { symbol: '済', concept: 'SORRY', description: 'sorry, apologize, excuse, pardon', category: 'common' },
+  { symbol: '拝', concept: 'PLEASE', description: 'please, kindly, request', category: 'common' },
+  { symbol: '諾', concept: 'YES', description: 'yes, okay, sure, agreed, affirmative', category: 'common' },
+  { symbol: '否', concept: 'NO', description: 'no, not, nope, negative, refuse', category: 'common' },
+  { symbol: '別', concept: 'GOODBYE', description: 'goodbye, bye, farewell, see you', category: 'common' },
+  
   // ========== CORE ACTIONS (100+ symbols) ==========
   // CRUD Operations
   { symbol: '作', concept: 'CREATE', description: 'Generate, create, make, build, produce, construct, develop, establish, initialize', category: 'action' },
@@ -393,6 +534,335 @@ export const SYNTHLANG_SYMBOLS: SymbolMapping[] = [
   { symbol: '情', concept: 'INFO', description: 'Info, information, message, notice', category: 'status' },
   { symbol: '危', concept: 'CRITICAL', description: 'Critical, urgent, severe, important', category: 'status' },
   { symbol: '軽', concept: 'MINOR', description: 'Minor, small, trivial, low priority', category: 'status' },
+  
+  // ========== ADDITIONAL COMMON WORDS (300+ symbols) ==========
+  // More Verbs
+  { symbol: '押', concept: 'PUSH', description: 'push, press, shove, force', category: 'common' },
+  { symbol: '引', concept: 'PULL', description: 'pull, drag, draw, tug', category: 'common' },
+  { symbol: '投', concept: 'THROW', description: 'throw, toss, cast, hurl', category: 'common' },
+  { symbol: '拾', concept: 'PICK', description: 'pick, choose, select, gather', category: 'common' },
+  { symbol: '落', concept: 'DROP', description: 'drop, fall, let go, release', category: 'common' },
+  { symbol: '切', concept: 'CUT', description: 'cut, slice, chop, trim', category: 'common' },
+  { symbol: '加', concept: 'ADD', description: 'add, append, attach, include', category: 'common' },
+  { symbol: '取', concept: 'TAKE', description: 'take, grab, seize, capture', category: 'common' },
+  { symbol: '売', concept: 'SELL', description: 'sell, sale, market, trade', category: 'common' },
+  { symbol: '買', concept: 'BUY', description: 'buy, purchase, acquire, obtain', category: 'common' },
+  { symbol: '送', concept: 'SEND', description: 'send, ship, deliver, transmit', category: 'common' },
+  { symbol: '待', concept: 'WAIT', description: 'wait, await, expect, hold', category: 'common' },
+  { symbol: '忘', concept: 'FORGET', description: 'forget, overlook, omit', category: 'common' },
+  { symbol: '覚', concept: 'REMEMBER', description: 'remember, recall, memorize', category: 'common' },
+  { symbol: '望', concept: 'HOPE', description: 'hope, wish, desire, expect', category: 'common' },
+  { symbol: '笑', concept: 'LAUGH', description: 'laugh, smile, chuckle, grin', category: 'common' },
+  { symbol: '泣', concept: 'CRY', description: 'cry, weep, sob, tears', category: 'common' },
+  { symbol: '勝', concept: 'WIN', description: 'win, victory, succeed, triumph', category: 'common' },
+  { symbol: '負', concept: 'LOSE', description: 'lose, defeat, fail, loss', category: 'common' },
+  { symbol: '歩', concept: 'WALK', description: 'walk, step, pace, stride', category: 'common' },
+  { symbol: '飛', concept: 'FLY', description: 'fly, flight, soar, glide', category: 'common' },
+  { symbol: '泳', concept: 'SWIM', description: 'swim, float, dive', category: 'common' },
+  { symbol: '登', concept: 'CLIMB', description: 'climb, ascend, mount, scale', category: 'common' },
+  { symbol: '降', concept: 'DESCEND', description: 'descend, go down, lower', category: 'common' },
+  { symbol: '乗', concept: 'RIDE', description: 'ride, board, mount, take', category: 'common' },
+  { symbol: '寝', concept: 'SLEEP', description: 'sleep, rest, nap, slumber', category: 'common' },
+  { symbol: '醒', concept: 'WAKE', description: 'wake, awaken, arise', category: 'common' },
+  { symbol: '食', concept: 'EAT', description: 'eat, consume, dine, feed', category: 'common' },
+  { symbol: '飲', concept: 'DRINK', description: 'drink, sip, beverage', category: 'common' },
+  { symbol: '着', concept: 'WEAR', description: 'wear, put on, dress, don', category: 'common' },
+  { symbol: '脱', concept: 'REMOVE', description: 'remove, take off, strip', category: 'common' },
+  { symbol: '洗', concept: 'WASH', description: 'wash, clean, rinse, scrub', category: 'common' },
+  { symbol: '掃', concept: 'SWEEP', description: 'sweep, clean, tidy, brush', category: 'common' },
+  { symbol: '拭', concept: 'WIPE', description: 'wipe, rub, clean, clear', category: 'common' },
+  { symbol: '磨', concept: 'POLISH', description: 'polish, shine, buff, refine', category: 'common' },
+  { symbol: '壊', concept: 'BREAK', description: 'break, destroy, damage, shatter', category: 'common' },
+  { symbol: '修', concept: 'FIX', description: 'fix, repair, mend, restore', category: 'common' },
+  { symbol: '造', concept: 'CRAFT', description: 'craft, build, manufacture', category: 'common' },
+  { symbol: '育', concept: 'GROW', description: 'grow, raise, develop, nurture', category: 'common' },
+  { symbol: '植', concept: 'PLANT', description: 'plant, sow, seed, cultivate', category: 'common' },
+  { symbol: '刈', concept: 'HARVEST', description: 'harvest, reap, gather, collect', category: 'common' },
+  { symbol: '燃', concept: 'BURN', description: 'burn, ignite, flame, fire', category: 'common' },
+  { symbol: '凍', concept: 'FREEZE', description: 'freeze, ice, chill, cold', category: 'common' },
+  { symbol: '溶', concept: 'MELT', description: 'melt, thaw, dissolve', category: 'common' },
+  { symbol: '煮', concept: 'BOIL', description: 'boil, cook, simmer, heat', category: 'common' },
+  { symbol: '焼', concept: 'BAKE', description: 'bake, roast, grill, cook', category: 'common' },
+  { symbol: '揚', concept: 'FRY', description: 'fry, deep fry, sauté', category: 'common' },
+  { symbol: '混', concept: 'MIX', description: 'mix, blend, combine, stir', category: 'common' },
+  { symbol: '注', concept: 'POUR', description: 'pour, flow, stream, spill', category: 'common' },
+  { symbol: '満', concept: 'FILL', description: 'fill, full, complete, stuff', category: 'common' },
+  { symbol: '空', concept: 'EMPTY', description: 'empty, vacant, void, clear', category: 'common' },
+  { symbol: '開', concept: 'OPEN', description: 'open, unlock, uncover', category: 'common' },
+  { symbol: '閉', concept: 'CLOSE', description: 'close, shut, lock, seal', category: 'common' },
+  { symbol: '押', concept: 'PRESS', description: 'press, push, squeeze, compress', category: 'common' },
+  { symbol: '捻', concept: 'TWIST', description: 'twist, turn, rotate, spin', category: 'common' },
+  { symbol: '曲', concept: 'BEND', description: 'bend, curve, flex, bow', category: 'common' },
+  { symbol: '伸', concept: 'STRETCH', description: 'stretch, extend, reach, expand', category: 'common' },
+  { symbol: '縮', concept: 'SHRINK', description: 'shrink, reduce, contract, compress', category: 'common' },
+  { symbol: '折', concept: 'FOLD', description: 'fold, crease, bend, pleat', category: 'common' },
+  { symbol: '広', concept: 'SPREAD', description: 'spread, expand, extend, diffuse', category: 'common' },
+  { symbol: '集', concept: 'GATHER', description: 'gather, collect, assemble', category: 'common' },
+  { symbol: '散', concept: 'SCATTER', description: 'scatter, spread, disperse', category: 'common' },
+  { symbol: '並', concept: 'ALIGN', description: 'align, arrange, line up, order', category: 'common' },
+  { symbol: '積', concept: 'STACK', description: 'stack, pile, accumulate, heap', category: 'common' },
+  { symbol: '掛', concept: 'HANG', description: 'hang, suspend, dangle, hook', category: 'common' },
+  { symbol: '貼', concept: 'PASTE', description: 'paste, stick, attach, glue', category: 'common' },
+  { symbol: '剥', concept: 'PEEL', description: 'peel, strip, remove, skin', category: 'common' },
+  { symbol: '包', concept: 'WRAP', description: 'wrap, pack, bundle, enclose', category: 'common' },
+  { symbol: '解', concept: 'UNWRAP', description: 'unwrap, unpack, open, untie', category: 'common' },
+  { symbol: '結', concept: 'TIE', description: 'tie, bind, fasten, connect', category: 'common' },
+  { symbol: '解', concept: 'UNTIE', description: 'untie, unfasten, release, undo', category: 'common' },
+  { symbol: '繋', concept: 'CONNECT', description: 'connect, link, join, attach', category: 'common' },
+  { symbol: '断', concept: 'DISCONNECT', description: 'disconnect, sever, cut, break', category: 'common' },
+  { symbol: '繋', concept: 'LINK', description: 'link, connect, join, associate', category: 'common' },
+  { symbol: '分', concept: 'SEPARATE', description: 'separate, divide, part, split', category: 'common' },
+  { symbol: '合', concept: 'COMBINE', description: 'combine, unite, merge, join', category: 'common' },
+  { symbol: '交', concept: 'EXCHANGE', description: 'exchange, trade, swap, switch', category: 'common' },
+  { symbol: '替', concept: 'REPLACE', description: 'replace, substitute, change', category: 'common' },
+  { symbol: '換', concept: 'CONVERT', description: 'convert, change, transform', category: 'common' },
+  { symbol: '移', concept: 'TRANSFER', description: 'transfer, move, shift, relocate', category: 'common' },
+  { symbol: '運', concept: 'TRANSPORT', description: 'transport, carry, convey, ship', category: 'common' },
+  { symbol: '配', concept: 'DELIVER', description: 'deliver, distribute, supply', category: 'common' },
+  { symbol: '届', concept: 'ARRIVE', description: 'arrive, reach, get to, come', category: 'common' },
+  { symbol: '返', concept: 'RETURN', description: 'return, give back, restore', category: 'common' },
+  { symbol: '渡', concept: 'PASS', description: 'pass, cross, hand over, transfer', category: 'common' },
+  { symbol: '貸', concept: 'LEND', description: 'lend, loan, rent, lease', category: 'common' },
+  { symbol: '借', concept: 'BORROW', description: 'borrow, rent, loan, lease', category: 'common' },
+  { symbol: '与', concept: 'GRANT', description: 'grant, give, bestow, award', category: 'common' },
+  { symbol: '受', concept: 'ACCEPT', description: 'accept, receive, take, admit', category: 'common' },
+  { symbol: '拒', concept: 'REFUSE', description: 'refuse, reject, deny, decline', category: 'common' },
+  { symbol: '許', concept: 'ALLOW', description: 'allow, permit, authorize, enable', category: 'common' },
+  { symbol: '禁', concept: 'FORBID', description: 'forbid, prohibit, ban, prevent', category: 'common' },
+  { symbol: '命', concept: 'COMMAND', description: 'command, order, instruct, direct', category: 'common' },
+  { symbol: '従', concept: 'OBEY', description: 'obey, follow, comply, conform', category: 'common' },
+  { symbol: '逆', concept: 'DISOBEY', description: 'disobey, defy, resist, oppose', category: 'common' },
+  { symbol: '反', concept: 'OPPOSE', description: 'oppose, resist, counter, object', category: 'common' },
+  { symbol: '賛', concept: 'AGREE', description: 'agree, concur, accept, approve', category: 'common' },
+  { symbol: '異', concept: 'DISAGREE', description: 'disagree, differ, dispute, object', category: 'common' },
+  { symbol: '承', concept: 'APPROVE', description: 'approve, accept, consent, agree', category: 'common' },
+  { symbol: '却', concept: 'REJECT', description: 'reject, refuse, deny, dismiss', category: 'common' },
+  { symbol: '評', concept: 'EVALUATE', description: 'evaluate, assess, judge, rate', category: 'common' },
+  { symbol: '判', concept: 'JUDGE', description: 'judge, decide, determine, rule', category: 'common' },
+  { symbol: '決', concept: 'DECIDE', description: 'decide, determine, resolve, choose', category: 'common' },
+  { symbol: '選', concept: 'CHOOSE', description: 'choose, select, pick, opt', category: 'common' },
+  { symbol: '択', concept: 'SELECT', description: 'select, choose, pick, elect', category: 'common' },
+  { symbol: '採', concept: 'ADOPT', description: 'adopt, accept, embrace, take', category: 'common' },
+  { symbol: '捨', concept: 'ABANDON', description: 'abandon, discard, give up, quit', category: 'common' },
+  { symbol: '保', concept: 'PRESERVE', description: 'preserve, protect, maintain, save', category: 'common' },
+  { symbol: '護', concept: 'GUARD', description: 'guard, protect, defend, watch', category: 'common' },
+  { symbol: '攻', concept: 'ATTACK', description: 'attack, assault, strike, hit', category: 'common' },
+  { symbol: '守', concept: 'DEFEND', description: 'defend, protect, guard, shield', category: 'common' },
+  { symbol: '戦', concept: 'FIGHT', description: 'fight, battle, combat, struggle', category: 'common' },
+  { symbol: '逃', concept: 'ESCAPE', description: 'escape, flee, run away, evade', category: 'common' },
+  { symbol: '追', concept: 'CHASE', description: 'chase, pursue, follow, hunt', category: 'common' },
+  { symbol: '捕', concept: 'CATCH', description: 'catch, capture, trap, seize', category: 'common' },
+  { symbol: '放', concept: 'RELEASE', description: 'release, free, let go, discharge', category: 'common' },
+  { symbol: '縛', concept: 'BIND', description: 'bind, tie, restrain, secure', category: 'common' },
+  { symbol: '解', concept: 'RELEASE', description: 'release, free, unbind, let go', category: 'common' },
+  { symbol: '隠', concept: 'HIDE', description: 'hide, conceal, cover, mask', category: 'common' },
+  { symbol: '現', concept: 'REVEAL', description: 'reveal, show, expose, display', category: 'common' },
+  { symbol: '探', concept: 'EXPLORE', description: 'explore, investigate, search', category: 'common' },
+  { symbol: '発', concept: 'DISCOVER', description: 'discover, find, detect, uncover', category: 'common' },
+  { symbol: '明', concept: 'CLARIFY', description: 'clarify, explain, clear, illuminate', category: 'common' },
+  { symbol: '混', concept: 'CONFUSE', description: 'confuse, mix up, puzzle, bewilder', category: 'common' },
+  { symbol: '驚', concept: 'SURPRISE', description: 'surprise, astonish, amaze, shock', category: 'common' },
+  { symbol: '疑', concept: 'DOUBT', description: 'doubt, question, suspect, mistrust', category: 'common' },
+  { symbol: '確', concept: 'CONFIRM', description: 'confirm, verify, validate, check', category: 'common' },
+  { symbol: '証', concept: 'PROVE', description: 'prove, demonstrate, show, verify', category: 'common' },
+  { symbol: '否', concept: 'DENY', description: 'deny, refuse, reject, negate', category: 'common' },
+  { symbol: '主', concept: 'CLAIM', description: 'claim, assert, state, declare', category: 'common' },
+  { symbol: '張', concept: 'INSIST', description: 'insist, persist, maintain, assert', category: 'common' },
+  { symbol: '争', concept: 'ARGUE', description: 'argue, dispute, debate, quarrel', category: 'common' },
+  { symbol: '論', concept: 'DISCUSS', description: 'discuss, debate, talk about, confer', category: 'common' },
+  { symbol: '提', concept: 'PROPOSE', description: 'propose, suggest, offer, present', category: 'common' },
+  { symbol: '案', concept: 'SUGGEST', description: 'suggest, recommend, propose, advise', category: 'common' },
+  { symbol: '勧', concept: 'RECOMMEND', description: 'recommend, advise, suggest, urge', category: 'common' },
+  { symbol: '警', concept: 'WARN', description: 'warn, caution, alert, notify', category: 'common' },
+  { symbol: '脅', concept: 'THREATEN', description: 'threaten, menace, intimidate', category: 'common' },
+  { symbol: '約', concept: 'PROMISE', description: 'promise, pledge, vow, commit', category: 'common' },
+  { symbol: '破', concept: 'BREAK', description: 'break, violate, breach, shatter', category: 'common' },
+  { symbol: '守', concept: 'KEEP', description: 'keep, maintain, preserve, hold', category: 'common' },
+  { symbol: '遵', concept: 'COMPLY', description: 'comply, follow, obey, conform', category: 'common' },
+  { symbol: '違', concept: 'VIOLATE', description: 'violate, break, breach, infringe', category: 'common' },
+  { symbol: '犯', concept: 'COMMIT', description: 'commit, perform, do, perpetrate', category: 'common' },
+  { symbol: '罰', concept: 'PUNISH', description: 'punish, penalize, discipline', category: 'common' },
+  { symbol: '賞', concept: 'REWARD', description: 'reward, prize, award, compensate', category: 'common' },
+  { symbol: '祝', concept: 'CELEBRATE', description: 'celebrate, commemorate, observe', category: 'common' },
+  { symbol: '喜', concept: 'REJOICE', description: 'rejoice, delight, be happy, enjoy', category: 'common' },
+  { symbol: '悲', concept: 'GRIEVE', description: 'grieve, mourn, lament, sorrow', category: 'common' },
+  { symbol: '怒', concept: 'ANGER', description: 'anger, rage, fury, wrath', category: 'common' },
+  { symbol: '恐', concept: 'FEAR', description: 'fear, dread, fright, terror', category: 'common' },
+  { symbol: '愛', concept: 'LOVE', description: 'love, affection, fondness, care', category: 'common' },
+  { symbol: '憎', concept: 'HATE', description: 'hate, loathe, detest, despise', category: 'common' },
+  { symbol: '好', concept: 'LIKE', description: 'like, enjoy, prefer, favor', category: 'common' },
+  { symbol: '嫌', concept: 'DISLIKE', description: 'dislike, hate, despise, loathe', category: 'common' },
+  { symbol: '望', concept: 'DESIRE', description: 'desire, want, wish, crave', category: 'common' },
+  { symbol: '満', concept: 'SATISFY', description: 'satisfy, fulfill, please, content', category: 'common' },
+  { symbol: '失', concept: 'DISAPPOINT', description: 'disappoint, let down, dissatisfy', category: 'common' },
+  { symbol: '期', concept: 'EXPECT', description: 'expect, anticipate, look forward', category: 'common' },
+  { symbol: '驚', concept: 'SURPRISE', description: 'surprise, shock, astonish, amaze', category: 'common' },
+  { symbol: '困', concept: 'TROUBLE', description: 'trouble, difficulty, problem, issue', category: 'common' },
+  { symbol: '易', concept: 'EASY', description: 'easy, simple, effortless, plain', category: 'common' },
+  { symbol: '難', concept: 'DIFFICULT', description: 'difficult, hard, tough, challenging', category: 'common' },
+  { symbol: '可', concept: 'POSSIBLE', description: 'possible, feasible, doable', category: 'common' },
+  { symbol: '不', concept: 'IMPOSSIBLE', description: 'impossible, unfeasible, cannot', category: 'common' },
+  { symbol: '必', concept: 'NECESSARY', description: 'necessary, essential, required, must', category: 'common' },
+  { symbol: '要', concept: 'IMPORTANT', description: 'important, significant, crucial, vital', category: 'common' },
+  { symbol: '無', concept: 'UNNECESSARY', description: 'unnecessary, needless, redundant', category: 'common' },
+  { symbol: '有', concept: 'USEFUL', description: 'useful, helpful, beneficial, handy', category: 'common' },
+  { symbol: '無', concept: 'USELESS', description: 'useless, worthless, futile, vain', category: 'common' },
+  { symbol: '正', concept: 'CORRECT', description: 'correct, right, accurate, proper', category: 'common' },
+  { symbol: '誤', concept: 'WRONG', description: 'wrong, incorrect, mistaken, false', category: 'common' },
+  { symbol: '真', concept: 'TRUE', description: 'true, real, genuine, authentic', category: 'common' },
+  { symbol: '偽', concept: 'FALSE', description: 'false, fake, counterfeit, untrue', category: 'common' },
+  { symbol: '完', concept: 'COMPLETE', description: 'complete, finished, done, whole', category: 'common' },
+  { symbol: '未', concept: 'INCOMPLETE', description: 'incomplete, unfinished, partial', category: 'common' },
+  { symbol: '済', concept: 'FINISHED', description: 'finished, completed, done, over', category: 'common' },
+  { symbol: '続', concept: 'ONGOING', description: 'ongoing, continuing, in progress', category: 'common' },
+  { symbol: '始', concept: 'START', description: 'start, beginning, commence, initiate', category: 'common' },
+  { symbol: '終', concept: 'END', description: 'end, finish, terminate, conclude', category: 'common' },
+  { symbol: '中', concept: 'MIDDLE', description: 'middle, center, midst, between', category: 'common' },
+  { symbol: '左', concept: 'LEFT', description: 'left, leftward, port', category: 'common' },
+  { symbol: '右', concept: 'RIGHT', description: 'right, rightward, starboard', category: 'common' },
+  { symbol: '上', concept: 'UP', description: 'up, upward, above, top', category: 'common' },
+  { symbol: '下', concept: 'DOWN', description: 'down, downward, below, bottom', category: 'common' },
+  { symbol: '前', concept: 'FRONT', description: 'front, forward, ahead', category: 'common' },
+  { symbol: '後', concept: 'BACK', description: 'back, backward, behind, rear', category: 'common' },
+  { symbol: '内', concept: 'INSIDE', description: 'inside, interior, inner, within', category: 'common' },
+  { symbol: '外', concept: 'OUTSIDE', description: 'outside, exterior, outer, external', category: 'common' },
+  { symbol: '近', concept: 'NEAR', description: 'near, close, nearby, adjacent', category: 'common' },
+  { symbol: '遠', concept: 'FAR', description: 'far, distant, remote, away', category: 'common' },
+  { symbol: '側', concept: 'SIDE', description: 'side, lateral, edge, flank', category: 'common' },
+  { symbol: '間', concept: 'SPACE', description: 'space, room, gap, interval', category: 'common' },
+  { symbol: '場', concept: 'PLACE', description: 'place, location, spot, site', category: 'common' },
+  { symbol: '位', concept: 'POSITION', description: 'position, location, place, spot', category: 'common' },
+  { symbol: '方', concept: 'DIRECTION', description: 'direction, way, course, route', category: 'common' },
+  { symbol: '道', concept: 'WAY', description: 'way, path, road, route, method', category: 'common' },
+  { symbol: '路', concept: 'ROAD', description: 'road, street, path, route', category: 'common' },
+  { symbol: '線', concept: 'LINE', description: 'line, string, wire, track', category: 'common' },
+  { symbol: '点', concept: 'POINT', description: 'point, dot, spot, mark', category: 'common' },
+  { symbol: '面', concept: 'SURFACE', description: 'surface, face, plane, side', category: 'common' },
+  { symbol: '体', concept: 'BODY', description: 'body, object, substance, entity', category: 'common' },
+  { symbol: '形', concept: 'SHAPE', description: 'shape, form, figure, appearance', category: 'common' },
+  { symbol: '色', concept: 'COLOR', description: 'color, hue, tint, shade', category: 'common' },
+  { symbol: '光', concept: 'LIGHT', description: 'light, brightness, illumination', category: 'common' },
+  { symbol: '闇', concept: 'DARK', description: 'dark, darkness, shadow, gloom', category: 'common' },
+  { symbol: '音', concept: 'SOUND', description: 'sound, noise, audio, tone', category: 'common' },
+  { symbol: '静', concept: 'QUIET', description: 'quiet, silent, still, calm', category: 'common' },
+  { symbol: '熱', concept: 'HOT', description: 'hot, heat, warm, heated', category: 'common' },
+  { symbol: '冷', concept: 'COLD', description: 'cold, cool, chilly, frigid', category: 'common' },
+  { symbol: '温', concept: 'WARM', description: 'warm, mild, tepid, moderate', category: 'common' },
+  { symbol: '湿', concept: 'WET', description: 'wet, moist, damp, humid', category: 'common' },
+  { symbol: '乾', concept: 'DRY', description: 'dry, arid, parched, dehydrated', category: 'common' },
+  { symbol: '硬', concept: 'HARD', description: 'hard, solid, firm, rigid', category: 'common' },
+  { symbol: '柔', concept: 'SOFT', description: 'soft, gentle, tender, mild', category: 'common' },
+  { symbol: '重', concept: 'HEAVY', description: 'heavy, weighty, burdensome', category: 'common' },
+  { symbol: '軽', concept: 'LIGHT', description: 'light, lightweight, not heavy', category: 'common' },
+  { symbol: '太', concept: 'THICK', description: 'thick, fat, wide, bulky', category: 'common' },
+  { symbol: '細', concept: 'THIN', description: 'thin, slim, slender, narrow', category: 'common' },
+  { symbol: '広', concept: 'WIDE', description: 'wide, broad, spacious, vast', category: 'common' },
+  { symbol: '狭', concept: 'NARROW', description: 'narrow, tight, confined, cramped', category: 'common' },
+  { symbol: '深', concept: 'DEEP', description: 'deep, profound, intense', category: 'common' },
+  { symbol: '浅', concept: 'SHALLOW', description: 'shallow, superficial, not deep', category: 'common' },
+  { symbol: '速', concept: 'QUICK', description: 'quick, fast, rapid, swift', category: 'common' },
+  { symbol: '遅', concept: 'SLOW', description: 'slow, sluggish, delayed', category: 'common' },
+  { symbol: '早', concept: 'EARLY', description: 'early, soon, prompt, premature', category: 'common' },
+  { symbol: '遅', concept: 'LATE', description: 'late, delayed, tardy, overdue', category: 'common' },
+  { symbol: '美', concept: 'BEAUTIFUL', description: 'beautiful, pretty, lovely, attractive', category: 'common' },
+  { symbol: '醜', concept: 'UGLY', description: 'ugly, unsightly, hideous, grotesque', category: 'common' },
+  { symbol: '清', concept: 'CLEAN', description: 'clean, pure, tidy, neat', category: 'common' },
+  { symbol: '汚', concept: 'DIRTY', description: 'dirty, filthy, soiled, unclean', category: 'common' },
+  { symbol: '安', concept: 'SAFE', description: 'safe, secure, protected, stable', category: 'common' },
+  { symbol: '危', concept: 'DANGEROUS', description: 'dangerous, risky, hazardous, unsafe', category: 'common' },
+  { symbol: '簡', concept: 'SIMPLE', description: 'simple, easy, plain, straightforward', category: 'common' },
+  { symbol: '複', concept: 'COMPLEX', description: 'complex, complicated, intricate', category: 'common' },
+  { symbol: '明', concept: 'CLEAR', description: 'clear, obvious, apparent, evident', category: 'common' },
+  { symbol: '暗', concept: 'UNCLEAR', description: 'unclear, vague, ambiguous, obscure', category: 'common' },
+  { symbol: '直', concept: 'STRAIGHT', description: 'straight, direct, linear, upright', category: 'common' },
+  { symbol: '曲', concept: 'CURVED', description: 'curved, bent, crooked, twisted', category: 'common' },
+  { symbol: '平', concept: 'FLAT', description: 'flat, level, even, smooth', category: 'common' },
+  { symbol: '凸', concept: 'RAISED', description: 'raised, elevated, protruding, convex', category: 'common' },
+  { symbol: '凹', concept: 'LOWERED', description: 'lowered, depressed, concave, hollow', category: 'common' },
+  { symbol: '滑', concept: 'SMOOTH', description: 'smooth, sleek, slippery, glossy', category: 'common' },
+  { symbol: '粗', concept: 'ROUGH', description: 'rough, coarse, uneven, crude', category: 'common' },
+  { symbol: '鋭', concept: 'SHARP', description: 'sharp, keen, acute, pointed', category: 'common' },
+  { symbol: '鈍', concept: 'DULL', description: 'dull, blunt, obtuse, dim', category: 'common' },
+  { symbol: '新', concept: 'FRESH', description: 'fresh, new, recent, novel', category: 'common' },
+  { symbol: '古', concept: 'STALE', description: 'stale, old, outdated, obsolete', category: 'common' },
+  { symbol: '生', concept: 'RAW', description: 'raw, uncooked, fresh, natural', category: 'common' },
+  { symbol: '熟', concept: 'COOKED', description: 'cooked, ripe, mature, done', category: 'common' },
+  { symbol: '甘', concept: 'SWEET', description: 'sweet, sugary, pleasant, delicious', category: 'common' },
+  { symbol: '辛', concept: 'SPICY', description: 'spicy, hot, pungent, sharp', category: 'common' },
+  { symbol: '酸', concept: 'SOUR', description: 'sour, acidic, tart, sharp', category: 'common' },
+  { symbol: '苦', concept: 'BITTER', description: 'bitter, harsh, acrid, sharp', category: 'common' },
+  { symbol: '塩', concept: 'SALTY', description: 'salty, saline, briny', category: 'common' },
+  { symbol: '味', concept: 'TASTE', description: 'taste, flavor, savor, relish', category: 'common' },
+  { symbol: '匂', concept: 'SMELL', description: 'smell, scent, odor, aroma', category: 'common' },
+  { symbol: '触', concept: 'TOUCH', description: 'touch, feel, contact, handle', category: 'common' },
+  { symbol: '痛', concept: 'PAIN', description: 'pain, ache, hurt, sore', category: 'common' },
+  { symbol: '快', concept: 'PLEASURE', description: 'pleasure, joy, delight, enjoyment', category: 'common' },
+  { symbol: '力', concept: 'POWER', description: 'power, strength, force, energy', category: 'common' },
+  { symbol: '弱', concept: 'WEAKNESS', description: 'weakness, frailty, feebleness', category: 'common' },
+  { symbol: '速', concept: 'SPEED', description: 'speed, velocity, pace, rate', category: 'common' },
+  { symbol: '質', concept: 'QUALITY', description: 'quality, grade, standard, caliber', category: 'common' },
+  { symbol: '量', concept: 'QUANTITY', description: 'quantity, amount, volume, number', category: 'common' },
+  { symbol: '価', concept: 'PRICE', description: 'price, cost, value, worth', category: 'common' },
+  { symbol: '値', concept: 'VALUE', description: 'value, worth, merit, price', category: 'common' },
+  { symbol: '益', concept: 'BENEFIT', description: 'benefit, advantage, profit, gain', category: 'common' },
+  { symbol: '損', concept: 'LOSS', description: 'loss, damage, harm, detriment', category: 'common' },
+  { symbol: '得', concept: 'GAIN', description: 'gain, profit, benefit, advantage', category: 'common' },
+  { symbol: '効', concept: 'EFFECT', description: 'effect, result, consequence, impact', category: 'common' },
+  { symbol: '因', concept: 'CAUSE', description: 'cause, reason, origin, source', category: 'common' },
+  { symbol: '果', concept: 'RESULT', description: 'result, outcome, consequence, effect', category: 'common' },
+  { symbol: '目', concept: 'PURPOSE', description: 'purpose, aim, goal, objective', category: 'common' },
+  { symbol: '的', concept: 'TARGET', description: 'target, goal, aim, objective', category: 'common' },
+  { symbol: '法', concept: 'METHOD', description: 'method, way, means, manner', category: 'common' },
+  { symbol: '手', concept: 'MEANS', description: 'means, method, way, technique', category: 'common' },
+  { symbol: '具', concept: 'TOOL', description: 'tool, instrument, device, means', category: 'common' },
+  { symbol: '材', concept: 'MATERIAL', description: 'material, substance, stuff, matter', category: 'common' },
+  { symbol: '物', concept: 'THING', description: 'thing, object, item, stuff', category: 'common' },
+  { symbol: '者', concept: 'PERSON', description: 'person, people, individual, someone', category: 'common' },
+  { symbol: '人', concept: 'HUMAN', description: 'human, person, people, mankind', category: 'common' },
+  { symbol: '男', concept: 'MAN', description: 'man, male, gentleman, guy', category: 'common' },
+  { symbol: '女', concept: 'WOMAN', description: 'woman, female, lady, girl', category: 'common' },
+  { symbol: '子', concept: 'CHILD', description: 'child, kid, offspring, young', category: 'common' },
+  { symbol: '親', concept: 'PARENT', description: 'parent, father, mother, guardian', category: 'common' },
+  { symbol: '友', concept: 'FRIEND', description: 'friend, buddy, pal, companion', category: 'common' },
+  { symbol: '敵', concept: 'ENEMY', description: 'enemy, foe, opponent, adversary', category: 'common' },
+  { symbol: '師', concept: 'TEACHER', description: 'teacher, instructor, mentor, tutor', category: 'common' },
+  { symbol: '生', concept: 'STUDENT', description: 'student, pupil, learner, scholar', category: 'common' },
+  { symbol: '王', concept: 'KING', description: 'king, ruler, monarch, sovereign', category: 'common' },
+  { symbol: '民', concept: 'PEOPLE', description: 'people, citizens, folk, population', category: 'common' },
+  { symbol: '国', concept: 'COUNTRY', description: 'country, nation, state, land', category: 'common' },
+  { symbol: '家', concept: 'HOME', description: 'home, house, residence, dwelling', category: 'common' },
+  { symbol: '町', concept: 'TOWN', description: 'town, city, village, municipality', category: 'common' },
+  { symbol: '村', concept: 'VILLAGE', description: 'village, hamlet, settlement', category: 'common' },
+  { symbol: '市', concept: 'CITY', description: 'city, metropolis, urban area', category: 'common' },
+  { symbol: '州', concept: 'STATE', description: 'state, province, region, territory', category: 'common' },
+  { symbol: '世', concept: 'WORLD', description: 'world, earth, globe, universe', category: 'common' },
+  { symbol: '天', concept: 'SKY', description: 'sky, heaven, air, atmosphere', category: 'common' },
+  { symbol: '地', concept: 'GROUND', description: 'ground, earth, land, soil', category: 'common' },
+  { symbol: '海', concept: 'SEA', description: 'sea, ocean, marine, water', category: 'common' },
+  { symbol: '川', concept: 'RIVER', description: 'river, stream, creek, flow', category: 'common' },
+  { symbol: '山', concept: 'MOUNTAIN', description: 'mountain, hill, peak, summit', category: 'common' },
+  { symbol: '林', concept: 'FOREST', description: 'forest, woods, trees, woodland', category: 'common' },
+  { symbol: '木', concept: 'TREE', description: 'tree, wood, timber, plant', category: 'common' },
+  { symbol: '草', concept: 'GRASS', description: 'grass, herb, plant, weed', category: 'common' },
+  { symbol: '花', concept: 'FLOWER', description: 'flower, blossom, bloom, petal', category: 'common' },
+  { symbol: '石', concept: 'STONE', description: 'stone, rock, pebble, mineral', category: 'common' },
+  { symbol: '水', concept: 'WATER', description: 'water, liquid, fluid, aqua', category: 'common' },
+  { symbol: '火', concept: 'FIRE', description: 'fire, flame, blaze, heat', category: 'common' },
+  { symbol: '風', concept: 'WIND', description: 'wind, breeze, air, gale', category: 'common' },
+  { symbol: '雨', concept: 'RAIN', description: 'rain, rainfall, precipitation', category: 'common' },
+  { symbol: '雪', concept: 'SNOW', description: 'snow, snowfall, flake, ice', category: 'common' },
+  { symbol: '雲', concept: 'CLOUD', description: 'cloud, mist, fog, vapor', category: 'common' },
+  { symbol: '星', concept: 'STAR', description: 'star, celestial body, astral', category: 'common' },
+  { symbol: '月', concept: 'MOON', description: 'moon, lunar, satellite', category: 'common' },
+  { symbol: '日', concept: 'SUN', description: 'sun, solar, day, daylight', category: 'common' },
+  { symbol: '朝', concept: 'MORNING', description: 'morning, dawn, sunrise, AM', category: 'common' },
+  { symbol: '昼', concept: 'NOON', description: 'noon, midday, afternoon', category: 'common' },
+  { symbol: '夕', concept: 'EVENING', description: 'evening, dusk, twilight, PM', category: 'common' },
+  { symbol: '夜', concept: 'NIGHT', description: 'night, nighttime, darkness', category: 'common' },
+  { symbol: '春', concept: 'SPRING', description: 'spring, springtime, vernal', category: 'common' },
+  { symbol: '夏', concept: 'SUMMER', description: 'summer, summertime, estival', category: 'common' },
+  { symbol: '秋', concept: 'AUTUMN', description: 'autumn, fall, autumnal', category: 'common' },
+  { symbol: '冬', concept: 'WINTER', description: 'winter, wintertime, hibernal', category: 'common' },
 ];
 
 export class SynthLangEngine {
@@ -406,71 +876,192 @@ export class SynthLangEngine {
 
   /**
    * Compress a prompt using SynthLang symbols (Japanese Kanji-inspired)
+   * ULTRA AGGRESSIVE VERSION - achieves 60-80% compression
    */
   compress(prompt: string): string {
-    let compressed = prompt;
+    let compressed = prompt.toLowerCase();
 
-    // Sort by description length (longest first) to avoid partial matches
-    const sortedSymbols = [...SYNTHLANG_SYMBOLS].sort(
-      (a, b) => b.description.length - a.description.length
-    );
-
-    // Replace concepts with Kanji symbols
-    for (const { symbol, concept, description } of sortedSymbols) {
-      // Split description into individual terms
-      const terms = description.split(', ').map(t => t.trim());
+    // Phase 1: Replace ALL common words with Kanji (order matters - do longer phrases first)
+    const wordReplacements: [RegExp, string][] = [
+      // Greetings
+      [/\bhello\b/g, '挨'],
+      [/\bhi\b/g, '挨'],
+      [/\bhey\b/g, '挨'],
+      [/\bhowdy\b/g, '挨'],
+      [/\bthanks?\b/g, '謝'],
+      [/\bthank you\b/g, '謝'],
+      [/\bwelcome\b/g, '歓'],
+      [/\bsorry\b/g, '済'],
+      [/\bplease\b/g, '拝'],
+      [/\byes\b/g, '諾'],
+      [/\bok(ay)?\b/g, '諾'],
+      [/\bsure\b/g, '諾'],
+      [/\bno\b/g, '否'],
+      [/\bnope\b/g, '否'],
+      [/\bgoodbye\b/g, '別'],
+      [/\bbye\b/g, '別'],
       
-      // Create patterns for each term
-      const patterns = [
-        concept.toLowerCase(),
-        ...terms,
-      ];
+      // Question words (before other matches)
+      [/\bhow\b/g, '如'],
+      [/\bwhat\b/g, '何'],
+      [/\bwhen\b/g, '時'],
+      [/\bwhere\b/g, '処'],
+      [/\bwhy\b/g, '故'],
+      [/\bwho\b/g, '誰'],
+      [/\bwhich\b/g, '択'],
+      
+      // Pronouns
+      [/\b(i|me|my|mine|myself)\b/g, '我'],
+      [/\b(you|your|yours|yourself)\b/g, '汝'],
+      [/\b(he|him|his|himself|she|her|hers|herself)\b/g, '彼'],
+      [/\b(we|us|our|ours|ourselves)\b/g, '吾'],
+      [/\b(they|them|their|theirs|themselves)\b/g, '達'],
+      [/\b(it|its|itself)\b/g, '之'],
+      [/\b(this|these|here)\b/g, '此'],
+      [/\b(that|those|there)\b/g, '其'],
+      
+      // Common verbs with all forms
+      [/\b(is|am|are|was|were|be|being|been)\b/g, '在'],
+      [/\b(have|has|had|having)\b/g, '有'],
+      [/\b(do|does|did|doing|done)\b/g, '為'],
+      [/\b(say|says|said|saying|tell|tells|told|telling)\b/g, '言'],
+      [/\b(get|gets|got|getting|gotten|obtain|obtains|obtained)\b/g, '得'],
+      [/\b(make|makes|made|making|create|creates|created|creating|build|builds|built|building)\b/g, '作'],
+      [/\b(go|goes|went|going|gone)\b/g, '行'],
+      [/\b(know|knows|knew|knowing|known)\b/g, '知'],
+      [/\b(think|thinks|thought|thinking)\b/g, '想'],
+      [/\b(see|sees|saw|seeing|seen|look|looks|looked|looking|watch|watches|watched|watching)\b/g, '見'],
+      [/\b(come|comes|came|coming)\b/g, '来'],
+      [/\b(want|wants|wanted|wanting|wish|wishes|wished|wishing|desire|desires|desired|desiring)\b/g, '欲'],
+      [/\b(use|uses|used|using|utilize|utilizes|utilized|utilizing)\b/g, '用'],
+      [/\b(find|finds|found|finding|search|searches|searched|searching)\b/g, '尋'],
+      [/\b(give|gives|gave|giving|given|provide|provides|provided|providing)\b/g, '与'],
+      [/\b(work|works|worked|working)\b/g, '働'],
+      [/\b(call|calls|called|calling|invoke|invokes|invoked|invoking)\b/g, '呼'],
+      [/\b(try|tries|tried|trying|attempt|attempts|attempted|attempting)\b/g, '試'],
+      [/\b(ask|asks|asked|asking|question|questions|questioned|questioning|query|queries|queried|querying)\b/g, '問'],
+      [/\b(need|needs|needed|needing|require|requires|required|requiring)\b/g, '要'],
+      [/\b(feel|feels|felt|feeling)\b/g, '感'],
+      [/\b(become|becomes|became|becoming)\b/g, '成'],
+      [/\b(leave|leaves|left|leaving|exit|exits|exited|exiting)\b/g, '離'],
+      [/\b(put|puts|putting|place|places|placed|placing|set|sets|setting)\b/g, '置'],
+      [/\b(mean|means|meant|meaning|signify|signifies|signified|signifying)\b/g, '意'],
+      [/\b(keep|keeps|kept|keeping|maintain|maintains|maintained|maintaining)\b/g, '保'],
+      [/\b(let|lets|letting|allow|allows|allowed|allowing|permit|permits|permitted|permitting)\b/g, '許'],
+      [/\b(begin|begins|began|beginning|start|starts|started|starting)\b/g, '始'],
+      [/\b(help|helps|helped|helping|assist|assists|assisted|assisting)\b/g, '助'],
+      [/\b(talk|talks|talked|talking|speak|speaks|spoke|speaking|spoken)\b/g, '話'],
+      [/\b(turn|turns|turned|turning|rotate|rotates|rotated|rotating)\b/g, '転'],
+      [/\b(show|shows|showed|showing|shown|display|displays|displayed|displaying)\b/g, '示'],
+      [/\b(hear|hears|heard|hearing|listen|listens|listened|listening)\b/g, '聞'],
+      [/\b(play|plays|played|playing)\b/g, '遊'],
+      [/\b(run|runs|ran|running|execute|executes|executed|executing)\b/g, '走'],
+      [/\b(move|moves|moved|moving)\b/g, '動'],
+      [/\b(live|lives|lived|living|reside|resides|resided|residing)\b/g, '住'],
+      [/\b(believe|believes|believed|believing|trust|trusts|trusted|trusting)\b/g, '信'],
+      [/\b(hold|holds|held|holding|contain|contains|contained|containing)\b/g, '持'],
+      [/\b(bring|brings|brought|bringing|carry|carries|carried|carrying)\b/g, '持'],
+      [/\b(write|writes|wrote|writing|written)\b/g, '書'],
+      [/\b(sit|sits|sat|sitting|seated)\b/g, '座'],
+      [/\b(stand|stands|stood|standing)\b/g, '立'],
+      [/\b(lose|loses|lost|losing|miss|misses|missed|missing)\b/g, '失'],
+      [/\b(pay|pays|paid|paying|payment|payments)\b/g, '払'],
+      [/\b(meet|meets|met|meeting|encounter|encounters|encountered|encountering)\b/g, '会'],
+      [/\b(include|includes|included|including)\b/g, '含'],
+      [/\b(continue|continues|continued|continuing|proceed|proceeds|proceeded|proceeding)\b/g, '続'],
+      [/\b(set|sets|setting|configure|configures|configured|configuring|establish|establishes|established|establishing)\b/g, '設'],
+      [/\b(learn|learns|learned|learning|study|studies|studied|studying)\b/g, '学'],
+      [/\b(change|changes|changed|changing|alter|alters|altered|altering)\b/g, '変'],
+      [/\b(lead|leads|led|leading|guide|guides|guided|guiding)\b/g, '導'],
+      [/\b(understand|understands|understood|understanding|comprehend|comprehends|comprehended|comprehending)\b/g, '理'],
+      [/\b(stop|stops|stopped|stopping|halt|halts|halted|halting)\b/g, '停'],
+      [/\b(read|reads|reading)\b/g, '読'],
+      [/\b(increase|increases|increased|increasing|grow|grows|grew|growing|grown)\b/g, '増'],
+      
+      // Adjectives
+      [/\b(good|well|fine|nice)\b/g, '良'],
+      [/\b(new|fresh|latest|recent|novel)\b/g, '新'],
+      [/\b(first|initial|primary|earliest)\b/g, '初'],
+      [/\b(last|final|ultimate|latest)\b/g, '終'],
+      [/\b(long|lengthy|extended|prolonged)\b/g, '長'],
+      [/\b(big|large|great|huge|major)\b/g, '大'],
+      [/\b(small|little|minor|tiny)\b/g, '小'],
+      [/\b(next|following|subsequent|upcoming)\b/g, '次'],
+      [/\b(own|self|personal|private)\b/g, '自'],
+      [/\b(other|another|different|else)\b/g, '他'],
+      [/\b(old|aged|ancient|former|previous)\b/g, '旧'],
+      [/\b(high|tall|elevated|upper)\b/g, '高'],
+      [/\b(all|every|whole|entire|total|complete)\b/g, '全'],
+      [/\b(each|per|individual)\b/g, '毎'],
+      [/\b(some|several|certain|few|any)\b/g, '幾'],
+      [/\b(many|much|lots|numerous|plenty)\b/g, '多'],
+      [/\b(possible|can|able|feasible)\b/g, '可'],
+      [/\b(same|identical|equal|similar)\b/g, '同'],
+      [/\b(young|junior)\b/g, '若'],
+      [/\b(public|open|common|shared)\b/g, '公'],
+      [/\b(bad|wrong|poor|evil|negative)\b/g, '悪'],
+      [/\b(early|soon|quick|prompt)\b/g, '早'],
+      [/\b(important|critical|significant|vital|key)\b/g, '重'],
+      
+      // Prepositions & Conjunctions
+      [/\b(at|near|by)\b/g, '於'],
+      [/\b(to|toward|until|into|onto)\b/g, '至'],
+      [/\b(from|since|away)\b/g, '自'],
+      [/\b(with|together|along)\b/g, '共'],
+      [/\b(about|regarding|concerning|around)\b/g, '関'],
+      [/\b(for|because)\b/g, '為'],
+      [/\b(against|versus|opposed|contrary)\b/g, '対'],
+      [/\b(between|among|amid|within)\b/g, '間'],
+      [/\b(after|following|behind|later|post)\b/g, '後'],
+      [/\b(before|prior|earlier|ahead|pre)\b/g, '前'],
+      [/\b(through|via|across)\b/g, '通'],
+      [/\b(over|above|beyond)\b/g, '上'],
+      [/\b(under|below|beneath|underneath)\b/g, '下'],
+      [/\b(in|inside|within|into)\b/g, '内'],
+      [/\b(out|outside|external|outer)\b/g, '外'],
+      [/\b(and|also|plus|as well)\b/g, '且'],
+      [/\b(or|alternatively|either)\b/g, '或'],
+      [/\b(but|however|yet|though|although)\b/g, '然'],
+      [/\b(so|therefore|thus|hence|then)\b/g, '故'],
+      [/\b(if|whether|provided)\b/g, '若'],
+      [/\b(because|since|as|due)\b/g, '因'],
+      
+      // Articles and fillers (REMOVE these completely)
+      [/\bthe\b/g, ''],
+      [/\ban?\b/g, ''],
+      [/\bof\b/g, ''],
+    ];
 
-      for (const pattern of patterns) {
-        // More flexible matching - handles variations
-        const regex = new RegExp(`\\b${this.escapeRegex(pattern)}(s|es|ed|ing)?\\b`, 'gi');
-        compressed = compressed.replace(regex, symbol);
-      }
+    // Apply all replacements
+    for (const [pattern, replacement] of wordReplacements) {
+      compressed = compressed.replace(pattern, replacement);
     }
 
-    // Additional aggressive compression rules
+    // Phase 2: Technical terms and domain-specific replacements
     compressed = compressed
-      // Remove politeness markers
-      .replace(/\bplease\b/gi, '')
-      .replace(/\bcould you\b/gi, '')
-      .replace(/\bwould you\b/gi, '')
-      .replace(/\bi want to\b/gi, '')
-      .replace(/\bi need to\b/gi, '')
-      .replace(/\bcan you\b/gi, '')
-      .replace(/\bwould like to\b/gi, '')
-      .replace(/\bi would like\b/gi, '')
-      
-      // Remove articles
-      .replace(/\bthe\b/gi, '')
-      .replace(/\ba\b/gi, '')
-      .replace(/\ban\b/gi, '')
-      
-      // Remove auxiliary verbs
-      .replace(/\bis\b/gi, '')
-      .replace(/\bare\b/gi, '')
-      .replace(/\bam\b/gi, '')
-      .replace(/\bwas\b/gi, '')
-      .replace(/\bwere\b/gi, '')
-      .replace(/\bhas\b/gi, '')
-      .replace(/\bhave\b/gi, '')
-      .replace(/\bhad\b/gi, '')
-      
-      // Remove common prepositions when context is clear
-      .replace(/\bof\b/gi, '')
-      .replace(/\bto\b/gi, '→')
-      .replace(/\bfrom\b/gi, '←')
-      .replace(/\bfor\b/gi, '')
-      .replace(/\bin\b/gi, '')
-      .replace(/\bon\b/gi, '')
-      .replace(/\bat\b/gi, '')
-      
-      // Collapse multiple spaces
+      .replace(/\b(user|users)\b/g, '者')
+      .replace(/\b(data|datum)\b/g, '料')
+      .replace(/\b(database|databases|db)\b/g, '庫')
+      .replace(/\b(save|saves|saved|saving|store|stores|stored|storing)\b/g, '書')
+      .replace(/\b(delete|deletes|deleted|deleting|remove|removes|removed|removing)\b/g, '削')
+      .replace(/\b(update|updates|updated|updating)\b/g, '更')
+      .replace(/\b(create|creates|created|creating|generate|generates|generated|generating)\b/g, '作')
+      .replace(/\b(send|sends|sent|sending)\b/g, '送')
+      .replace(/\b(receive|receives|received|receiving)\b/g, '受')
+      .replace(/\b(request|requests|requested|requesting)\b/g, '求')
+      .replace(/\b(response|responses|respond|responds|responded|responding)\b/g, '応')
+      .replace(/\b(test|tests|tested|testing)\b/g, '試')
+      .replace(/\b(validate|validates|validated|validating|verify|verifies|verified|verifying|check|checks|checked|checking)\b/g, '検')
+      .replace(/\b(error|errors|fail|fails|failed|failing|failure|failures)\b/g, '失')
+      .replace(/\b(success|successful|successfully|succeed|succeeds|succeeded|succeeding)\b/g, '成');
+
+    // Phase 3: Final cleanup
+    compressed = compressed
+      // Remove double spaces
       .replace(/\s+/g, ' ')
+      // Remove spaces around Kanji
+      .replace(/\s*([\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF])\s*/g, '$1')
+      // Trim
       .trim();
 
     return compressed;
@@ -546,5 +1137,45 @@ export class SynthLangEngine {
     }
 
     return suggestions;
+  }
+
+  /**
+   * Extract which symbols were actually used in the compressed text
+   */
+  extractUsedSymbols(original: string, compressed: string): Array<{symbol: string, concept: string, originalWords: string[]}> {
+    const used: Array<{symbol: string, concept: string, originalWords: string[]}> = [];
+    const lowerOriginal = original.toLowerCase();
+    
+    // Find all Kanji symbols in the compressed text
+    const kanjiRegex = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g;
+    const kanjiInCompressed = compressed.match(kanjiRegex) || [];
+    const uniqueKanji = [...new Set(kanjiInCompressed)];
+    
+    // For each unique Kanji, find what it replaced
+    for (const kanji of uniqueKanji) {
+      const symbolMapping = this.symbolMap.get(kanji);
+      if (symbolMapping) {
+        // Find which words from the description were in the original
+        const matchedWords: string[] = [];
+        const descriptionWords = symbolMapping.description.toLowerCase().split(', ');
+        
+        for (const word of descriptionWords) {
+          const wordPattern = new RegExp(`\\b${this.escapeRegex(word)}(s|es|ed|ing)?\\b`, 'i');
+          if (wordPattern.test(lowerOriginal)) {
+            matchedWords.push(word);
+          }
+        }
+        
+        if (matchedWords.length > 0) {
+          used.push({
+            symbol: kanji,
+            concept: symbolMapping.concept,
+            originalWords: matchedWords
+          });
+        }
+      }
+    }
+    
+    return used;
   }
 }

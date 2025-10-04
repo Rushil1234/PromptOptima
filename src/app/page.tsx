@@ -16,6 +16,11 @@ interface CompressionResult {
   compressionRatio: number;
   estimatedTokenSavings: number;
   semanticScore: number;
+  usedSymbols?: Array<{
+    symbol: string;
+    concept: string;
+    originalWords: string[];
+  }>;
 }
 
 export default function Home() {
@@ -421,6 +426,42 @@ export default function Home() {
                 {result.compressed}
               </div>
             </GlassPanel>
+
+            {/* Symbols Used (SynthLang only) */}
+            {result.usedSymbols && result.usedSymbols.length > 0 && (
+              <GlassPanel>
+                <h2 className="text-2xl font-bold text-dark-50 mb-4">
+                  🎌 Kanji Symbols Used
+                </h2>
+                <p className="text-sm text-dark-400 mb-6">
+                  {result.usedSymbols.length} unique symbols replaced {result.usedSymbols.reduce((acc, s) => acc + s.originalWords.length, 0)} words
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-96 overflow-y-auto scrollbar-thin pr-2">
+                  {result.usedSymbols.map((sym, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: idx * 0.05 }}
+                      className="bg-gradient-to-br from-dark-800/70 to-dark-900/70 border border-primary-500/30 rounded-lg p-3 hover:border-primary-400/50 transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-3xl">{sym.symbol}</span>
+                        <div className="flex-1">
+                          <div className="text-xs font-semibold text-primary-400 uppercase tracking-wider">
+                            {sym.concept}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-xs text-dark-300">
+                        <span className="text-dark-500">Replaced: </span>
+                        <span className="text-dark-200">{sym.originalWords.join(', ')}</span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </GlassPanel>
+            )}
 
             {/* Comparison */}
             <GlassPanel>
