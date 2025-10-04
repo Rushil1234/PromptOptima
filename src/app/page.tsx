@@ -10,7 +10,7 @@ import SymbolReference from '@/components/SymbolReference';
 import Chatbot from '@/components/Chatbot';
 import CopyButton from '@/components/CopyButton';
 import { ToastContainer } from '@/components/Toast';
-import FaultyTerminal from '@/components/FaultyTerminal';
+import Threads from '@/components/Threads';
 
 type Strategy = 'llmlingua' | 'synthlang' | 'hybrid' | 'ultra';
 type Tab = 'compress' | 'chat';
@@ -186,26 +186,13 @@ export default function Home() {
 
   return (
     <>
-      {/* WebGL Faulty Terminal Background - Subtle, low-key effect */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
-        <FaultyTerminal
-          scale={1.8}
-          gridMul={[2, 1]}
-          digitSize={1.5}
-          timeScale={0.5}
-          pause={false}
-          scanlineIntensity={0.3}
-          glitchAmount={0.4}
-          flickerAmount={0.3}
-          noiseAmp={0.5}
-          chromaticAberration={0}
-          dither={0.2}
-          curvature={0.1}
-          tint="#00ff88"
-          mouseReact={true}
-          mouseStrength={0.8}
-          pageLoadAnimation={false}
-          brightness={0.25}
+      {/* WebGL Threads Background - Smooth flowing lines with mouse interaction */}
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0, opacity: 0.4 }}>
+        <Threads
+          color={[0.6, 0.4, 1]}  // Purple color (RGB 0-1 scale)
+          amplitude={0.8}
+          distance={0}
+          enableMouseInteraction={true}
         />
       </div>
       
