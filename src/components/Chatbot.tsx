@@ -182,13 +182,18 @@ export default function Chatbot({
     <GlassPanel className="flex flex-col h-[600px]">
       {/* Header */}
       <div className="flex items-center justify-between mb-4 pb-4 border-b border-dark-700">
-        <div>
+        <div className="flex-1">
           <h2 className="text-2xl font-bold text-dark-50 flex items-center gap-2">
             🤖 AI Chat Assistant
           </h2>
           <p className="text-sm text-dark-400 mt-1">
-            Powered by optimized token compression
+            💡 <strong>Smart Token Optimization:</strong> This chatbot uses advanced compression to reduce token usage by up to <span className="text-primary-400 font-semibold">95%</span>
           </p>
+          <div className="mt-2 text-xs text-dark-500 space-y-1">
+            <p>✨ <strong>SynthLang Compression:</strong> Converts verbose text to symbolic tokens (60-93% reduction)</p>
+            <p>🌍 <strong>Language Switching:</strong> Translates to token-efficient languages like Japanese/Chinese (40% reduction)</p>
+            <p>✏️ <strong>Auto Spell-Check:</strong> Fixes typos to improve compression quality</p>
+          </div>
         </div>
         <div className="flex gap-2">
           <button
@@ -431,20 +436,22 @@ export default function Chatbot({
       </AnimatePresence>
 
       {/* Input */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 relative z-50">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Type your message... (Press Enter to send)"
           disabled={loading}
-          className="flex-1 px-4 py-3 bg-dark-900/50 border border-dark-700 rounded-xl text-dark-100 placeholder-dark-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 px-4 py-3 bg-dark-900/50 border border-dark-700 rounded-xl text-dark-100 placeholder-dark-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 resize-none disabled:opacity-50 disabled:cursor-not-allowed relative z-50"
+          style={{ zIndex: 50 }}
           rows={2}
         />
         <button
           onClick={handleSend}
           disabled={!input.trim() || loading}
-          className="px-6 py-3 bg-gradient-to-br from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95"
+          className="px-6 py-3 bg-gradient-to-br from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95 relative z-50"
+          style={{ zIndex: 50 }}
         >
           {loading ? '⏳' : '🚀'}
         </button>

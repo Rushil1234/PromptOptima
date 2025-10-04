@@ -447,7 +447,8 @@ export default function Home() {
                   )}
                   <button
                     onClick={() => setError(null)}
-                    className="mt-4 text-sm text-red-400 hover:text-red-300 font-semibold"
+                    className="mt-4 text-sm text-red-400 hover:text-red-300 font-semibold relative z-50"
+                    style={{ zIndex: 50 }}
                   >
                     Dismiss
                   </button>
@@ -490,7 +491,8 @@ export default function Home() {
                   </div>
                   <button
                     onClick={() => setSuggestion(null)}
-                    className="mt-4 text-sm text-primary-400 hover:text-primary-300 font-semibold"
+                    className="mt-4 text-sm text-primary-400 hover:text-primary-300 font-semibold relative z-50"
+                    style={{ zIndex: 50 }}
                   >
                     Dismiss
                   </button>
