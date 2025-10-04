@@ -1,0 +1,1041 @@
+{
+  "summary": {
+    "model": "SynthLang",
+    "totalTests": 23,
+    "passed": 3,
+    "failed": 20,
+    "avgCompressionRatio": 0.419086015378823,
+    "avgSemanticScore": 0.6058057280883368,
+    "avgLatency": 0.05796186956570676,
+    "passRate": 0.13043478260869565,
+    "results": [
+      {
+        "testId": "easy_001",
+        "passed": false,
+        "compressionRatio": 0.5333333333333333,
+        "semanticScore": 0.5,
+        "latency": 0.1459580000009737,
+        "translated": "作 新 user",
+        "expected": "作 新 者",
+        "confidence": 0.6666666666666667,
+        "errors": [
+          "Output mismatch: got \"作 新 user\", expected \"作 新 者\""
+        ]
+      },
+      {
+        "testId": "easy_002",
+        "passed": false,
+        "compressionRatio": 0.23076923076923078,
+        "semanticScore": 0.25,
+        "latency": 0.06045799999992596,
+        "translated": "読 庫",
+        "expected": "読 全 値",
+        "confidence": 1,
+        "errors": [
+          "Output mismatch: got \"読 庫\", expected \"読 全 値\""
+        ]
+      },
+      {
+        "testId": "easy_003",
+        "passed": false,
+        "compressionRatio": 0.5454545454545454,
+        "semanticScore": 0.3333333333333333,
+        "latency": 0.020958000000973698,
+        "translated": "更 user",
+        "expected": "更 者",
+        "confidence": 0.5,
+        "errors": [
+          "Output mismatch: got \"更 user\", expected \"更 者\""
+        ]
+      },
+      {
+        "testId": "easy_004",
+        "passed": true,
+        "compressionRatio": 0.2727272727272727,
+        "semanticScore": 1,
+        "latency": 0.0327499999984866,
+        "translated": "削 簿",
+        "expected": "削 簿",
+        "confidence": 1,
+        "errors": []
+      },
+      {
+        "testId": "easy_005",
+        "passed": false,
+        "compressionRatio": 0.25,
+        "semanticScore": 0.3333333333333333,
+        "latency": 0.548291999999492,
+        "translated": "送 要",
+        "expected": "送 求",
+        "confidence": 1,
+        "errors": [
+          "Output mismatch: got \"送 要\", expected \"送 求\""
+        ]
+      },
+      {
+        "testId": "medium_001",
+        "passed": false,
+        "compressionRatio": 0.3888888888888889,
+        "semanticScore": 0.7142857142857143,
+        "latency": 0.022415999999793712,
+        "translated": "作 新 user 且 書 庫",
+        "expected": "作 新 者 且 書 庫",
+        "confidence": 0.8333333333333334,
+        "errors": [
+          "Output mismatch: got \"作 新 user 且 書 庫\", expected \"作 新 者 且 書 庫\""
+        ]
+      },
+      {
+        "testId": "medium_002",
+        "passed": false,
+        "compressionRatio": 0.5,
+        "semanticScore": 0.5,
+        "latency": 0.024832999995851424,
+        "translated": "読 records 且 選 by 日",
+        "expected": "読 全 録 且 選 日",
+        "confidence": 0.6666666666666667,
+        "errors": [
+          "Output mismatch: got \"読 records 且 選 by 日\", expected \"読 全 録 且 選 日\""
+        ]
+      },
+      {
+        "testId": "medium_003",
+        "passed": false,
+        "compressionRatio": 0.2571428571428571,
+        "semanticScore": 0.6666666666666666,
+        "latency": 0.019958999997470528,
+        "translated": "検 引 故 更 庫",
+        "expected": "検 入 故 更 庫",
+        "confidence": 1,
+        "errors": [
+          "Output mismatch: got \"検 引 故 更 庫\", expected \"検 入 故 更 庫\""
+        ]
+      },
+      {
+        "testId": "medium_004",
+        "passed": true,
+        "compressionRatio": 0.2558139534883721,
+        "semanticScore": 1,
+        "latency": 0.0680419999989681,
+        "translated": "送 求 器 且 受 答",
+        "expected": "送 求 器 且 受 答",
+        "confidence": 1,
+        "errors": []
+      },
+      {
+        "testId": "medium_005",
+        "passed": false,
+        "compressionRatio": 0.5476190476190477,
+        "semanticScore": 0.5714285714285714,
+        "latency": 0.025500000003376044,
+        "translated": "回 through 全 items 且 計 計",
+        "expected": "回 全 物 且 計 全",
+        "confidence": 0.7142857142857143,
+        "errors": [
+          "Output mismatch: got \"回 through 全 items 且 計 計\", expected \"回 全 物 且 計 全\""
+        ]
+      },
+      {
+        "testId": "medium_006",
+        "passed": false,
+        "compressionRatio": 0.3,
+        "semanticScore": 0.6666666666666666,
+        "latency": 0.013375000002270099,
+        "translated": "圧 簿 且 暗 庫",
+        "expected": "圧 簿 且 暗 値",
+        "confidence": 1,
+        "errors": [
+          "Output mismatch: got \"圧 簿 且 暗 庫\", expected \"圧 簿 且 暗 値\""
+        ]
+      },
+      {
+        "testId": "medium_007",
+        "passed": false,
+        "compressionRatio": 0.6388888888888888,
+        "semanticScore": 0.42857142857142855,
+        "latency": 0.014791000001423527,
+        "translated": "authenticate user 且 作 会",
+        "expected": "認 者 且 作 会",
+        "confidence": 0.6,
+        "errors": [
+          "Output mismatch: got \"authenticate user 且 作 会\", expected \"認 者 且 作 会\""
+        ]
+      },
+      {
+        "testId": "hard_001",
+        "passed": false,
+        "compressionRatio": 0.4444444444444444,
+        "semanticScore": 0.5833333333333334,
+        "latency": 0.07679199999984121,
+        "translated": "条 誤 occurs 故 再 the 交 或 取 且 取",
+        "expected": "条 誤 故 再 処 或 取 且 戻",
+        "confidence": 0.8181818181818181,
+        "errors": [
+          "Output mismatch: got \"条 誤 occurs 故 再 the 交 或 取 且 取\", expected \"条 誤 故 再 処 或 取 且 戻\""
+        ]
+      },
+      {
+        "testId": "hard_002",
+        "passed": false,
+        "compressionRatio": 0.35,
+        "semanticScore": 0.8571428571428571,
+        "latency": 0.05012500000157161,
+        "translated": "読 庫 ← 蔵 或 読 ← 庫 且 更 蔵",
+        "expected": "読 蔵 或 読 庫 且 更 蔵",
+        "confidence": 0.8181818181818181,
+        "errors": [
+          "Output mismatch: got \"読 庫 ← 蔵 或 読 ← 庫 且 更 蔵\", expected \"読 蔵 或 読 庫 且 更 蔵\""
+        ]
+      },
+      {
+        "testId": "hard_003",
+        "passed": false,
+        "compressionRatio": 0.5733333333333334,
+        "semanticScore": 0.5833333333333334,
+        "latency": 0.03054100000008475,
+        "translated": "検 user credentials authenticate 且 作 会 故 戻 令",
+        "expected": "検 者 認 且 作 会 故 戻 令",
+        "confidence": 0.7,
+        "errors": [
+          "Output mismatch: got \"検 user credentials authenticate 且 作 会 故 戻 令\", expected \"検 者 認 且 作 会 故 戻 令\""
+        ]
+      },
+      {
+        "testId": "hard_004",
+        "passed": false,
+        "compressionRatio": 0.5217391304347826,
+        "semanticScore": 0.5333333333333333,
+        "latency": 0.025417000004381407,
+        "translated": "問 庫 選 results 順 by 日 且 戻 初 ten items",
+        "expected": "問 庫 選 成 順 日 且 戻 初 10 物",
+        "confidence": 0.6666666666666667,
+        "errors": [
+          "Output mismatch: got \"問 庫 選 results 順 by 日 且 戻 初 ten items\", expected \"問 庫 選 成 順 日 且 戻 初 10 物\""
+        ]
+      },
+      {
+        "testId": "hard_005",
+        "passed": false,
+        "compressionRatio": 0.5411764705882353,
+        "semanticScore": 0.4666666666666667,
+        "latency": 0.02466600000479957,
+        "translated": "訓 模 可 表 検 精 且 書 weights 条 performance improves",
+        "expected": "訓 模 値 検 精 且 書 重 条 最",
+        "confidence": 0.75,
+        "errors": [
+          "Output mismatch: got \"訓 模 可 表 検 精 且 書 weights 条 performance improves\", expected \"訓 模 値 検 精 且 書 重 条 最\""
+        ]
+      },
+      {
+        "testId": "hard_006",
+        "passed": false,
+        "compressionRatio": 0.5070422535211268,
+        "semanticScore": 0.4375,
+        "latency": 0.026000000005296897,
+        "translated": "描 画 表 釦 且 待 for user click 故 算 event",
+        "expected": "描 画 表 釦 且 待 者 押 故 処 件",
+        "confidence": 0.6666666666666667,
+        "errors": [
+          "Output mismatch: got \"描 画 表 釦 且 待 for user click 故 算 event\", expected \"描 画 表 釦 且 待 者 押 故 処 件\""
+        ]
+      },
+      {
+        "testId": "domain_ml_001",
+        "passed": true,
+        "compressionRatio": 0.29545454545454547,
+        "semanticScore": 1,
+        "latency": 0.021917000005487353,
+        "translated": "訓 模 予 値 且 計 損",
+        "expected": "訓 模 予 値 且 計 損",
+        "confidence": 1,
+        "errors": []
+      },
+      {
+        "testId": "domain_ml_002",
+        "passed": false,
+        "compressionRatio": 0.3469387755102041,
+        "semanticScore": 0.5555555555555556,
+        "latency": 0.029499999996914994,
+        "translated": "級 庫 群 items 且 最 精",
+        "expected": "級 値 群 物 且 最 精",
+        "confidence": 0.8571428571428572,
+        "errors": [
+          "Output mismatch: got \"級 庫 群 items 且 最 精\", expected \"級 値 群 物 且 最 精\""
+        ]
+      },
+      {
+        "testId": "domain_web_001",
+        "passed": false,
+        "compressionRatio": 0.5333333333333333,
+        "semanticScore": 0.6666666666666666,
+        "latency": 0.01795799999672454,
+        "translated": "読 ← 接 解 JSON 且 表 results",
+        "expected": "読 接 解 JSON 且 表 成",
+        "confidence": 0.75,
+        "errors": [
+          "Output mismatch: got \"読 ← 接 解 JSON 且 表 results\", expected \"読 接 解 JSON 且 表 成\""
+        ]
+      },
+      {
+        "testId": "domain_db_001",
+        "passed": false,
+        "compressionRatio": 0.3902439024390244,
+        "semanticScore": 0.8571428571428571,
+        "latency": 0.018832999994629063,
+        "translated": "挿 録 into 表 且 作 索",
+        "expected": "挿 録 表 且 作 索",
+        "confidence": 0.8571428571428572,
+        "errors": [
+          "Output mismatch: got \"挿 録 into 表 且 作 索\", expected \"挿 録 表 且 作 索\""
+        ]
+      },
+      {
+        "testId": "domain_db_002",
+        "passed": false,
+        "compressionRatio": 0.4146341463414634,
+        "semanticScore": 0.42857142857142855,
+        "latency": 0.014042000002518762,
+        "translated": "備 庫 且 restore ← 備",
+        "expected": "備 庫 且 復 快",
+        "confidence": 0.6666666666666667,
+        "errors": [
+          "Output mismatch: got \"備 庫 且 restore ← 備\", expected \"備 庫 且 復 快\""
+        ]
+      }
+    ]
+  },
+  "byDifficulty": {
+    "easy": {
+      "model": "easy",
+      "totalTests": 5,
+      "passed": 1,
+      "failed": 4,
+      "avgCompressionRatio": 0.3664568764568764,
+      "avgSemanticScore": 0.4833333333333333,
+      "avgLatency": 0.16168319999997038,
+      "passRate": 0.2,
+      "results": [
+        {
+          "testId": "easy_001",
+          "passed": false,
+          "compressionRatio": 0.5333333333333333,
+          "semanticScore": 0.5,
+          "latency": 0.1459580000009737,
+          "translated": "作 新 user",
+          "expected": "作 新 者",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"作 新 user\", expected \"作 新 者\""
+          ]
+        },
+        {
+          "testId": "easy_002",
+          "passed": false,
+          "compressionRatio": 0.23076923076923078,
+          "semanticScore": 0.25,
+          "latency": 0.06045799999992596,
+          "translated": "読 庫",
+          "expected": "読 全 値",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"読 庫\", expected \"読 全 値\""
+          ]
+        },
+        {
+          "testId": "easy_003",
+          "passed": false,
+          "compressionRatio": 0.5454545454545454,
+          "semanticScore": 0.3333333333333333,
+          "latency": 0.020958000000973698,
+          "translated": "更 user",
+          "expected": "更 者",
+          "confidence": 0.5,
+          "errors": [
+            "Output mismatch: got \"更 user\", expected \"更 者\""
+          ]
+        },
+        {
+          "testId": "easy_004",
+          "passed": true,
+          "compressionRatio": 0.2727272727272727,
+          "semanticScore": 1,
+          "latency": 0.0327499999984866,
+          "translated": "削 簿",
+          "expected": "削 簿",
+          "confidence": 1,
+          "errors": []
+        },
+        {
+          "testId": "easy_005",
+          "passed": false,
+          "compressionRatio": 0.25,
+          "semanticScore": 0.3333333333333333,
+          "latency": 0.548291999999492,
+          "translated": "送 要",
+          "expected": "送 求",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"送 要\", expected \"送 求\""
+          ]
+        }
+      ]
+    },
+    "medium": {
+      "model": "medium",
+      "totalTests": 12,
+      "passed": 2,
+      "failed": 10,
+      "avgCompressionRatio": 0.4057465282588855,
+      "avgSemanticScore": 0.6712962962962963,
+      "avgLatency": 0.024263833332952345,
+      "passRate": 0.16666666666666666,
+      "results": [
+        {
+          "testId": "medium_001",
+          "passed": false,
+          "compressionRatio": 0.3888888888888889,
+          "semanticScore": 0.7142857142857143,
+          "latency": 0.022415999999793712,
+          "translated": "作 新 user 且 書 庫",
+          "expected": "作 新 者 且 書 庫",
+          "confidence": 0.8333333333333334,
+          "errors": [
+            "Output mismatch: got \"作 新 user 且 書 庫\", expected \"作 新 者 且 書 庫\""
+          ]
+        },
+        {
+          "testId": "medium_002",
+          "passed": false,
+          "compressionRatio": 0.5,
+          "semanticScore": 0.5,
+          "latency": 0.024832999995851424,
+          "translated": "読 records 且 選 by 日",
+          "expected": "読 全 録 且 選 日",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"読 records 且 選 by 日\", expected \"読 全 録 且 選 日\""
+          ]
+        },
+        {
+          "testId": "medium_003",
+          "passed": false,
+          "compressionRatio": 0.2571428571428571,
+          "semanticScore": 0.6666666666666666,
+          "latency": 0.019958999997470528,
+          "translated": "検 引 故 更 庫",
+          "expected": "検 入 故 更 庫",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"検 引 故 更 庫\", expected \"検 入 故 更 庫\""
+          ]
+        },
+        {
+          "testId": "medium_004",
+          "passed": true,
+          "compressionRatio": 0.2558139534883721,
+          "semanticScore": 1,
+          "latency": 0.0680419999989681,
+          "translated": "送 求 器 且 受 答",
+          "expected": "送 求 器 且 受 答",
+          "confidence": 1,
+          "errors": []
+        },
+        {
+          "testId": "medium_005",
+          "passed": false,
+          "compressionRatio": 0.5476190476190477,
+          "semanticScore": 0.5714285714285714,
+          "latency": 0.025500000003376044,
+          "translated": "回 through 全 items 且 計 計",
+          "expected": "回 全 物 且 計 全",
+          "confidence": 0.7142857142857143,
+          "errors": [
+            "Output mismatch: got \"回 through 全 items 且 計 計\", expected \"回 全 物 且 計 全\""
+          ]
+        },
+        {
+          "testId": "medium_006",
+          "passed": false,
+          "compressionRatio": 0.3,
+          "semanticScore": 0.6666666666666666,
+          "latency": 0.013375000002270099,
+          "translated": "圧 簿 且 暗 庫",
+          "expected": "圧 簿 且 暗 値",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"圧 簿 且 暗 庫\", expected \"圧 簿 且 暗 値\""
+          ]
+        },
+        {
+          "testId": "medium_007",
+          "passed": false,
+          "compressionRatio": 0.6388888888888888,
+          "semanticScore": 0.42857142857142855,
+          "latency": 0.014791000001423527,
+          "translated": "authenticate user 且 作 会",
+          "expected": "認 者 且 作 会",
+          "confidence": 0.6,
+          "errors": [
+            "Output mismatch: got \"authenticate user 且 作 会\", expected \"認 者 且 作 会\""
+          ]
+        },
+        {
+          "testId": "domain_ml_001",
+          "passed": true,
+          "compressionRatio": 0.29545454545454547,
+          "semanticScore": 1,
+          "latency": 0.021917000005487353,
+          "translated": "訓 模 予 値 且 計 損",
+          "expected": "訓 模 予 値 且 計 損",
+          "confidence": 1,
+          "errors": []
+        },
+        {
+          "testId": "domain_ml_002",
+          "passed": false,
+          "compressionRatio": 0.3469387755102041,
+          "semanticScore": 0.5555555555555556,
+          "latency": 0.029499999996914994,
+          "translated": "級 庫 群 items 且 最 精",
+          "expected": "級 値 群 物 且 最 精",
+          "confidence": 0.8571428571428572,
+          "errors": [
+            "Output mismatch: got \"級 庫 群 items 且 最 精\", expected \"級 値 群 物 且 最 精\""
+          ]
+        },
+        {
+          "testId": "domain_web_001",
+          "passed": false,
+          "compressionRatio": 0.5333333333333333,
+          "semanticScore": 0.6666666666666666,
+          "latency": 0.01795799999672454,
+          "translated": "読 ← 接 解 JSON 且 表 results",
+          "expected": "読 接 解 JSON 且 表 成",
+          "confidence": 0.75,
+          "errors": [
+            "Output mismatch: got \"読 ← 接 解 JSON 且 表 results\", expected \"読 接 解 JSON 且 表 成\""
+          ]
+        },
+        {
+          "testId": "domain_db_001",
+          "passed": false,
+          "compressionRatio": 0.3902439024390244,
+          "semanticScore": 0.8571428571428571,
+          "latency": 0.018832999994629063,
+          "translated": "挿 録 into 表 且 作 索",
+          "expected": "挿 録 表 且 作 索",
+          "confidence": 0.8571428571428572,
+          "errors": [
+            "Output mismatch: got \"挿 録 into 表 且 作 索\", expected \"挿 録 表 且 作 索\""
+          ]
+        },
+        {
+          "testId": "domain_db_002",
+          "passed": false,
+          "compressionRatio": 0.4146341463414634,
+          "semanticScore": 0.42857142857142855,
+          "latency": 0.014042000002518762,
+          "translated": "備 庫 且 restore ← 備",
+          "expected": "備 庫 且 復 快",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"備 庫 且 restore ← 備\", expected \"備 庫 且 復 快\""
+          ]
+        }
+      ]
+    },
+    "hard": {
+      "model": "hard",
+      "totalTests": 6,
+      "passed": 0,
+      "failed": 6,
+      "avgCompressionRatio": 0.489622605386987,
+      "avgSemanticScore": 0.5768849206349206,
+      "avgLatency": 0.03892350000266257,
+      "passRate": 0,
+      "results": [
+        {
+          "testId": "hard_001",
+          "passed": false,
+          "compressionRatio": 0.4444444444444444,
+          "semanticScore": 0.5833333333333334,
+          "latency": 0.07679199999984121,
+          "translated": "条 誤 occurs 故 再 the 交 或 取 且 取",
+          "expected": "条 誤 故 再 処 或 取 且 戻",
+          "confidence": 0.8181818181818181,
+          "errors": [
+            "Output mismatch: got \"条 誤 occurs 故 再 the 交 或 取 且 取\", expected \"条 誤 故 再 処 或 取 且 戻\""
+          ]
+        },
+        {
+          "testId": "hard_002",
+          "passed": false,
+          "compressionRatio": 0.35,
+          "semanticScore": 0.8571428571428571,
+          "latency": 0.05012500000157161,
+          "translated": "読 庫 ← 蔵 或 読 ← 庫 且 更 蔵",
+          "expected": "読 蔵 或 読 庫 且 更 蔵",
+          "confidence": 0.8181818181818181,
+          "errors": [
+            "Output mismatch: got \"読 庫 ← 蔵 或 読 ← 庫 且 更 蔵\", expected \"読 蔵 或 読 庫 且 更 蔵\""
+          ]
+        },
+        {
+          "testId": "hard_003",
+          "passed": false,
+          "compressionRatio": 0.5733333333333334,
+          "semanticScore": 0.5833333333333334,
+          "latency": 0.03054100000008475,
+          "translated": "検 user credentials authenticate 且 作 会 故 戻 令",
+          "expected": "検 者 認 且 作 会 故 戻 令",
+          "confidence": 0.7,
+          "errors": [
+            "Output mismatch: got \"検 user credentials authenticate 且 作 会 故 戻 令\", expected \"検 者 認 且 作 会 故 戻 令\""
+          ]
+        },
+        {
+          "testId": "hard_004",
+          "passed": false,
+          "compressionRatio": 0.5217391304347826,
+          "semanticScore": 0.5333333333333333,
+          "latency": 0.025417000004381407,
+          "translated": "問 庫 選 results 順 by 日 且 戻 初 ten items",
+          "expected": "問 庫 選 成 順 日 且 戻 初 10 物",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"問 庫 選 results 順 by 日 且 戻 初 ten items\", expected \"問 庫 選 成 順 日 且 戻 初 10 物\""
+          ]
+        },
+        {
+          "testId": "hard_005",
+          "passed": false,
+          "compressionRatio": 0.5411764705882353,
+          "semanticScore": 0.4666666666666667,
+          "latency": 0.02466600000479957,
+          "translated": "訓 模 可 表 検 精 且 書 weights 条 performance improves",
+          "expected": "訓 模 値 検 精 且 書 重 条 最",
+          "confidence": 0.75,
+          "errors": [
+            "Output mismatch: got \"訓 模 可 表 検 精 且 書 weights 条 performance improves\", expected \"訓 模 値 検 精 且 書 重 条 最\""
+          ]
+        },
+        {
+          "testId": "hard_006",
+          "passed": false,
+          "compressionRatio": 0.5070422535211268,
+          "semanticScore": 0.4375,
+          "latency": 0.026000000005296897,
+          "translated": "描 画 表 釦 且 待 for user click 故 算 event",
+          "expected": "描 画 表 釦 且 待 者 押 故 処 件",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"描 画 表 釦 且 待 for user click 故 算 event\", expected \"描 画 表 釦 且 待 者 押 故 処 件\""
+          ]
+        }
+      ]
+    }
+  },
+  "byCategory": {
+    "crud": {
+      "model": "crud",
+      "totalTests": 5,
+      "passed": 1,
+      "failed": 4,
+      "avgCompressionRatio": 0.3942346542346542,
+      "avgSemanticScore": 0.5595238095238095,
+      "avgLatency": 0.056508000000030735,
+      "passRate": 0.2,
+      "results": [
+        {
+          "testId": "easy_001",
+          "passed": false,
+          "compressionRatio": 0.5333333333333333,
+          "semanticScore": 0.5,
+          "latency": 0.1459580000009737,
+          "translated": "作 新 user",
+          "expected": "作 新 者",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"作 新 user\", expected \"作 新 者\""
+          ]
+        },
+        {
+          "testId": "easy_002",
+          "passed": false,
+          "compressionRatio": 0.23076923076923078,
+          "semanticScore": 0.25,
+          "latency": 0.06045799999992596,
+          "translated": "読 庫",
+          "expected": "読 全 値",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"読 庫\", expected \"読 全 値\""
+          ]
+        },
+        {
+          "testId": "easy_003",
+          "passed": false,
+          "compressionRatio": 0.5454545454545454,
+          "semanticScore": 0.3333333333333333,
+          "latency": 0.020958000000973698,
+          "translated": "更 user",
+          "expected": "更 者",
+          "confidence": 0.5,
+          "errors": [
+            "Output mismatch: got \"更 user\", expected \"更 者\""
+          ]
+        },
+        {
+          "testId": "easy_004",
+          "passed": true,
+          "compressionRatio": 0.2727272727272727,
+          "semanticScore": 1,
+          "latency": 0.0327499999984866,
+          "translated": "削 簿",
+          "expected": "削 簿",
+          "confidence": 1,
+          "errors": []
+        },
+        {
+          "testId": "medium_001",
+          "passed": false,
+          "compressionRatio": 0.3888888888888889,
+          "semanticScore": 0.7142857142857143,
+          "latency": 0.022415999999793712,
+          "translated": "作 新 user 且 書 庫",
+          "expected": "作 新 者 且 書 庫",
+          "confidence": 0.8333333333333334,
+          "errors": [
+            "Output mismatch: got \"作 新 user 且 書 庫\", expected \"作 新 者 且 書 庫\""
+          ]
+        }
+      ]
+    },
+    "api": {
+      "model": "api",
+      "totalTests": 2,
+      "passed": 1,
+      "failed": 1,
+      "avgCompressionRatio": 0.25290697674418605,
+      "avgSemanticScore": 0.6666666666666666,
+      "avgLatency": 0.30816699999923003,
+      "passRate": 0.5,
+      "results": [
+        {
+          "testId": "easy_005",
+          "passed": false,
+          "compressionRatio": 0.25,
+          "semanticScore": 0.3333333333333333,
+          "latency": 0.548291999999492,
+          "translated": "送 要",
+          "expected": "送 求",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"送 要\", expected \"送 求\""
+          ]
+        },
+        {
+          "testId": "medium_004",
+          "passed": true,
+          "compressionRatio": 0.2558139534883721,
+          "semanticScore": 1,
+          "latency": 0.0680419999989681,
+          "translated": "送 求 器 且 受 答",
+          "expected": "送 求 器 且 受 答",
+          "confidence": 1,
+          "errors": []
+        }
+      ]
+    },
+    "data": {
+      "model": "data",
+      "totalTests": 4,
+      "passed": 0,
+      "failed": 4,
+      "avgCompressionRatio": 0.41793478260869565,
+      "avgSemanticScore": 0.6392857142857142,
+      "avgLatency": 0.028437500001018634,
+      "passRate": 0,
+      "results": [
+        {
+          "testId": "medium_002",
+          "passed": false,
+          "compressionRatio": 0.5,
+          "semanticScore": 0.5,
+          "latency": 0.024832999995851424,
+          "translated": "読 records 且 選 by 日",
+          "expected": "読 全 録 且 選 日",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"読 records 且 選 by 日\", expected \"読 全 録 且 選 日\""
+          ]
+        },
+        {
+          "testId": "medium_006",
+          "passed": false,
+          "compressionRatio": 0.3,
+          "semanticScore": 0.6666666666666666,
+          "latency": 0.013375000002270099,
+          "translated": "圧 簿 且 暗 庫",
+          "expected": "圧 簿 且 暗 値",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"圧 簿 且 暗 庫\", expected \"圧 簿 且 暗 値\""
+          ]
+        },
+        {
+          "testId": "hard_002",
+          "passed": false,
+          "compressionRatio": 0.35,
+          "semanticScore": 0.8571428571428571,
+          "latency": 0.05012500000157161,
+          "translated": "読 庫 ← 蔵 或 読 ← 庫 且 更 蔵",
+          "expected": "読 蔵 或 読 庫 且 更 蔵",
+          "confidence": 0.8181818181818181,
+          "errors": [
+            "Output mismatch: got \"読 庫 ← 蔵 或 読 ← 庫 且 更 蔵\", expected \"読 蔵 或 読 庫 且 更 蔵\""
+          ]
+        },
+        {
+          "testId": "hard_004",
+          "passed": false,
+          "compressionRatio": 0.5217391304347826,
+          "semanticScore": 0.5333333333333333,
+          "latency": 0.025417000004381407,
+          "translated": "問 庫 選 results 順 by 日 且 戻 初 ten items",
+          "expected": "問 庫 選 成 順 日 且 戻 初 10 物",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"問 庫 選 results 順 by 日 且 戻 初 ten items\", expected \"問 庫 選 成 順 日 且 戻 初 10 物\""
+          ]
+        }
+      ]
+    },
+    "logic": {
+      "model": "logic",
+      "totalTests": 3,
+      "passed": 0,
+      "failed": 3,
+      "avgCompressionRatio": 0.4164021164021164,
+      "avgSemanticScore": 0.6071428571428572,
+      "avgLatency": 0.040750333333562594,
+      "passRate": 0,
+      "results": [
+        {
+          "testId": "medium_003",
+          "passed": false,
+          "compressionRatio": 0.2571428571428571,
+          "semanticScore": 0.6666666666666666,
+          "latency": 0.019958999997470528,
+          "translated": "検 引 故 更 庫",
+          "expected": "検 入 故 更 庫",
+          "confidence": 1,
+          "errors": [
+            "Output mismatch: got \"検 引 故 更 庫\", expected \"検 入 故 更 庫\""
+          ]
+        },
+        {
+          "testId": "medium_005",
+          "passed": false,
+          "compressionRatio": 0.5476190476190477,
+          "semanticScore": 0.5714285714285714,
+          "latency": 0.025500000003376044,
+          "translated": "回 through 全 items 且 計 計",
+          "expected": "回 全 物 且 計 全",
+          "confidence": 0.7142857142857143,
+          "errors": [
+            "Output mismatch: got \"回 through 全 items 且 計 計\", expected \"回 全 物 且 計 全\""
+          ]
+        },
+        {
+          "testId": "hard_001",
+          "passed": false,
+          "compressionRatio": 0.4444444444444444,
+          "semanticScore": 0.5833333333333334,
+          "latency": 0.07679199999984121,
+          "translated": "条 誤 occurs 故 再 the 交 或 取 且 取",
+          "expected": "条 誤 故 再 処 或 取 且 戻",
+          "confidence": 0.8181818181818181,
+          "errors": [
+            "Output mismatch: got \"条 誤 occurs 故 再 the 交 或 取 且 取\", expected \"条 誤 故 再 処 或 取 且 戻\""
+          ]
+        }
+      ]
+    },
+    "auth": {
+      "model": "auth",
+      "totalTests": 2,
+      "passed": 0,
+      "failed": 2,
+      "avgCompressionRatio": 0.606111111111111,
+      "avgSemanticScore": 0.5059523809523809,
+      "avgLatency": 0.02266600000075414,
+      "passRate": 0,
+      "results": [
+        {
+          "testId": "medium_007",
+          "passed": false,
+          "compressionRatio": 0.6388888888888888,
+          "semanticScore": 0.42857142857142855,
+          "latency": 0.014791000001423527,
+          "translated": "authenticate user 且 作 会",
+          "expected": "認 者 且 作 会",
+          "confidence": 0.6,
+          "errors": [
+            "Output mismatch: got \"authenticate user 且 作 会\", expected \"認 者 且 作 会\""
+          ]
+        },
+        {
+          "testId": "hard_003",
+          "passed": false,
+          "compressionRatio": 0.5733333333333334,
+          "semanticScore": 0.5833333333333334,
+          "latency": 0.03054100000008475,
+          "translated": "検 user credentials authenticate 且 作 会 故 戻 令",
+          "expected": "検 者 認 且 作 会 故 戻 令",
+          "confidence": 0.7,
+          "errors": [
+            "Output mismatch: got \"検 user credentials authenticate 且 作 会 故 戻 令\", expected \"検 者 認 且 作 会 故 戻 令\""
+          ]
+        }
+      ]
+    },
+    "ml": {
+      "model": "ml",
+      "totalTests": 3,
+      "passed": 1,
+      "failed": 2,
+      "avgCompressionRatio": 0.39452326385099495,
+      "avgSemanticScore": 0.674074074074074,
+      "avgLatency": 0.02536100000240064,
+      "passRate": 0.3333333333333333,
+      "results": [
+        {
+          "testId": "hard_005",
+          "passed": false,
+          "compressionRatio": 0.5411764705882353,
+          "semanticScore": 0.4666666666666667,
+          "latency": 0.02466600000479957,
+          "translated": "訓 模 可 表 検 精 且 書 weights 条 performance improves",
+          "expected": "訓 模 値 検 精 且 書 重 条 最",
+          "confidence": 0.75,
+          "errors": [
+            "Output mismatch: got \"訓 模 可 表 検 精 且 書 weights 条 performance improves\", expected \"訓 模 値 検 精 且 書 重 条 最\""
+          ]
+        },
+        {
+          "testId": "domain_ml_001",
+          "passed": true,
+          "compressionRatio": 0.29545454545454547,
+          "semanticScore": 1,
+          "latency": 0.021917000005487353,
+          "translated": "訓 模 予 値 且 計 損",
+          "expected": "訓 模 予 値 且 計 損",
+          "confidence": 1,
+          "errors": []
+        },
+        {
+          "testId": "domain_ml_002",
+          "passed": false,
+          "compressionRatio": 0.3469387755102041,
+          "semanticScore": 0.5555555555555556,
+          "latency": 0.029499999996914994,
+          "translated": "級 庫 群 items 且 最 精",
+          "expected": "級 値 群 物 且 最 精",
+          "confidence": 0.8571428571428572,
+          "errors": [
+            "Output mismatch: got \"級 庫 群 items 且 最 精\", expected \"級 値 群 物 且 最 精\""
+          ]
+        }
+      ]
+    },
+    "ui": {
+      "model": "ui",
+      "totalTests": 1,
+      "passed": 0,
+      "failed": 1,
+      "avgCompressionRatio": 0.5070422535211268,
+      "avgSemanticScore": 0.4375,
+      "avgLatency": 0.026000000005296897,
+      "passRate": 0,
+      "results": [
+        {
+          "testId": "hard_006",
+          "passed": false,
+          "compressionRatio": 0.5070422535211268,
+          "semanticScore": 0.4375,
+          "latency": 0.026000000005296897,
+          "translated": "描 画 表 釦 且 待 for user click 故 算 event",
+          "expected": "描 画 表 釦 且 待 者 押 故 処 件",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"描 画 表 釦 且 待 for user click 故 算 event\", expected \"描 画 表 釦 且 待 者 押 故 処 件\""
+          ]
+        }
+      ]
+    },
+    "web": {
+      "model": "web",
+      "totalTests": 1,
+      "passed": 0,
+      "failed": 1,
+      "avgCompressionRatio": 0.5333333333333333,
+      "avgSemanticScore": 0.6666666666666666,
+      "avgLatency": 0.01795799999672454,
+      "passRate": 0,
+      "results": [
+        {
+          "testId": "domain_web_001",
+          "passed": false,
+          "compressionRatio": 0.5333333333333333,
+          "semanticScore": 0.6666666666666666,
+          "latency": 0.01795799999672454,
+          "translated": "読 ← 接 解 JSON 且 表 results",
+          "expected": "読 接 解 JSON 且 表 成",
+          "confidence": 0.75,
+          "errors": [
+            "Output mismatch: got \"読 ← 接 解 JSON 且 表 results\", expected \"読 接 解 JSON 且 表 成\""
+          ]
+        }
+      ]
+    },
+    "database": {
+      "model": "database",
+      "totalTests": 2,
+      "passed": 0,
+      "failed": 2,
+      "avgCompressionRatio": 0.4024390243902439,
+      "avgSemanticScore": 0.6428571428571428,
+      "avgLatency": 0.016437499998573912,
+      "passRate": 0,
+      "results": [
+        {
+          "testId": "domain_db_001",
+          "passed": false,
+          "compressionRatio": 0.3902439024390244,
+          "semanticScore": 0.8571428571428571,
+          "latency": 0.018832999994629063,
+          "translated": "挿 録 into 表 且 作 索",
+          "expected": "挿 録 表 且 作 索",
+          "confidence": 0.8571428571428572,
+          "errors": [
+            "Output mismatch: got \"挿 録 into 表 且 作 索\", expected \"挿 録 表 且 作 索\""
+          ]
+        },
+        {
+          "testId": "domain_db_002",
+          "passed": false,
+          "compressionRatio": 0.4146341463414634,
+          "semanticScore": 0.42857142857142855,
+          "latency": 0.014042000002518762,
+          "translated": "備 庫 且 restore ← 備",
+          "expected": "備 庫 且 復 快",
+          "confidence": 0.6666666666666667,
+          "errors": [
+            "Output mismatch: got \"備 庫 且 restore ← 備\", expected \"備 庫 且 復 快\""
+          ]
+        }
+      ]
+    }
+  }
+}
