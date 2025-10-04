@@ -1,0 +1,305 @@
+{
+  "sample_prompts": [
+    {
+      "id": 1,
+      "title": "Financial Analysis",
+      "original": "Please analyze the current portfolio for risk exposure in five different sectors including technology, healthcare, energy, financials, and consumer goods. Provide detailed recommendations for risk mitigation strategies and suggest specific allocation adjustments to optimize the risk-return profile.",
+      "category": "analysis",
+      "tokens_original": 45,
+      "priority": "high"
+    },
+    {
+      "id": 2,
+      "title": "Code Review",
+      "original": "Review this Python function for potential security vulnerabilities, performance optimizations, and code quality improvements. Please provide specific suggestions for each issue you identify and rank them by importance.",
+      "category": "technical",
+      "tokens_original": 32,
+      "priority": "medium"
+    },
+    {
+      "id": 3,
+      "title": "Creative Writing",
+      "original": "Write a compelling marketing copy for a new sustainable fashion brand that targets environmentally conscious millennials. The copy should emphasize innovation, sustainability, and style while maintaining an authentic and relatable tone.",
+      "category": "creative",
+      "tokens_original": 38,
+      "priority": "low"
+    },
+    {
+      "id": 4,
+      "title": "Data Summary",
+      "original": "Summarize the quarterly earnings report highlighting key performance indicators, revenue growth, profit margins, and provide insights into market trends that may have influenced these results.",
+      "category": "summary",
+      "tokens_original": 30,
+      "priority": "high"
+    }
+  ],
+  "compression_methods": {
+    "language_routing": {
+      "name": "Strategic Language Switching",
+      "reduction": 40,
+      "speed": 1.5,
+      "quality": 95,
+      "best_for": [
+        "mathematical",
+        "analytical",
+        "technical"
+      ]
+    },
+    "llmlingua": {
+      "name": "LLMLingua Compression",
+      "reduction": 80,
+      "speed": 1.0,
+      "quality": 92,
+      "best_for": [
+        "general",
+        "summary",
+        "creative"
+      ]
+    },
+    "synthlang": {
+      "name": "SynthLang Symbolic",
+      "reduction": 90,
+      "speed": 0.5,
+      "quality": 88,
+      "best_for": [
+        "repetitive",
+        "structured",
+        "high-frequency"
+      ]
+    },
+    "hybrid": {
+      "name": "Hybrid Semantic",
+      "reduction": 60,
+      "speed": 1.2,
+      "quality": 96,
+      "best_for": [
+        "balanced",
+        "mixed",
+        "enterprise"
+      ]
+    }
+  },
+  "compressed_results": [
+    {
+      "prompt_id": 1,
+      "method": "language_routing",
+      "method_name": "Strategic Language Switching",
+      "original_tokens": 45,
+      "compressed_tokens": 27,
+      "reduction_percent": 40,
+      "quality_score": 95,
+      "compressed_text": "[CN] Please analyze the c... [Routed to Chinese for efficiency]",
+      "cost_savings": 0.036,
+      "processing_time": 0.68
+    },
+    {
+      "prompt_id": 1,
+      "method": "llmlingua",
+      "method_name": "LLMLingua Compression",
+      "original_tokens": 45,
+      "compressed_tokens": 8,
+      "reduction_percent": 80,
+      "quality_score": 92,
+      "compressed_text": "Please analyze the current por... [LLMLingua compressed]",
+      "cost_savings": 0.074,
+      "processing_time": 0.45
+    },
+    {
+      "prompt_id": 1,
+      "method": "synthlang",
+      "method_name": "SynthLang Symbolic",
+      "original_tokens": 45,
+      "compressed_tokens": 4,
+      "reduction_percent": 90,
+      "quality_score": 88,
+      "compressed_text": "\u21b9 Financial Analysis \u2295 Please analyze ... [Symbolic]",
+      "cost_savings": 0.082,
+      "processing_time": 0.23
+    },
+    {
+      "prompt_id": 1,
+      "method": "hybrid",
+      "method_name": "Hybrid Semantic",
+      "original_tokens": 45,
+      "compressed_tokens": 18,
+      "reduction_percent": 60,
+      "quality_score": 96,
+      "compressed_text": "Please analyze the curren... [Hybrid compressed]",
+      "cost_savings": 0.054,
+      "processing_time": 0.54
+    },
+    {
+      "prompt_id": 2,
+      "method": "language_routing",
+      "method_name": "Strategic Language Switching",
+      "original_tokens": 32,
+      "compressed_tokens": 19,
+      "reduction_percent": 40,
+      "quality_score": 95,
+      "compressed_text": "[CN] Review this Python f... [Routed to Chinese for efficiency]",
+      "cost_savings": 0.026,
+      "processing_time": 0.48
+    },
+    {
+      "prompt_id": 2,
+      "method": "llmlingua",
+      "method_name": "LLMLingua Compression",
+      "original_tokens": 32,
+      "compressed_tokens": 6,
+      "reduction_percent": 80,
+      "quality_score": 92,
+      "compressed_text": "Review this Python function fo... [LLMLingua compressed]",
+      "cost_savings": 0.052,
+      "processing_time": 0.32
+    },
+    {
+      "prompt_id": 2,
+      "method": "synthlang",
+      "method_name": "SynthLang Symbolic",
+      "original_tokens": 32,
+      "compressed_tokens": 3,
+      "reduction_percent": 90,
+      "quality_score": 88,
+      "compressed_text": "\u21b9 Code Review \u2295 Review this Pyt... [Symbolic]",
+      "cost_savings": 0.058,
+      "processing_time": 0.16
+    },
+    {
+      "prompt_id": 2,
+      "method": "hybrid",
+      "method_name": "Hybrid Semantic",
+      "original_tokens": 32,
+      "compressed_tokens": 12,
+      "reduction_percent": 60,
+      "quality_score": 96,
+      "compressed_text": "Review this Python functi... [Hybrid compressed]",
+      "cost_savings": 0.04,
+      "processing_time": 0.38
+    },
+    {
+      "prompt_id": 3,
+      "method": "language_routing",
+      "method_name": "Strategic Language Switching",
+      "original_tokens": 38,
+      "compressed_tokens": 22,
+      "reduction_percent": 40,
+      "quality_score": 95,
+      "compressed_text": "[CN] Write a compelling m... [Routed to Chinese for efficiency]",
+      "cost_savings": 0.032,
+      "processing_time": 0.57
+    },
+    {
+      "prompt_id": 3,
+      "method": "llmlingua",
+      "method_name": "LLMLingua Compression",
+      "original_tokens": 38,
+      "compressed_tokens": 7,
+      "reduction_percent": 80,
+      "quality_score": 92,
+      "compressed_text": "Write a compelling marketing c... [LLMLingua compressed]",
+      "cost_savings": 0.062,
+      "processing_time": 0.38
+    },
+    {
+      "prompt_id": 3,
+      "method": "synthlang",
+      "method_name": "SynthLang Symbolic",
+      "original_tokens": 38,
+      "compressed_tokens": 3,
+      "reduction_percent": 90,
+      "quality_score": 88,
+      "compressed_text": "\u21b9 Creative Writing \u2295 Write a compell... [Symbolic]",
+      "cost_savings": 0.07,
+      "processing_time": 0.19
+    },
+    {
+      "prompt_id": 3,
+      "method": "hybrid",
+      "method_name": "Hybrid Semantic",
+      "original_tokens": 38,
+      "compressed_tokens": 15,
+      "reduction_percent": 60,
+      "quality_score": 96,
+      "compressed_text": "Write a compelling market... [Hybrid compressed]",
+      "cost_savings": 0.046,
+      "processing_time": 0.46
+    },
+    {
+      "prompt_id": 4,
+      "method": "language_routing",
+      "method_name": "Strategic Language Switching",
+      "original_tokens": 30,
+      "compressed_tokens": 18,
+      "reduction_percent": 40,
+      "quality_score": 95,
+      "compressed_text": "[CN] Summarize the quarte... [Routed to Chinese for efficiency]",
+      "cost_savings": 0.024,
+      "processing_time": 0.45
+    },
+    {
+      "prompt_id": 4,
+      "method": "llmlingua",
+      "method_name": "LLMLingua Compression",
+      "original_tokens": 30,
+      "compressed_tokens": 5,
+      "reduction_percent": 80,
+      "quality_score": 92,
+      "compressed_text": "Summarize the quarterly earnin... [LLMLingua compressed]",
+      "cost_savings": 0.05,
+      "processing_time": 0.3
+    },
+    {
+      "prompt_id": 4,
+      "method": "synthlang",
+      "method_name": "SynthLang Symbolic",
+      "original_tokens": 30,
+      "compressed_tokens": 2,
+      "reduction_percent": 90,
+      "quality_score": 88,
+      "compressed_text": "\u21b9 Data Summary \u2295 Summarize the q... [Symbolic]",
+      "cost_savings": 0.056,
+      "processing_time": 0.15
+    },
+    {
+      "prompt_id": 4,
+      "method": "hybrid",
+      "method_name": "Hybrid Semantic",
+      "original_tokens": 30,
+      "compressed_tokens": 12,
+      "reduction_percent": 60,
+      "quality_score": 96,
+      "compressed_text": "Summarize the quarterly e... [Hybrid compressed]",
+      "cost_savings": 0.036,
+      "processing_time": 0.36
+    }
+  ],
+  "performance_data": {
+    "total_prompts_processed": 15847,
+    "total_tokens_saved": 892456,
+    "total_cost_savings": 1784.91,
+    "average_compression_ratio": 68.5,
+    "average_quality_score": 93.2,
+    "uptime_percentage": 99.7,
+    "cache_hit_rate": 84.3
+  },
+  "pricing_tiers": [
+    {
+      "model": "GPT-4",
+      "input_cost": 0.03,
+      "output_cost": 0.06,
+      "tokens_per_dollar": 33.33
+    },
+    {
+      "model": "GPT-3.5-turbo",
+      "input_cost": 0.001,
+      "output_cost": 0.002,
+      "tokens_per_dollar": 1000
+    },
+    {
+      "model": "Claude-3",
+      "input_cost": 0.015,
+      "output_cost": 0.075,
+      "tokens_per_dollar": 66.67
+    }
+  ]
+}

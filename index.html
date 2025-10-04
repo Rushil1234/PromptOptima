@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual-Strategy Prompt Optimization Middleware</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="header__title">Dual-Strategy Optimization Middleware</h1>
+                    <div class="status status--success">System Online • 99.7% Uptime</div>
+                </div>
+                <nav class="header__nav">
+                    <button class="nav-btn nav-btn--active" data-tab="overview">System Overview</button>
+                    <button class="nav-btn" data-tab="optimize">Optimize Prompt</button>
+                    <button class="nav-btn" data-tab="strategies">Strategy Details</button>
+                    <button class="nav-btn" data-tab="symbols">Symbol Library</button>
+                    <button class="nav-btn" data-tab="api">API Integration</button>
+                    <button class="nav-btn" data-tab="metrics">Performance</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container">
+                <!-- System Overview Tab -->
+                <div class="tab-content tab-content--active" id="overview">
+                    <div class="overview-hero">
+                        <h2>Intelligent Middleware Architecture</h2>
+                        <p class="hero-subtitle">Two powerful engines working in harmony to minimize tokens while preserving semantic integrity</p>
+                    </div>
+
+                    <div class="middleware-diagram">
+                        <div class="middleware-layer">
+                            <div class="layer-item application">
+                                <div class="layer-icon">🔧</div>
+                                <div class="layer-title">Your Application</div>
+                                <div class="layer-desc">Sends prompts for optimization</div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="layer-item middleware">
+                                <div class="layer-icon">🧠</div>
+                                <div class="layer-title">Optimization Middleware</div>
+                                <div class="layer-desc">Smart routing & compression</div>
+                                <div class="middleware-engines">
+                                    <div class="engine-badge llmlingua">LLMLingua</div>
+                                    <div class="engine-badge synthlang">SynthLang</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="layer-item llm">
+                                <div class="layer-icon">⚡</div>
+                                <div class="layer-title">LLM API</div>
+                                <div class="layer-desc">Receives optimized prompts</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-comparison">
+                        <div class="strategy-card llmlingua-card">
+                            <div class="strategy-header">
+                                <div class="strategy-icon">📝</div>
+                                <div class="strategy-title">LLMLingua Engine</div>
+                                <div class="strategy-badge">General Purpose</div>
+                            </div>
+                            <div class="strategy-content">
+                                <div class="strategy-metric">
+                                    <span class="metric-label">Max Reduction</span>
+                                    <span class="metric-value">80%</span>
+                                </div>
+                                <div class="strategy-desc">Smart editor using fine-tuned language model to identify and remove non-essential words while preserving core semantics.</div>
+                                <div class="strategy-features">
+                                    <span class="feature-tag">Versatile</span>
+                                    <span class="feature-tag">One-off prompts</span>
+                                    <span class="feature-tag">Varied content</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="strategy-card synthlang-card">
+                            <div class="strategy-header">
+                                <div class="strategy-icon">㍿</div>
+                                <div class="strategy-title">SynthLang System</div>
+                                <div class="strategy-badge">Domain Specific</div>
+                            </div>
+                            <div class="strategy-content">
+                                <div class="strategy-metric">
+                                    <span class="metric-label">Max Reduction</span>
+                                    <span class="metric-value">90%</span>
+                                </div>
+                                <div class="strategy-desc">Kanji-inspired symbolic system where single glyphs represent complex concepts or entire instructions.</div>
+                                <div class="strategy-features">
+                                    <span class="feature-tag">High frequency</span>
+                                    <span class="feature-tag">Repetitive tasks</span>
+                                    <span class="feature-tag">Domain specific</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="performance-overview">
+                        <h3>Real-time Performance Metrics</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value" id="totalProcessed">2,847</div>
+                                <div class="metric-label">Total Prompts</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="avgCompression">72%</div>
+                                <div class="metric-label">Avg Compression</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="costSavings">$8,429</div>
+                                <div class="metric-label">Cost Savings</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="semanticPreservation">96.8%</div>
+                                <div class="metric-label">Semantic Preservation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optimize Prompt Tab -->
+                <div class="tab-content" id="optimize">
+                    <div class="optimization-interface">
+                        <div class="optimization-header">
+                            <h2>Prompt Optimization Engine</h2>
+                            <p>Watch both strategies analyze and optimize your prompt in real-time</p>
+                        </div>
+
+                        <div class="prompt-input-section">
+                            <div class="form-group">
+                                <label class="form-label">Enter your prompt for optimization</label>
+                                <textarea id="promptInput" class="form-control prompt-textarea" placeholder="Enter your prompt here..." rows="4"></textarea>
+                                <div class="input-meta">
+                                    <span class="token-count">Tokens: <span id="inputTokenCount">0</span></span>
+                                    <span class="category-detected">Category: <span id="detectedCategory">Unknown</span></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Target LLM Model</label>
+                                    <select id="modelSelect" class="form-control">
+                                        <option value="gpt4">GPT-4 ($0.03/$0.06 per 1K)</option>
+                                        <option value="gpt35">GPT-3.5 Turbo ($0.001/$0.002 per 1K)</option>
+                                        <option value="claude">Claude-3 ($0.015/$0.075 per 1K)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Strategy Override</label>
+                                    <select id="strategyOverride" class="form-control">
+                                        <option value="auto">Auto-Select (Recommended)</option>
+                                        <option value="llmlingua">Force LLMLingua</option>
+                                        <option value="synthlang">Force SynthLang</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button id="optimizeBtn" class="btn btn--primary btn--lg btn--full-width" disabled>
+                                <span class="btn-text">Analyze & Optimize Prompt</span>
+                                <div class="loading-spinner hidden"></div>
+                            </button>
+                        </div>
+
+                        <div id="strategyRecommendation" class="recommendation-section hidden">
+                            <h3>Strategy Analysis & Recommendation</h3>
+                            <div class="recommendation-content">
+                                <div class="recommendation-card">
+                                    <div class="recommendation-header">
+                                        <span class="recommended-strategy"></span>
+                                        <span class="confidence-score"></span>
+                                    </div>
+                                    <div class="recommendation-reasoning"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="optimizationResults" class="results-section hidden">
+                            <h3>Dual-Engine Optimization Results</h3>
+                            
+                            <div class="engines-comparison">
+                                <div class="engine-result llmlingua-result">
+                                    <div class="engine-header">
+                                        <div class="engine-icon">📝</div>
+                                        <h4>LLMLingua Engine</h4>
+                                        <div class="processing-status">
+                                            <div class="status-steps">
+                                                <div class="step" data-step="analysis">Input Analysis</div>
+                                                <div class="step" data-step="identification">Word Identification</div>
+                                                <div class="step" data-step="removal">Phrase Removal</div>
+                                                <div class="step" data-step="verification">Semantic Verification</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="engine-content">
+                                        <div class="compressed-prompt" id="llmlinguaPrompt"></div>
+                                        <div class="engine-metrics">
+                                            <div class="metric">
+                                                <span class="metric-label">Tokens</span>
+                                                <span class="metric-value" id="llmlinguaTokens">-</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-label">Reduction</span>
+                                                <span class="metric-value" id="llmlinguaReduction">-</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-label">Semantic Score</span>
+                                                <span class="metric-value" id="llmlinguaScore">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="engine-result synthlang-result">
+                                    <div class="engine-header">
+                                        <div class="engine-icon">㍿</div>
+                                        <h4>SynthLang System</h4>
+                                        <div class="processing-status">
+                                            <div class="status-steps">
+                                                <div class="step" data-step="domain">Domain Analysis</div>
+                                                <div class="step" data-step="mapping">Concept Mapping</div>
+                                                <div class="step" data-step="assignment">Symbol Assignment</div>
+                                                <div class="step" data-step="encoding">Compression Encoding</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="engine-content">
+                                        <div class="compressed-prompt" id="synthlangPrompt"></div>
+                                        <div class="symbol-mapping" id="symbolMapping"></div>
+                                        <div class="engine-metrics">
+                                            <div class="metric">
+                                                <span class="metric-label">Tokens</span>
+                                                <span class="metric-value" id="synthlangTokens">-</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-label">Reduction</span>
+                                                <span class="metric-value" id="synthlangReduction">-</span>
+                                            </div>
+                                            <div class="metric">
+                                                <span class="metric-label">Semantic Score</span>
+                                                <span class="metric-value" id="synthlangScore">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="optimization-summary">
+                                <div class="summary-metrics">
+                                    <div class="summary-metric">
+                                        <span class="summary-label">Recommended Strategy</span>
+                                        <span class="summary-value" id="recommendedStrategy">-</span>
+                                    </div>
+                                    <div class="summary-metric">
+                                        <span class="summary-label">Best Compression</span>
+                                        <span class="summary-value" id="bestCompression">-</span>
+                                    </div>
+                                    <div class="summary-metric">
+                                        <span class="summary-label">Cost Savings</span>
+                                        <span class="summary-value" id="costSavings">-</span>
+                                    </div>
+                                    <div class="summary-metric">
+                                        <span class="summary-label">Processing Time</span>
+                                        <span class="summary-value" id="processingTime">-</span>
+                                    </div>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn btn--secondary" onclick="copyOptimizedPrompt()">Copy Best Result</button>
+                                    <button class="btn btn--outline" onclick="switchTab('api')">View API Integration</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy Details Tab -->
+                <div class="tab-content" id="strategies">
+                    <div class="strategies-interface">
+                        <h2>Strategy Deep Dive</h2>
+                        <p>Detailed breakdown of both optimization engines and their methodologies</p>
+
+                        <div class="strategy-details">
+                            <div class="strategy-detail-card">
+                                <div class="strategy-detail-header">
+                                    <div class="strategy-icon">📝</div>
+                                    <h3>LLMLingua General Engine</h3>
+                                    <div class="strategy-badge">Up to 80% Reduction</div>
+                                </div>
+                                <div class="strategy-detail-content">
+                                    <div class="methodology">
+                                        <h4>Methodology</h4>
+                                        <div class="process-flow">
+                                            <div class="process-step">
+                                                <div class="step-number">1</div>
+                                                <div class="step-content">
+                                                    <h5>Input Analysis</h5>
+                                                    <p>Fine-tuned model analyzes prompt structure and identifies key components</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">2</div>
+                                                <div class="step-content">
+                                                    <h5>Non-essential Word Identification</h5>
+                                                    <p>Smart editor flags redundant articles, conjunctions, and filler words</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">3</div>
+                                                <div class="step-content">
+                                                    <h5>Redundant Phrase Removal</h5>
+                                                    <p>Removes repetitive expressions while maintaining meaning integrity</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">4</div>
+                                                <div class="step-content">
+                                                    <h5>Semantic Verification</h5>
+                                                    <p>Validates that core meaning is preserved through similarity scoring</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="use-cases">
+                                        <h4>Optimal Use Cases</h4>
+                                        <div class="use-case-list">
+                                            <div class="use-case">General-purpose prompts</div>
+                                            <div class="use-case">One-off requests</div>
+                                            <div class="use-case">Varied content types</div>
+                                            <div class="use-case">Creative writing tasks</div>
+                                            <div class="use-case">Ad-hoc analysis requests</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="strategy-detail-card">
+                                <div class="strategy-detail-header">
+                                    <div class="strategy-icon">㍿</div>
+                                    <h3>SynthLang Symbolic System</h3>
+                                    <div class="strategy-badge">Up to 90% Reduction</div>
+                                </div>
+                                <div class="strategy-detail-content">
+                                    <div class="methodology">
+                                        <h4>Methodology</h4>
+                                        <div class="process-flow">
+                                            <div class="process-step">
+                                                <div class="step-number">1</div>
+                                                <div class="step-content">
+                                                    <h5>Domain Analysis</h5>
+                                                    <p>Categorizes prompt into domain-specific contexts (financial, technical, etc.)</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">2</div>
+                                                <div class="step-content">
+                                                    <h5>Concept Mapping</h5>
+                                                    <p>Maps complex concepts and instructions to existing symbol library</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">3</div>
+                                                <div class="step-content">
+                                                    <h5>Symbol Assignment</h5>
+                                                    <p>Replaces verbose expressions with compact symbolic representations</p>
+                                                </div>
+                                            </div>
+                                            <div class="process-step">
+                                                <div class="step-number">4</div>
+                                                <div class="step-content">
+                                                    <h5>Compression Encoding</h5>
+                                                    <p>Generates highly compressed prompt using domain-specific glyphs</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="use-cases">
+                                        <h4>Optimal Use Cases</h4>
+                                        <div class="use-case-list">
+                                            <div class="use-case">High-frequency requests</div>
+                                            <div class="use-case">Domain-specific tasks</div>
+                                            <div class="use-case">Repetitive operations</div>
+                                            <div class="use-case">Financial analysis</div>
+                                            <div class="use-case">Code review workflows</div>
+                                        </div>
+                                    </div>
+                                    <div class="roi-calculator">
+                                        <h4>ROI Calculator</h4>
+                                        <div class="calculator-inputs">
+                                            <div class="calc-input">
+                                                <label>Monthly prompt volume:</label>
+                                                <input type="number" id="monthlyVolume" value="100" min="1">
+                                            </div>
+                                            <div class="calc-input">
+                                                <label>Average tokens per prompt:</label>
+                                                <input type="number" id="avgTokens" value="50" min="1">
+                                            </div>
+                                            <div class="calc-result">
+                                                <span>Break-even point: <strong id="breakEvenPoint">2.3 months</strong></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Symbol Library Tab -->
+                <div class="tab-content" id="symbols">
+                    <div class="symbols-interface">
+                        <h2>SynthLang Symbol Library</h2>
+                        <p>Kanji-inspired symbolic language for maximum compression efficiency</p>
+
+                        <div class="symbol-categories">
+                            <div class="category-tabs">
+                                <button class="category-tab category-tab--active" data-category="financial">Financial</button>
+                                <button class="category-tab" data-category="technical">Technical</button>
+                                <button class="category-tab" data-category="general">General</button>
+                            </div>
+
+                            <div class="symbol-grid" id="symbolGrid">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="symbol-creator">
+                            <h3>Create Custom Symbols</h3>
+                            <div class="creator-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Concept/Phrase</label>
+                                        <input type="text" id="conceptInput" class="form-control" placeholder="e.g., 'analyze financial performance'">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Symbol</label>
+                                        <input type="text" id="symbolInput" class="form-control" placeholder="e.g., ↹⊞">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Category</label>
+                                        <select id="categoryInput" class="form-control">
+                                            <option value="financial">Financial</option>
+                                            <option value="technical">Technical</option>
+                                            <option value="general">General</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn--primary" onclick="addCustomSymbol()">Add Symbol</button>
+                            </div>
+                        </div>
+
+                        <div class="symbol-usage-stats">
+                            <h3>Symbol Usage Statistics</h3>
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="symbolUsageChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Integration Tab -->
+                <div class="tab-content" id="api">
+                    <div class="api-interface">
+                        <h2>Unified API Integration</h2>
+                        <p>Single endpoint for intelligent prompt optimization with automatic strategy routing</p>
+
+                        <div class="api-sections">
+                            <div class="api-section">
+                                <h3>API Endpoint</h3>
+                                <div class="endpoint-card">
+                                    <div class="endpoint-method">POST</div>
+                                    <div class="endpoint-url">https://api.promptoptim.io/v1/optimize</div>
+                                    <button class="copy-btn" onclick="copyToClipboard('https://api.promptoptim.io/v1/optimize')">Copy</button>
+                                </div>
+                            </div>
+
+                            <div class="api-section">
+                                <h3>Request Example</h3>
+                                <div class="code-block">
+                                    <pre><code id="requestExample">{
+  "prompt": "Please analyze the quarterly financial performance...",
+  "strategy": "auto", // "auto", "llmlingua", "synthlang"
+  "target_model": "gpt4",
+  "preserve_quality": 95,
+  "domain_context": "financial" // optional
+}</code></pre>
+                                    <button class="copy-btn" onclick="copyCode('requestExample')">Copy</button>
+                                </div>
+                            </div>
+
+                            <div class="api-section">
+                                <h3>Response Example</h3>
+                                <div class="code-block">
+                                    <pre><code id="responseExample">{
+  "success": true,
+  "strategy_used": "synthlang",
+  "original_tokens": 48,
+  "optimized_tokens": 12,
+  "compression_ratio": 75.0,
+  "semantic_preservation": 96.8,
+  "cost_savings": 0.0021,
+  "processing_time_ms": 234,
+  "optimized_prompt": "↹⊞ quarterly ⚡ → △⚠ optimization",
+  "symbol_mapping": {
+    "↹": "analyze",
+    "⊞": "portfolio", 
+    "⚡": "performance",
+    "→": "recommend",
+    "△": "profit",
+    "⚠": "risk"
+  }
+}</code></pre>
+                                    <button class="copy-btn" onclick="copyCode('responseExample')">Copy</button>
+                                </div>
+                            </div>
+
+                            <div class="api-section">
+                                <h3>Live API Tester</h3>
+                                <div class="api-tester">
+                                    <div class="tester-form">
+                                        <div class="form-group">
+                                            <label class="form-label">Test Prompt</label>
+                                            <textarea id="apiTestPrompt" class="form-control" rows="3" placeholder="Enter a prompt to test the API..."></textarea>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label class="form-label">Strategy</label>
+                                                <select id="apiStrategy" class="form-control">
+                                                    <option value="auto">Auto-Select</option>
+                                                    <option value="llmlingua">LLMLingua</option>
+                                                    <option value="synthlang">SynthLang</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Target Model</label>
+                                                <select id="apiModel" class="form-control">
+                                                    <option value="gpt4">GPT-4</option>
+                                                    <option value="gpt35">GPT-3.5</option>
+                                                    <option value="claude">Claude-3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn--primary btn--full-width" onclick="testAPI()">Test API Call</button>
+                                    </div>
+                                    <div id="apiResponse" class="api-response hidden">
+                                        <h4>API Response</h4>
+                                        <pre><code id="apiResponseCode"></code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="api-section">
+                                <h3>SDK Examples</h3>
+                                <div class="sdk-tabs">
+                                    <button class="sdk-tab sdk-tab--active" data-lang="javascript">JavaScript</button>
+                                    <button class="sdk-tab" data-lang="python">Python</button>
+                                    <button class="sdk-tab" data-lang="curl">cURL</button>
+                                </div>
+                                <div class="sdk-content">
+                                    <div class="sdk-example sdk-example--active" data-lang="javascript">
+                                        <div class="code-block">
+                                            <pre><code>import { PromptOptimizer } from '@promptoptim/sdk';
+
+const optimizer = new PromptOptimizer('your-api-key');
+
+const result = await optimizer.optimize({
+  prompt: 'Your long prompt here...',
+  strategy: 'auto',
+  targetModel: 'gpt4'
+});
+
+console.log(`Saved ${result.compression_ratio}% tokens!`);</code></pre>
+                                            <button class="copy-btn" onclick="copyCode(this.previousElementSibling)">Copy</button>
+                                        </div>
+                                    </div>
+                                    <div class="sdk-example" data-lang="python">
+                                        <div class="code-block">
+                                            <pre><code>from promptoptim import PromptOptimizer
+
+optimizer = PromptOptimizer(api_key='your-api-key')
+
+result = optimizer.optimize(
+    prompt='Your long prompt here...',
+    strategy='auto',
+    target_model='gpt4'
+)
+
+print(f"Saved {result.compression_ratio}% tokens!")</code></pre>
+                                            <button class="copy-btn" onclick="copyCode(this.previousElementSibling)">Copy</button>
+                                        </div>
+                                    </div>
+                                    <div class="sdk-example" data-lang="curl">
+                                        <div class="code-block">
+                                            <pre><code>curl -X POST https://api.promptoptim.io/v1/optimize \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer your-api-key" \
+  -d '{
+    "prompt": "Your long prompt here...",
+    "strategy": "auto",
+    "target_model": "gpt4"
+  }'</code></pre>
+                                            <button class="copy-btn" onclick="copyCode(this.previousElementSibling)">Copy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics Tab -->
+                <div class="tab-content" id="metrics">
+                    <div class="metrics-interface">
+                        <h2>Performance Analytics</h2>
+                        <p>Real-time insights and performance tracking across both optimization strategies</p>
+
+                        <div class="metrics-dashboard">
+                            <div class="metrics-overview">
+                                <div class="overview-card">
+                                    <div class="overview-stat">
+                                        <div class="stat-value">2,847</div>
+                                        <div class="stat-label">Total Prompts Processed</div>
+                                        <div class="stat-change positive">+12.5% this week</div>
+                                    </div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-stat">
+                                        <div class="stat-value">72%</div>
+                                        <div class="stat-label">Average Compression</div>
+                                        <div class="stat-change positive">+3.2% improvement</div>
+                                    </div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-stat">
+                                        <div class="stat-value">$8,429.33</div>
+                                        <div class="stat-label">Total Cost Savings</div>
+                                        <div class="stat-change positive">+$1,247 this month</div>
+                                    </div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-stat">
+                                        <div class="stat-value">96.8%</div>
+                                        <div class="stat-label">Semantic Preservation</div>
+                                        <div class="stat-change positive">Above 95% target</div>
+                                    </div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-stat">
+                                        <div class="stat-value">0.3s</div>
+                                        <div class="stat-label">Avg Processing Time</div>
+                                        <div class="stat-change positive">-50ms optimization</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chart-grid">
+                                <div class="chart-card">
+                                    <h3>Strategy Performance Comparison</h3>
+                                    <div class="chart-container" style="position: relative; height: 300px;">
+                                        <canvas id="strategyComparisonChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="chart-card">
+                                    <h3>Cost Savings Over Time</h3>
+                                    <div class="chart-container" style="position: relative; height: 300px;">
+                                        <canvas id="costSavingsChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="chart-card">
+                                    <h3>Token Reduction Distribution</h3>
+                                    <div class="chart-container" style="position: relative; height: 300px;">
+                                        <canvas id="tokenReductionChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="chart-card">
+                                    <h3>Semantic Preservation Quality</h3>
+                                    <div class="chart-container" style="position: relative; height: 300px;">
+                                        <canvas id="qualityChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="api-client.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

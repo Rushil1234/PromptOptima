@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Dual Strategy Optimizer</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        .status { padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        button {
+            background: #4F46E5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover { background: #4338CA; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .test-result { margin: 20px 0; }
+        .loading { display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 API Connection Test</h1>
+        <p>Test your Dual-Strategy Optimizer API connection</p>
+
+        <div id="serverStatus" class="status warning">
+            <strong>⏳ Server Status:</strong> Checking...
+        </div>
+
+        <h2>Run Tests</h2>
+        <button onclick="runAllTests()">Run All Tests</button>
+        <button onclick="testHealth()">Test Health</button>
+        <button onclick="testOptimize()">Test Optimization</button>
+        <button onclick="testSymbols()">Test Symbols</button>
+
+        <div id="results"></div>
+
+        <h2>Troubleshooting</h2>
+        <div class="status">
+            <strong>If tests fail:</strong>
+            <ol>
+                <li>Make sure server is running: <code>npm start</code></li>
+                <li>Check server is on port 3000: <code>lsof -ti:3000</code></li>
+                <li>Try restarting: Kill the server (Ctrl+C) and run <code>npm start</code> again</li>
+                <li>Check browser console (F12) for errors</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+
+        function showResult(title, success, message, details = null) {
+            const resultsDiv = document.getElementById('results');
+            const statusClass = success ? 'success' : 'error';
+            const icon = success ? '✅' : '❌';
+            
+            let html = `
+                <div class="test-result">
+                    <div class="status ${statusClass}">
+                        <strong>${icon} ${title}</strong><br>
+                        ${message}
+                    </div>
+            `;
+            
+            if (details) {
+                html += `<pre>${JSON.stringify(details, null, 2)}</pre>`;
+            }
+            
+            html += '</div>';
+            resultsDiv.innerHTML += html;
+        }
+
+        async function testHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                if (data.status === 'healthy') {
+                    showResult('Health Check', true, 'Server is running and healthy!', data);
+                    updateServerStatus(true);
+                } else {
+                    showResult('Health Check', false, 'Server responded but status is not healthy', data);
+                    updateServerStatus(false);
+                }
+            } catch (error) {
+                showResult('Health Check', false, `Cannot connect to server: ${error.message}`);
+                updateServerStatus(false);
+            }
+        }
+
+        async function testOptimize() {
+            try {
+                const response = await fetch(`${API_BASE}/optimize`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prompt: 'Please analyze the quarterly financial performance of our technology portfolio',
+                        strategy: 'auto',
+                        model: 'gpt4'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.recommendation) {
+                    showResult('Optimization Test', true, 
+                        `Compression working! Recommended: ${data.recommendation.recommended}, ` +
+                        `Compression: ${data.results[data.recommendation.recommended].compressionRate}%`,
+                        {
+                            recommended: data.recommendation.recommended,
+                            confidence: data.recommendation.confidence,
+                            llmlingua_compression: data.results.llmlingua.compressionRate + '%',
+                            synthlang_compression: data.results.synthlang.compressionRate + '%'
+                        }
+                    );
+                } else {
+                    showResult('Optimization Test', false, 'Unexpected response format', data);
+                }
+            } catch (error) {
+                showResult('Optimization Test', false, `Error: ${error.message}`);
+            }
+        }
+
+        async function testSymbols() {
+            try {
+                const response = await fetch(`${API_BASE}/symbols`);
+                const data = await response.json();
+                
+                const categories = Object.keys(data);
+                showResult('Symbols Test', true, 
+                    `Symbol libraries loaded! Categories: ${categories.join(', ')}`,
+                    { categories, financial_symbols: Object.keys(data.financial || {}).length }
+                );
+            } catch (error) {
+                showResult('Symbols Test', false, `Error: ${error.message}`);
+            }
+        }
+
+        function updateServerStatus(isHealthy) {
+            const statusDiv = document.getElementById('serverStatus');
+            if (isHealthy) {
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '<strong>✅ Server Status:</strong> Running and healthy!';
+            } else {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '<strong>❌ Server Status:</strong> Not responding. Please run: <code>npm start</code>';
+            }
+        }
+
+        async function runAllTests() {
+            document.getElementById('results').innerHTML = '<h2>Test Results</h2>';
+            await testHealth();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await testOptimize();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await testSymbols();
+        }
+
+        // Auto-test on load
+        window.onload = function() {
+            testHealth();
+        };
+    </script>
+</body>
+</html>
