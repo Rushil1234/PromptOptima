@@ -219,7 +219,7 @@ export default function Home() {
             Intelligent middleware for prompt compression using{' '}
             <span className="text-primary-400 font-semibold">dual-strategy optimization</span>
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
             <span className="badge bg-emerald-500/10 border-emerald-500/20 text-emerald-400">
               ⚡ Up to 95% token reduction
             </span>
@@ -230,6 +230,12 @@ export default function Home() {
               🚀 AI-powered chat + compression
             </span>
           </div>
+          <a
+            href="/analytics"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-primary-500/50 hover:shadow-xl hover:shadow-primary-500/60 hover:scale-105"
+          >
+            📊 View Analytics Dashboard
+          </a>
         </motion.div>
 
         {/* Tab Navigation */}
