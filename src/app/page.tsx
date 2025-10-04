@@ -7,8 +7,12 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import MetricCard from '@/components/MetricCard';
 import StrategyCard from '@/components/StrategyCard';
 import SymbolReference from '@/components/SymbolReference';
+import Chatbot from '@/components/Chatbot';
+import CopyButton from '@/components/CopyButton';
+import { ToastContainer } from '@/components/Toast';
 
 type Strategy = 'llmlingua' | 'synthlang' | 'hybrid';
+type Tab = 'compress' | 'chat';
 
 interface CompressionResult {
   original: string;
@@ -21,9 +25,33 @@ interface CompressionResult {
     concept: string;
     originalWords: string[];
   }>;
+  layers?: {
+    structural?: {
+      compressionRatio: number;
+      removedCount: number;
+      removed: string[];
+    };
+    semantic?: {
+      compressionRatio: number;
+      mergedCount: number;
+      merged: Array<{ original: string[]; merged: string }>;
+    };
+    contextual?: {
+      preservedCount: number;
+      relationshipsCount: number;
+      preserved: string[];
+      relationships: Array<{ from: string; to: string; type: string }>;
+    };
+    format?: {
+      compressionRatio: number;
+      optimizationCount: number;
+      optimizations: Array<{ before: string; after: string }>;
+    };
+  };
 }
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<Tab>('compress');
   const [prompt, setPrompt] = useState('');
   const [strategy, setStrategy] = useState<Strategy>('llmlingua');
   const [loading, setLoading] = useState(false);
@@ -36,6 +64,16 @@ export default function Home() {
     reasoning: string;
     estimatedSavings: number;
   } | null>(null);
+  const [toasts, setToasts] = useState<Array<{ id: string; message: string; type?: 'success' | 'error' | 'info' }>>([]);
+
+  const addToast = (message: string, type: 'success' | 'error' | 'info' = 'success') => {
+    const id = Date.now().toString();
+    setToasts(prev => [...prev, { id, message, type }]);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts(prev => prev.filter(toast => toast.id !== id));
+  };
 
   // Parallax effect
   const [scrollY, setScrollY] = useState(0);
@@ -58,7 +96,9 @@ export default function Home() {
       const endpoint =
         strategy === 'llmlingua'
           ? '/api/compress/llmlingua'
-          : '/api/compress/synthlang';
+          : strategy === 'synthlang'
+          ? '/api/compress/synthlang'
+          : '/api/compress/hybrid';
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -181,24 +221,72 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <span className="badge bg-emerald-500/10 border-emerald-500/20 text-emerald-400">
-              ⚡ Up to 90% token reduction
+              ⚡ Up to 95% token reduction
             </span>
             <span className="badge bg-cyan-500/10 border-cyan-500/20 text-cyan-400">
               🎯 95%+ semantic preservation
             </span>
             <span className="badge bg-accent-500/10 border-accent-500/20 text-accent-400">
-              🚀 Instant compression
+              🚀 AI-powered chat + compression
             </span>
           </div>
         </motion.div>
 
-        {/* Strategy Selection */}
-        <GlassPanel className="mb-8">
+        {/* Tab Navigation */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mb-8"
+        >
+          <GlassPanel className="p-2">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab('compress')}
+                className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                  activeTab === 'compress'
+                    ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/50'
+                    : 'text-dark-300 hover:text-dark-100 hover:bg-dark-800/50'
+                }`}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <span>🔧</span>
+                  <span>Compression Lab</span>
+                </span>
+              </button>
+              <button
+                onClick={() => setActiveTab('chat')}
+                className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                  activeTab === 'chat'
+                    ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/50'
+                    : 'text-dark-300 hover:text-dark-100 hover:bg-dark-800/50'
+                }`}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <span>💬</span>
+                  <span>AI Chat</span>
+                </span>
+              </button>
+            </div>
+          </GlassPanel>
+        </motion.div>
+
+        {/* Compression Tab */}
+        {activeTab === 'compress' && (
+          <motion.div
+            key="compress"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Strategy Selection */}
+            <GlassPanel className="mb-8">
           <h2 className="text-2xl font-bold text-dark-50 mb-2">
             Select Optimization Strategy
           </h2>
           <p className="text-dark-400 mb-6">Choose the compression method that best fits your use case</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <StrategyCard
               title="LLMLingua"
               description="General-purpose compression using AI-powered semantic analysis to remove non-essential words"
@@ -216,6 +304,15 @@ export default function Home() {
               bestFor="Structured tasks"
               selected={strategy === 'synthlang'}
               onClick={() => setStrategy('synthlang')}
+            />
+            <StrategyCard
+              title="Hybrid Semantic"
+              description="Multi-layer approach combining structural analysis, semantic deduplication, and format optimization"
+              icon="🔀"
+              compression="70-85%"
+              bestFor="Complex prompts"
+              selected={strategy === 'hybrid'}
+              onClick={() => setStrategy('hybrid')}
             />
           </div>
           <button
@@ -463,6 +560,136 @@ export default function Home() {
               </GlassPanel>
             )}
 
+            {/* Layer Breakdown (Hybrid only) */}
+            {result.layers && (
+              <GlassPanel>
+                <h2 className="text-2xl font-bold text-dark-50 mb-2">
+                  Compression Layer Breakdown
+                </h2>
+                <p className="text-sm text-dark-400 mb-6">
+                  Multi-layer optimization applied sequentially
+                </p>
+                <div className="space-y-4">
+                  {/* Structural Layer */}
+                  {result.layers.structural && (
+                    <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-semibold text-dark-100 flex items-center gap-2">
+                          <span className="text-xl">🏗️</span>
+                          Structural Analysis
+                        </h3>
+                        <span className="text-sm text-emerald-400 font-semibold">
+                          {result.layers.structural.compressionRatio.toFixed(1)}% reduced
+                        </span>
+                      </div>
+                      <p className="text-xs text-dark-400 mb-2">
+                        Removed {result.layers.structural.removedCount} filler words and redundant phrases
+                      </p>
+                      {result.layers.structural.removed.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {result.layers.structural.removed.slice(0, 5).map((word, idx) => (
+                            <span key={idx} className="text-xs bg-red-500/10 text-red-400 px-2 py-1 rounded">
+                              {word}
+                            </span>
+                          ))}
+                          {result.layers.structural.removedCount > 5 && (
+                            <span className="text-xs text-dark-500">
+                              +{result.layers.structural.removedCount - 5} more
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Semantic Layer */}
+                  {result.layers.semantic && (
+                    <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-semibold text-dark-100 flex items-center gap-2">
+                          <span className="text-xl">🔄</span>
+                          Semantic Deduplication
+                        </h3>
+                        <span className="text-sm text-emerald-400 font-semibold">
+                          {result.layers.semantic.compressionRatio.toFixed(1)}% reduced
+                        </span>
+                      </div>
+                      <p className="text-xs text-dark-400 mb-2">
+                        Merged {result.layers.semantic.mergedCount} verbose phrases into concise equivalents
+                      </p>
+                      {result.layers.semantic.merged.length > 0 && (
+                        <div className="space-y-1 mt-2">
+                          {result.layers.semantic.merged.slice(0, 3).map((merge, idx) => (
+                            <div key={idx} className="text-xs flex items-center gap-2">
+                              <span className="text-dark-500">{merge.original.join(', ')}</span>
+                              <span className="text-primary-400">→</span>
+                              <span className="text-emerald-400">{merge.merged}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Contextual Layer */}
+                  {result.layers.contextual && (
+                    <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-semibold text-dark-100 flex items-center gap-2">
+                          <span className="text-xl">🔗</span>
+                          Context Preservation
+                        </h3>
+                        <span className="text-sm text-cyan-400 font-semibold">
+                          {result.layers.contextual.preservedCount} entities preserved
+                        </span>
+                      </div>
+                      <p className="text-xs text-dark-400 mb-2">
+                        Maintained {result.layers.contextual.relationshipsCount} key relationships
+                      </p>
+                      {result.layers.contextual.preserved.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {result.layers.contextual.preserved.slice(0, 8).map((entity, idx) => (
+                            <span key={idx} className="text-xs bg-cyan-500/10 text-cyan-400 px-2 py-1 rounded">
+                              {entity}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Format Layer */}
+                  {result.layers.format && (
+                    <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-semibold text-dark-100 flex items-center gap-2">
+                          <span className="text-xl">✨</span>
+                          Format Optimization
+                        </h3>
+                        <span className="text-sm text-emerald-400 font-semibold">
+                          {result.layers.format.compressionRatio.toFixed(1)}% reduced
+                        </span>
+                      </div>
+                      <p className="text-xs text-dark-400 mb-2">
+                        Applied {result.layers.format.optimizationCount} format optimizations
+                      </p>
+                      {result.layers.format.optimizations.length > 0 && (
+                        <div className="space-y-1 mt-2">
+                          {result.layers.format.optimizations.slice(0, 3).map((opt, idx) => (
+                            <div key={idx} className="text-xs flex items-center gap-2">
+                              <span className="text-dark-500 truncate max-w-[200px]">{opt.before}</span>
+                              <span className="text-primary-400">→</span>
+                              <span className="text-emerald-400">{opt.after}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </GlassPanel>
+            )}
+
             {/* Comparison */}
             <GlassPanel>
               <h2 className="text-2xl font-bold text-dark-50 mb-6">
@@ -474,7 +701,14 @@ export default function Home() {
                     <h3 className="text-sm font-semibold text-dark-300">
                       Original
                     </h3>
-                    <span className="text-xs text-dark-500">{result.original.length} characters</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-dark-500">{result.original.length} characters</span>
+                      <CopyButton
+                        text={result.original}
+                        onCopy={() => addToast('Original text copied!')}
+                        size="sm"
+                      />
+                    </div>
                   </div>
                   <div className="bg-dark-900/50 border border-dark-700 rounded-xl p-4 h-48 overflow-y-auto scrollbar-thin text-dark-200 text-sm leading-relaxed">
                     {result.original}
@@ -485,7 +719,14 @@ export default function Home() {
                     <h3 className="text-sm font-semibold text-dark-300">
                       Compressed
                     </h3>
-                    <span className="text-xs text-dark-500">{result.compressed.length} characters</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-dark-500">{result.compressed.length} characters</span>
+                      <CopyButton
+                        text={result.compressed}
+                        onCopy={() => addToast('Compressed text copied!')}
+                        size="sm"
+                      />
+                    </div>
                   </div>
                   <div className="bg-dark-900/50 border border-dark-700 rounded-xl p-4 h-48 overflow-y-auto scrollbar-thin text-primary-300 text-sm leading-relaxed font-mono">
                     {result.compressed}
@@ -493,6 +734,21 @@ export default function Home() {
                 </div>
               </div>
             </GlassPanel>
+          </motion.div>
+        )}
+        </motion.div>
+        )}
+
+        {/* Chat Tab */}
+        {activeTab === 'chat' && (
+          <motion.div
+            key="chat"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Chatbot />
           </motion.div>
         )}
 
@@ -514,9 +770,12 @@ export default function Home() {
             <span className="text-primary-400 font-semibold">Google Gemini</span>
           </div>
           <p className="text-dark-600 text-xs">
-            Powered by LLMLingua compression and SynthLang symbolic optimization
+            Powered by LLMLingua compression, SynthLang optimization & strategic language switching
           </p>
         </motion.footer>
+
+        {/* Toast Notifications */}
+        <ToastContainer toasts={toasts} removeToast={removeToast} />
       </div>
     </main>
   );
