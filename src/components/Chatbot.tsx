@@ -17,6 +17,7 @@ interface Message {
     translatedPrompt?: string;
     compressedPrompt?: string;
     decodedPrompt?: string;
+    originalLanguageResponse?: string; // Reasoning in original language
     usedSymbols?: Array<{ symbol: string; concept: string }>;
     language?: OptimalLanguage;
     taskType?: TaskType;
@@ -43,6 +44,7 @@ export default function Chatbot({
   const [loading, setLoading] = useState(false);
   const [spellCheckSuggestion, setSpellCheckSuggestion] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [expandedReasoning, setExpandedReasoning] = useState<Set<string>>(new Set());
   const [toasts, setToasts] = useState<Array<{ id: string; message: string; type?: 'success' | 'error' | 'info' }>>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -129,11 +131,12 @@ export default function Chatbot({
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,
         role: 'assistant',
-        content: data.response,
+        content: data.response, // Always in English
         timestamp: new Date(),
         metadata: {
           originalPrompt: data.originalPrompt,
           translatedPrompt: data.translatedPrompt,
+          originalLanguageResponse: data.originalLanguageResponse, // Reasoning in original language
           language: data.language,
           taskType: data.taskType,
           tokensSaved: data.tokensSaved,
@@ -298,11 +301,36 @@ export default function Chatbot({
                       className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
                     />
                   </div>
+                  
+                  {/* Show original language reasoning if available */}
+                  {message.metadata?.originalLanguageResponse && (
+                    <details className="mt-3 pt-3 border-t border-dark-700/50">
+                      <summary className="text-xs font-semibold text-primary-400 cursor-pointer hover:text-primary-300 transition-colors flex items-center gap-2">
+                        <span>🧠</span>
+                        <span>View Reasoning in {message.metadata.language || 'Original Language'}</span>
+                        <span className="text-dark-500">(Click to expand)</span>
+                      </summary>
+                      <div className="mt-2 p-3 bg-dark-900/50 rounded-lg border border-dark-700/30">
+                        <div className="text-xs text-dark-300 leading-relaxed whitespace-pre-wrap">
+                          {message.metadata.originalLanguageResponse}
+                        </div>
+                        <div className="mt-2 flex items-center gap-2">
+                          <CopyButton
+                            text={message.metadata.originalLanguageResponse}
+                            onCopy={() => addToast('Original reasoning copied!')}
+                            size="sm"
+                          />
+                          <span className="text-xs text-dark-500">Original {message.metadata.language} response</span>
+                        </div>
+                      </div>
+                    </details>
+                  )}
+                  
                   {message.metadata && (
                     <div className="mt-2 pt-2 border-t border-dark-700/50 text-xs text-dark-400 space-y-1">
                       {message.metadata.language && message.metadata.language !== 'english' && (
                         <div className="flex items-center gap-1">
-                          🌐 Processed in {message.metadata.language}
+                          🌐 Reasoned in {message.metadata.language}, translated to English
                         </div>
                       )}
                       {message.metadata.tokensSaved !== undefined && message.metadata.tokensSaved > 0 && (

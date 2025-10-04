@@ -118,8 +118,9 @@ ${language !== 'english' ? `Respond in ${language}.` : ''}`;
     });
 
     let responseText = response.text || 'Sorry, I could not generate a response.';
+    let originalLanguageResponse = responseText;
 
-    // Step 6: Translate response back to English (if needed)
+    // Step 6: ALWAYS translate response to English (even if reasoning was in another language)
     if (language !== 'english') {
       responseText = await languageTranslator.translateToEnglish(
         responseText,
@@ -131,7 +132,8 @@ ${language !== 'english' ? `Respond in ${language}.` : ''}`;
     const totalTokensSaved = languageTokensSaved + synthLangTokensSaved;
 
     return NextResponse.json({
-      response: responseText,
+      response: responseText, // Always in English
+      originalLanguageResponse: language !== 'english' ? originalLanguageResponse : undefined, // Original reasoning
       originalPrompt,
       translatedPrompt: language !== 'english' ? translatedPrompt : undefined,
       compressedPrompt: useSynthLang ? compressedPrompt : undefined,
