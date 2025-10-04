@@ -24,8 +24,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Apply hybrid semantic compression
-    const result = hybridCompressor.compress(prompt);
+    // Apply hybrid semantic compression with AI deep learning pass
+    const result = await hybridCompressor.compress(prompt, true);
 
     return NextResponse.json({
       original: result.original,
@@ -54,7 +54,11 @@ export async function POST(request: NextRequest) {
           compressionRatio: result.layers.format.ratio,
           optimizationCount: result.layers.format.optimizations.length,
           optimizations: result.layers.format.optimizations.slice(0, 10),
-        }
+        },
+        deepLearning: result.layers.deepLearning ? {
+          compressionRatio: result.layers.deepLearning.ratio,
+          semanticPreservation: result.layers.deepLearning.semanticPreservation,
+        } : undefined
       }
     });
   } catch (error) {

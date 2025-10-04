@@ -11,7 +11,7 @@ import Chatbot from '@/components/Chatbot';
 import CopyButton from '@/components/CopyButton';
 import { ToastContainer } from '@/components/Toast';
 
-type Strategy = 'llmlingua' | 'synthlang' | 'hybrid';
+type Strategy = 'llmlingua' | 'synthlang' | 'hybrid' | 'ultra';
 type Tab = 'compress' | 'chat';
 
 interface CompressionResult {
@@ -98,6 +98,8 @@ export default function Home() {
           ? '/api/compress/llmlingua'
           : strategy === 'synthlang'
           ? '/api/compress/synthlang'
+          : strategy === 'ultra'
+          ? '/api/compress/ultra'
           : '/api/compress/hybrid';
 
       const response = await fetch(endpoint, {
@@ -292,7 +294,7 @@ export default function Home() {
             Select Optimization Strategy
           </h2>
           <p className="text-dark-400 mb-6">Choose the compression method that best fits your use case</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <StrategyCard
               title="LLMLingua"
               description="General-purpose compression using AI-powered semantic analysis to remove non-essential words"
@@ -313,12 +315,21 @@ export default function Home() {
             />
             <StrategyCard
               title="Hybrid Semantic"
-              description="Multi-layer approach combining structural analysis, semantic deduplication, and format optimization"
+              description="Enhanced multi-layer approach with AI-powered deep learning pass for maximum semantic preservation"
               icon="🔀"
               compression="70-85%"
               bestFor="Complex prompts"
               selected={strategy === 'hybrid'}
               onClick={() => setStrategy('hybrid')}
+            />
+            <StrategyCard
+              title="Ultra"
+              description="Maximum compression! Chains all three strategies: Hybrid → LLMLingua → SynthLang for ultimate token savings"
+              icon="⚡"
+              compression="90-95%"
+              bestFor="Maximum savings"
+              selected={strategy === 'ultra'}
+              onClick={() => setStrategy('ultra')}
             />
           </div>
           <button

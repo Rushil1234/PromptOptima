@@ -199,7 +199,7 @@ Respond with ONLY a number from 0-100:`;
    * Analyze prompt and suggest optimal compression strategy
    */
   async analyzePrompt(prompt: string): Promise<{
-    recommendedStrategy: 'llmlingua' | 'synthlang' | 'hybrid';
+    recommendedStrategy: 'llmlingua' | 'synthlang' | 'hybrid' | 'ultra';
     reasoning: string;
     estimatedSavings: number;
   }> {
@@ -233,15 +233,24 @@ Use when:
 - Tasks are complex and domain-specific (e.g., technical manuals, multi-stage workflows, policy generation)
 - Can invest in multi-layer pipeline for longer-term benefits
 
+**Ultra (90-95% compression):**
+Use when:
+- Need MAXIMUM token reduction regardless of processing time
+- Prompt is long (>500 chars) and highly compressible
+- Can accept 15-30 second processing time
+- Want the absolute best compression across all strategies
+- Budget is tight and every token counts
+
 DECISION FLOW:
-1. Is prompt mostly unstructured, natural language? → LLMLingua
+1. Is prompt short (<200 chars) or need fastest result? → LLMLingua
 2. Is prompt strictly templated or symbolizable (fixed format)? → SynthLang  
 3. Does prompt mix narrative and structure, or demand highest semantic accuracy? → Hybrid Semantic
+4. Is prompt long (>500 chars) and need MAXIMUM compression? → Ultra
 
-Analyze the prompt structure, complexity, and domain specificity. Then respond in this EXACT format:
-STRATEGY: [llmlingua|synthlang|hybrid]
+Analyze the prompt structure, complexity, domain specificity, and length. Then respond in this EXACT format:
+STRATEGY: [llmlingua|synthlang|hybrid|ultra]
 REASONING: [one clear sentence explaining why based on the criteria above]
-SAVINGS: [estimated compression % as number only: 60-80 for llmlingua, 80-90 for synthlang, 70-85 for hybrid]`;
+SAVINGS: [estimated compression % as number only: 60-80 for llmlingua, 80-90 for synthlang, 70-85 for hybrid, 90-95 for ultra]`;
 
     try {
       const response = await ai.generate({

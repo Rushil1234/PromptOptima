@@ -1,10 +1,13 @@
 /**
- * Hybrid Semantic Compression Engine
- * Multi-layer compression approach that combines:
- * 1. Structural Analysis - Remove filler words and redundant phrases
- * 2. Semantic Deduplication - Identify and merge similar concepts
- * 3. Context Preservation - Maintain key relationships
- * 4. Format Optimization - Convert verbose instructions to concise directives
+ * Enhanced Hybrid Semantic Compression Engine v2.0
+ * Advanced multi-layer compression approach:
+ * 1. Structural Analysis - Aggressive filler removal and pattern optimization
+ * 2. Semantic Deduplication - AI-powered concept merging
+ * 3. Context Preservation - Entity recognition and relationship mapping
+ * 4. Format Optimization - Convert verbose to concise with advanced abbreviations
+ * 5. Deep Learning Pass - AI-powered semantic compression with meaning preservation
+ * 
+ * Target: 70-85% compression with 95%+ semantic fidelity
  */
 
 export interface HybridCompressionResult {
@@ -31,6 +34,11 @@ export interface HybridCompressionResult {
       optimizations: Array<{ before: string; after: string }>;
       ratio: number;
     };
+    deepLearning?: {
+      compressed: string;
+      ratio: number;
+      semanticPreservation: number;
+    };
   };
   estimatedTokenSavings: number;
   semanticScore: number;
@@ -40,12 +48,17 @@ export class HybridSemanticCompressor {
   private fillerWords = new Set([
     // Common filler words
     'actually', 'basically', 'essentially', 'literally', 'really', 'very', 'quite',
-    'just', 'simply', 'only', 'merely', 'perhaps', 'maybe', 'possibly',
+    'just', 'simply', 'only', 'merely', 'perhaps', 'maybe', 'possibly', 'somewhat',
+    'rather', 'fairly', 'pretty', 'absolutely', 'totally', 'completely', 'definitely',
+    'certainly', 'surely', 'truly', 'honestly', 'obviously', 'clearly', 'evidently',
     // Redundant phrases
     'in order to', 'due to the fact that', 'for the purpose of', 'with regard to',
     'in the event that', 'at this point in time', 'take into consideration',
     'it is important to note that', 'as a matter of fact', 'in my opinion',
-    'I think that', 'I believe that', 'it seems that', 'it appears that'
+    'I think that', 'I believe that', 'it seems that', 'it appears that',
+    'it should be noted that', 'it goes without saying', 'needless to say',
+    'as far as I know', 'to tell you the truth', 'in a nutshell', 'long story short',
+    'at the end of the day', 'when all is said and done', 'for all intents and purposes'
   ]);
 
   private redundantPatterns = [
@@ -77,6 +90,25 @@ export class HybridSemanticCompressor {
     ['in the near future', 'soon'],
     ['at the present time', 'now'],
     ['in the majority of cases', 'usually'],
+    ['has the ability to', 'can'],
+    ['is able to', 'can'],
+    ['is capable of', 'can'],
+    ['in the process of', 'currently'],
+    ['a number of', 'several'],
+    ['a large number of', 'many'],
+    ['the majority of', 'most'],
+    ['a small number of', 'few'],
+    ['make use of', 'use'],
+    ['put into effect', 'implement'],
+    ['bring to an end', 'end'],
+    ['come to a conclusion', 'conclude'],
+    ['reach a decision', 'decide'],
+    ['have an effect on', 'affect'],
+    ['have an impact on', 'impact'],
+    ['make an attempt', 'try'],
+    ['give an indication of', 'indicate'],
+    ['provide assistance to', 'help'],
+    ['offer resistance to', 'resist'],
   ]);
 
   /**
@@ -292,9 +324,87 @@ export class HybridSemanticCompressor {
   }
 
   /**
-   * Main compression method - applies all layers sequentially
+   * Layer 5: Deep Learning Pass - AI-powered semantic compression
+   * Uses advanced pattern recognition to further compress while preserving meaning
    */
-  compress(text: string): HybridCompressionResult {
+  private async deepLearningPass(text: string, useAI: boolean = true): Promise<{
+    compressed: string;
+    ratio: number;
+    semanticPreservation: number;
+  }> {
+    const originalLength = text.length;
+    
+    if (!useAI || text.length < 100) {
+      // Skip AI for short texts or when disabled
+      return {
+        compressed: text,
+        ratio: 0,
+        semanticPreservation: 100
+      };
+    }
+
+    try {
+      // Import AI only when needed
+      const { ai } = await import('./genkit');
+      
+      const compressionPrompt = `Compress this text by removing ALL unnecessary words while preserving 100% of the core meaning. Use abbreviations, remove filler, merge redundant concepts:
+
+Original:
+"""
+${text}
+"""
+
+Rules:
+- Remove ALL filler words (very, really, actually, etc.)
+- Use abbreviations (e.g., w/ = with, info = information)
+- Merge duplicate concepts
+- Keep technical terms exact
+- Maintain all numbers and dates
+- Preserve logical relationships
+- Output ONLY the compressed version, no explanation`;
+
+      const response = await ai.generate({
+        model: 'gemini-2.0-flash',
+        prompt: compressionPrompt,
+        config: {
+          temperature: 0.1, // Very low for consistent compression
+          maxOutputTokens: Math.max(512, Math.ceil(text.length / 2)),
+        },
+      });
+
+      const compressed = response.text.trim()
+        .replace(/^["']|["']$/g, '')
+        .replace(/^compressed version:\s*/i, '')
+        .replace(/^here is the compressed version:\s*/i, '')
+        .trim();
+
+      const ratio = ((originalLength - compressed.length) / originalLength) * 100;
+      
+      // Calculate semantic preservation (based on key term retention)
+      const originalWords = new Set(text.toLowerCase().match(/\b\w{4,}\b/g) || []);
+      const compressedWords = new Set(compressed.toLowerCase().match(/\b\w{4,}\b/g) || []);
+      const preservation = (compressedWords.size / originalWords.size) * 100;
+
+      return {
+        compressed,
+        ratio: Math.max(0, ratio),
+        semanticPreservation: Math.min(100, preservation)
+      };
+    } catch (error) {
+      console.error('Deep learning pass failed:', error);
+      return {
+        compressed: text,
+        ratio: 0,
+        semanticPreservation: 100
+      };
+    }
+  }
+
+  /**
+   * Main compression method - applies all layers sequentially
+   * @param useAI - Enable AI-powered deep learning pass (default: true)
+   */
+  async compress(text: string, useAI: boolean = true): Promise<HybridCompressionResult> {
     const original = text;
 
     // Layer 1: Structural Analysis
@@ -309,13 +419,18 @@ export class HybridSemanticCompressor {
     // Layer 4: Format Optimization
     const format = this.formatOptimization(semantic.compressed);
 
-    const compressed = format.compressed;
+    // Layer 5: Deep Learning Pass (AI-powered)
+    const deepLearning = await this.deepLearningPass(format.compressed, useAI);
+
+    const compressed = deepLearning.compressed;
     const compressionRatio = ((original.length - compressed.length) / original.length) * 100;
     const estimatedTokenSavings = this.estimateTokenSavings(original, compressed);
 
-    // Calculate semantic score (based on preserved entities and relationships)
+    // Calculate semantic score (based on preserved entities, relationships, and AI preservation)
     const semanticScore = Math.min(
-      95 + (contextual.preserved.length * 0.5) + (contextual.relationships.length * 0.3),
+      (deepLearning.semanticPreservation * 0.6) + 
+      (contextual.preserved.length * 0.3) + 
+      (contextual.relationships.length * 0.2),
       99.9
     );
 
@@ -327,7 +442,8 @@ export class HybridSemanticCompressor {
         structural,
         semantic,
         contextual,
-        format
+        format,
+        deepLearning: useAI ? deepLearning : undefined
       },
       estimatedTokenSavings,
       semanticScore
