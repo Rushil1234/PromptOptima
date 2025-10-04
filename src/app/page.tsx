@@ -10,6 +10,7 @@ import SymbolReference from '@/components/SymbolReference';
 import Chatbot from '@/components/Chatbot';
 import CopyButton from '@/components/CopyButton';
 import { ToastContainer } from '@/components/Toast';
+import FaultyTerminal from '@/components/FaultyTerminal';
 
 type Strategy = 'llmlingua' | 'synthlang' | 'hybrid' | 'ultra';
 type Tab = 'compress' | 'chat';
@@ -183,44 +184,29 @@ export default function Home() {
     alert('Copied to clipboard!');
   };
 
-  // Mouse tracking for interactive background
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <>
-      {/* Faulty Terminal Background Effect - MOUSE REACTIVE */}
-      <div className="terminal-background">
-        {/* Mouse glow that follows cursor */}
-        <div 
-          className="mouse-glow"
-          style={{
-            left: `${mousePos.x}px`,
-            top: `${mousePos.y}px`,
-          }}
+      {/* WebGL Faulty Terminal Background - Authentic shader-based effect */}
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
+        <FaultyTerminal
+          scale={1.5}
+          gridMul={[2, 1]}
+          digitSize={1.2}
+          timeScale={1}
+          pause={false}
+          scanlineIntensity={1}
+          glitchAmount={1}
+          flickerAmount={1}
+          noiseAmp={1}
+          chromaticAberration={0}
+          dither={0}
+          curvature={0}
+          tint="#00ff88"
+          mouseReact={true}
+          mouseStrength={0.5}
+          pageLoadAnimation={false}
+          brightness={1}
         />
-        {/* Glitch lines */}
-        <div className="glitch-line glitch-line-1"></div>
-        <div className="glitch-line glitch-line-2"></div>
-        <div className="glitch-line glitch-line-3"></div>
-        <div className="glitch-line glitch-line-4"></div>
-        <div className="glitch-line glitch-line-5"></div>
-        {/* Terminal grid overlay - shifts based on mouse */}
-        <div 
-          className="terminal-grid"
-          style={{
-            transform: `translate(${mousePos.x * 0.02}px, ${mousePos.y * 0.02}px)`,
-          }}
-        />
-        {/* Vignette effect */}
-        <div className="terminal-vignette"></div>
       </div>
       
       <main className="min-h-screen relative">
