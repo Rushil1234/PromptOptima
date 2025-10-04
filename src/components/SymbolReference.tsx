@@ -13,11 +13,11 @@ export default function SymbolReference() {
     : SYNTHLANG_SYMBOLS;
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap gap-2">
+    <div className="space-y-6 relative z-[50]">
+      <div className="flex flex-wrap gap-2 relative z-[50]">
         <button
           onClick={() => setSelectedCategory(null)}
-          className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+          className={`relative z-[50] px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
             selectedCategory === null
               ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
               : 'bg-dark-700/50 text-dark-300 hover:bg-dark-700 hover:text-dark-100'
@@ -29,7 +29,7 @@ export default function SymbolReference() {
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all capitalize ${
+            className={`relative z-[50] px-4 py-2 rounded-lg text-sm font-semibold transition-all capitalize cursor-pointer ${
               selectedCategory === category
                 ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
                 : 'bg-dark-700/50 text-dark-300 hover:bg-dark-700 hover:text-dark-100'

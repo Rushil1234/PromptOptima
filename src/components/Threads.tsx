@@ -145,12 +145,17 @@ const Threads: React.FC<ThreadsProps> = ({
     if (!containerRef.current) return;
     const container = containerRef.current;
 
-    const renderer = new Renderer({ alpha: true });
+    const renderer = new Renderer({ alpha: true, antialias: true });
     const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
+    gl.clearColor(0.04, 0.04, 0.04, 1.0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     container.appendChild(gl.canvas);
+    
+    // Ensure canvas is visible
+    gl.canvas.style.display = 'block';
+    gl.canvas.style.width = '100%';
+    gl.canvas.style.height = '100%';
 
     const geometry = new Triangle(gl);
     const program = new Program(gl, {

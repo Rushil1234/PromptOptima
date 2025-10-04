@@ -189,23 +189,26 @@ export default function Home() {
       {/* WebGL Threads Background - Smooth flowing lines with mouse interaction */}
       <div style={{ 
         position: 'fixed', 
-        inset: 0, 
-        zIndex: 0, 
-        opacity: 0.7,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 0,
         pointerEvents: 'none',
         transform: 'translateZ(0)',
-        willChange: 'transform, opacity',
-        isolation: 'isolate'
+        willChange: 'transform',
+        isolation: 'isolate',
+        backgroundColor: '#0a0a0a'
       }}>
         <Threads
-          color={[0.6, 0.4, 1]}  // Purple color (RGB 0-1 scale)
-          amplitude={0.8}
+          color={[0.5, 0.2, 0.9]}  // Deep purple (RGB 0-1 scale)
+          amplitude={1.0}
           distance={0}
           enableMouseInteraction={false}
         />
       </div>
       
-      <main className="min-h-screen relative">
+      <main className="min-h-screen relative" style={{ position: 'relative', zIndex: 1 }}>
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl">
         {/* Header */}
@@ -348,7 +351,8 @@ export default function Home() {
           </div>
           <button
             onClick={() => setShowSymbols(!showSymbols)}
-            className="relative z-[2] text-sm text-primary-400 hover:text-primary-300 transition-colors font-semibold flex items-center gap-2 cursor-pointer"
+            className="relative z-[30] text-sm text-primary-400 hover:text-primary-300 transition-colors font-semibold flex items-center gap-2 cursor-pointer pointer-events-auto"
+            style={{ position: 'relative', zIndex: 30 }}
           >
             <span>{showSymbols ? '▼' : '▶'}</span>
             {showSymbols ? 'Hide' : 'Show'} SynthLang Symbol Reference
