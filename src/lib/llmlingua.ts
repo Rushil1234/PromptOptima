@@ -203,35 +203,52 @@ Respond with ONLY a number from 0-100:`;
     reasoning: string;
     estimatedSavings: number;
   }> {
-    const analysisPrompt = `Analyze this prompt and recommend the best compression strategy:
+    const analysisPrompt = `You are an expert compression strategy advisor. Analyze this prompt using STRICT criteria and recommend the optimal compression strategy.
 
-Prompt:
+Prompt to analyze:
 """
 ${prompt}
 """
 
-Strategies:
-- LLMLingua: General-purpose, 60-80% compression, works for any prompt
-- SynthLang: Symbol-based, 80-90% compression, best for repetitive/structured tasks
-- Hybrid: Combines both, 70-85% compression, best for complex varied tasks
+STRICT SELECTION CRITERIA:
 
-Consider:
-1. Prompt structure (free-form vs structured)
-2. Repetition of concepts
-3. Domain specificity
-4. Length and complexity
+**LLMLingua (60-80% compression):**
+Use when:
+- Prompt is free-form text without strict formatting (e.g., open-ended Q&A, casual chat, blog posts)
+- Need one-size-fits-all solution for fast deployment
+- Maintaining natural readability is more important than absolute compactness
+- Domain or task type varies frequently
 
-Respond in this exact format:
+**SynthLang (80-90% compression):**
+Use when:
+- Prompts follow rigid, repeatable structures (e.g., data tables, configuration files, code snippets)
+- Can define and learn a small set of custom symbols/glyphs once and reuse them
+- Absolute maximum token reduction is critical, can trade off some readability
+- Task is narrow and stable (e.g., API request templates, structured planning)
+
+**Hybrid Semantic (70-85% compression):**
+Use when:
+- Prompts combine structured elements AND free-form text (e.g., mixed tables + narrative, multi-step instructions)
+- Require both strong compression AND semantic fidelity
+- Tasks are complex and domain-specific (e.g., technical manuals, multi-stage workflows, policy generation)
+- Can invest in multi-layer pipeline for longer-term benefits
+
+DECISION FLOW:
+1. Is prompt mostly unstructured, natural language? → LLMLingua
+2. Is prompt strictly templated or symbolizable (fixed format)? → SynthLang  
+3. Does prompt mix narrative and structure, or demand highest semantic accuracy? → Hybrid Semantic
+
+Analyze the prompt structure, complexity, and domain specificity. Then respond in this EXACT format:
 STRATEGY: [llmlingua|synthlang|hybrid]
-REASONING: [one sentence explanation]
-SAVINGS: [estimated % as number only]`;
+REASONING: [one clear sentence explaining why based on the criteria above]
+SAVINGS: [estimated compression % as number only: 60-80 for llmlingua, 80-90 for synthlang, 70-85 for hybrid]`;
 
     try {
       const response = await ai.generate({
         model: gemini15Flash,
         prompt: analysisPrompt,
         config: {
-          temperature: 0.3,
+          temperature: 0.2, // Lower temp for more consistent, rule-based decisions
           maxOutputTokens: 512,
         },
       });
@@ -241,16 +258,20 @@ SAVINGS: [estimated % as number only]`;
       const reasoningMatch = text.match(/REASONING:\s*(.+)/i);
       const savingsMatch = text.match(/SAVINGS:\s*(\d+)/i);
 
+      const strategy = (strategyMatch?.[1]?.toLowerCase() as any) || 'llmlingua';
+      const reasoning = reasoningMatch?.[1]?.trim() || 'General-purpose compression recommended based on prompt analysis';
+      const savings = parseInt(savingsMatch?.[1] || '70');
+
       return {
-        recommendedStrategy: (strategyMatch?.[1] as any) || 'llmlingua',
-        reasoning: reasoningMatch?.[1] || 'General-purpose compression recommended',
-        estimatedSavings: parseInt(savingsMatch?.[1] || '70'),
+        recommendedStrategy: strategy,
+        reasoning: reasoning,
+        estimatedSavings: savings,
       };
     } catch (error) {
       console.error('Analysis error:', error);
       return {
         recommendedStrategy: 'llmlingua',
-        reasoning: 'Default to general-purpose compression',
+        reasoning: 'Free-form text detected - using general-purpose compression for fast deployment',
         estimatedSavings: 70,
       };
     }
