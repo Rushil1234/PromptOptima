@@ -29,7 +29,7 @@ export default function StrategyCard({
       className={`
         relative cursor-pointer transition-all duration-500 p-6 rounded-2xl
         bg-gradient-to-br from-dark-800/40 via-dark-800/30 to-dark-900/40
-        backdrop-blur-2xl border overflow-hidden
+        backdrop-blur-2xl border overflow-hidden z-[1]
         ${
           selected
             ? 'border-primary-400/50 shadow-2xl shadow-primary-500/20 ring-2 ring-primary-400/30'

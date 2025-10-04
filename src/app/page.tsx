@@ -184,21 +184,18 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen relative">
-      {/* Animated gradient mesh background */}
-      <div className="fixed inset-0 bg-gradient-mesh opacity-50" />
-      <div
-        className="fixed inset-0 opacity-30"
-        style={{
-          transform: `translateY(${scrollY * 0.3}px)`,
-        }}
-      >
-        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl" />
+    <>
+      {/* Threads-style animated background */}
+      <div className="threads-background">
+        <div className="threads-orb orb-1"></div>
+        <div className="threads-orb orb-2"></div>
+        <div className="threads-orb orb-3"></div>
+        <div className="threads-orb orb-4"></div>
       </div>
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl">
+      
+      <main className="min-h-screen relative">
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -250,13 +247,13 @@ export default function Home() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="mb-8"
+          className="mb-8 relative z-[30]"
         >
-          <GlassPanel className="p-2">
-            <div className="flex gap-2">
+          <GlassPanel className="p-2 relative">
+            <div className="flex gap-2 relative z-[2]">
               <button
                 onClick={() => setActiveTab('compress')}
-                className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                className={`relative z-[3] flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'compress'
                     ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/50'
                     : 'text-dark-300 hover:text-dark-100 hover:bg-dark-800/50'
@@ -269,7 +266,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab('chat')}
-                className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                className={`relative z-[3] flex-1 px-6 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer ${
                   activeTab === 'chat'
                     ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/50'
                     : 'text-dark-300 hover:text-dark-100 hover:bg-dark-800/50'
@@ -339,7 +336,7 @@ export default function Home() {
           </div>
           <button
             onClick={() => setShowSymbols(!showSymbols)}
-            className="text-sm text-primary-400 hover:text-primary-300 transition-colors font-semibold flex items-center gap-2"
+            className="relative z-[2] text-sm text-primary-400 hover:text-primary-300 transition-colors font-semibold flex items-center gap-2 cursor-pointer"
           >
             <span>{showSymbols ? '▼' : '▶'}</span>
             {showSymbols ? 'Hide' : 'Show'} SynthLang Symbol Reference
@@ -800,5 +797,6 @@ export default function Home() {
         <ToastContainer toasts={toasts} removeToast={removeToast} />
       </div>
     </main>
+    </>
   );
 }

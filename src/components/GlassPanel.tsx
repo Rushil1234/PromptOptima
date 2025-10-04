@@ -28,6 +28,7 @@ export default function GlassPanel({
         border border-white/5
         shadow-2xl shadow-black/20
         relative
+        z-[1]
         overflow-hidden
         before:absolute before:inset-0 
         before:bg-gradient-to-br before:from-primary-500/5 before:to-transparent
