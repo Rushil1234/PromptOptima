@@ -187,12 +187,21 @@ export default function Home() {
   return (
     <>
       {/* WebGL Threads Background - Smooth flowing lines with mouse interaction */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0, opacity: 0.4 }}>
+      <div style={{ 
+        position: 'fixed', 
+        inset: 0, 
+        zIndex: 0, 
+        opacity: 0.7,
+        pointerEvents: 'none',
+        transform: 'translateZ(0)',
+        willChange: 'transform, opacity',
+        isolation: 'isolate'
+      }}>
         <Threads
           color={[0.6, 0.4, 1]}  // Purple color (RGB 0-1 scale)
           amplitude={0.8}
           distance={0}
-          enableMouseInteraction={true}
+          enableMouseInteraction={false}
         />
       </div>
       

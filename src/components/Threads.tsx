@@ -61,9 +61,9 @@ float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float t
     float amplitude_normal = smoothstep(split_point, 0.7, st.x);
     float amplitude_strength = 0.5;
     float finalAmplitude = amplitude_normal * amplitude_strength
-                           * amplitude * (1.0 + (mouse.y - 0.5) * 0.2);
+                           * amplitude * (1.0 + (mouse.y - 0.5) * 0.5);
 
-    float time_scaled = time / 10.0 + (mouse.x - 0.5) * 1.0;
+    float time_scaled = time / 10.0 + (mouse.x - 0.5) * 2.0;
     float blur = smoothstep(split_point, split_point + 0.05, st.x) * perc;
 
     float xnoise = mix(
@@ -133,7 +133,7 @@ const Threads: React.FC<ThreadsProps> = ({
   color = [1, 1, 1], 
   amplitude = 1, 
   distance = 0, 
-  enableMouseInteraction = false,
+  enableMouseInteraction = true,
   className = '',
   style,
   ...rest 
@@ -199,7 +199,7 @@ const Threads: React.FC<ThreadsProps> = ({
 
     function update(t: number) {
       if (enableMouseInteraction) {
-        const smoothing = 0.05;
+        const smoothing = 0.15;
         currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0]);
         currentMouse[1] += smoothing * (targetMouse[1] - currentMouse[1]);
         program.uniforms.uMouse.value[0] = currentMouse[0];
