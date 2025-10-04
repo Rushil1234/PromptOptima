@@ -15,80 +15,163 @@
   }
 }
 
-/* Threads-style animated background - Using absolute positioning for proper layering */
-.threads-background {
+/* Faulty Terminal Background - Glitch effect with scanlines */
+.terminal-background {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  background: linear-gradient(to bottom, #0a0a0a 0%, #0f0f0f 100%);
 }
 
-.threads-orb {
+/* Scanlines effect (CRT monitor) */
+.terminal-background::before {
+  content: '';
   position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.8;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  will-change: transform;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 136, 0.03) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 255, 136, 0.03) 3px
+  );
+  animation: scanlines 8s linear infinite;
+  pointer-events: none;
 }
 
-.orb-1 {
-  width: 600px;
-  height: 600px;
-  top: -15%;
-  left: -15%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.6) 0%, rgba(99, 102, 241, 0.2) 40%, transparent 70%);
-  animation: float-1 20s ease-in-out infinite;
+/* Screen flicker effect */
+.terminal-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 136, 0.02);
+  animation: flicker 0.15s infinite;
+  pointer-events: none;
 }
 
-.orb-2 {
-  width: 700px;
-  height: 700px;
-  top: -20%;
-  right: -20%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.55) 0%, rgba(168, 85, 247, 0.2) 40%, transparent 70%);
-  animation: float-2 25s ease-in-out infinite;
+/* Glitch lines */
+.glitch-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 255, 136, 0.8) 20%,
+    rgba(0, 255, 200, 0.6) 50%,
+    rgba(0, 255, 136, 0.8) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  filter: blur(1px);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
 
-.orb-3 {
-  width: 550px;
-  height: 550px;
-  bottom: -15%;
-  left: 5%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(59, 130, 246, 0.15) 40%, transparent 70%);
-  animation: float-3 18s ease-in-out infinite;
+.glitch-line-1 {
+  animation: glitch-slide-1 3s ease-in-out infinite;
 }
 
-.orb-4 {
-  width: 650px;
-  height: 650px;
-  bottom: -18%;
-  right: 0%;
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.45) 0%, rgba(236, 72, 153, 0.15) 40%, transparent 70%);
-  animation: float-4 22s ease-in-out infinite;
+.glitch-line-2 {
+  animation: glitch-slide-2 4s ease-in-out infinite 0.5s;
 }
 
-@keyframes float-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(100px, 100px) scale(1.1); }
+.glitch-line-3 {
+  animation: glitch-slide-3 5s ease-in-out infinite 1s;
 }
 
-@keyframes float-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-80px, 120px) scale(1.15); }
+.glitch-line-4 {
+  animation: glitch-slide-4 3.5s ease-in-out infinite 1.5s;
 }
 
-@keyframes float-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(120px, -60px) scale(1.08); }
+.glitch-line-5 {
+  animation: glitch-slide-5 4.5s ease-in-out infinite 2s;
 }
 
-@keyframes float-4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-100px, -80px) scale(1.12); }
+/* Terminal grid overlay */
+.terminal-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-shift 20s linear infinite;
+  pointer-events: none;
+}
+
+/* Vignette effect */
+.terminal-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+/* Glitch animations */
+@keyframes glitch-slide-1 {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 0.8; }
+  10% { top: 15%; opacity: 0.9; }
+  15% { opacity: 0; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes glitch-slide-2 {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 0.7; }
+  10% { top: 35%; opacity: 0.8; }
+  15% { opacity: 0; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes glitch-slide-3 {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 0.9; }
+  10% { top: 55%; opacity: 1; }
+  15% { opacity: 0; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes glitch-slide-4 {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 0.6; }
+  10% { top: 75%; opacity: 0.7; }
+  15% { opacity: 0; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes glitch-slide-5 {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 0.8; }
+  10% { top: 45%; opacity: 0.85; }
+  15% { opacity: 0; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Scanline movement */
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+
+/* Screen flicker */
+@keyframes flicker {
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.96; }
+}
+
+/* Grid shift animation */
+@keyframes grid-shift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
 }
 
 @keyframes shimmer {

@@ -185,12 +185,18 @@ export default function Home() {
 
   return (
     <>
-      {/* Threads-style animated background */}
-      <div className="threads-background">
-        <div className="threads-orb orb-1"></div>
-        <div className="threads-orb orb-2"></div>
-        <div className="threads-orb orb-3"></div>
-        <div className="threads-orb orb-4"></div>
+      {/* Faulty Terminal Background Effect */}
+      <div className="terminal-background">
+        {/* Glitch lines */}
+        <div className="glitch-line glitch-line-1"></div>
+        <div className="glitch-line glitch-line-2"></div>
+        <div className="glitch-line glitch-line-3"></div>
+        <div className="glitch-line glitch-line-4"></div>
+        <div className="glitch-line glitch-line-5"></div>
+        {/* Terminal grid overlay */}
+        <div className="terminal-grid"></div>
+        {/* Vignette effect */}
+        <div className="terminal-vignette"></div>
       </div>
       
       <main className="min-h-screen relative">
