@@ -35,7 +35,8 @@ export default function CopyButton({ text, onCopy, className = '', size = 'md' }
       onClick={handleCopy}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className={`${sizes[size]} flex items-center justify-center rounded-lg bg-dark-700/50 hover:bg-dark-600/50 border border-dark-600 hover:border-primary-500/50 transition-all duration-200 ${className}`}
+      className={`${sizes[size]} flex items-center justify-center rounded-lg bg-dark-700/50 hover:bg-dark-600/50 border border-dark-600 hover:border-primary-500/50 transition-all duration-200 relative z-50 ${className}`}
+      style={{ zIndex: 50 }}
       title="Copy to clipboard"
     >
       {copied ? (

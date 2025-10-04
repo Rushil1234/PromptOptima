@@ -46,32 +46,18 @@ export interface HybridCompressionResult {
 
 export class HybridSemanticCompressor {
   private fillerWords = new Set([
-    // Common filler words
-    'actually', 'basically', 'essentially', 'literally', 'really', 'very', 'quite',
-    'just', 'simply', 'only', 'merely', 'perhaps', 'maybe', 'possibly', 'somewhat',
-    'rather', 'fairly', 'pretty', 'absolutely', 'totally', 'completely', 'definitely',
-    'certainly', 'surely', 'truly', 'honestly', 'obviously', 'clearly', 'evidently',
-    // Redundant phrases
-    'in order to', 'due to the fact that', 'for the purpose of', 'with regard to',
-    'in the event that', 'at this point in time', 'take into consideration',
-    'it is important to note that', 'as a matter of fact', 'in my opinion',
-    'I think that', 'I believe that', 'it seems that', 'it appears that',
-    'it should be noted that', 'it goes without saying', 'needless to say',
-    'as far as I know', 'to tell you the truth', 'in a nutshell', 'long story short',
-    'at the end of the day', 'when all is said and done', 'for all intents and purposes'
+    // Only most obvious filler words - reduced aggressiveness
+    'basically', 'literally', 'actually',
+    'absolutely', 'totally', 'definitely',
+    // Keep important qualifiers like 'very', 'quite', 'really', 'perhaps', 'maybe'
   ]);
 
   private redundantPatterns = [
-    { pattern: /\b(please|kindly)\s+(help|assist|provide|give|show)\b/gi, replacement: '$2' },
-    { pattern: /\b(can|could|would)\s+you\s+(please\s+)?/gi, replacement: '' },
-    { pattern: /\bI\s+(would|want|need)\s+to\s+/gi, replacement: '' },
+    // Reduced list - only most obvious redundancies
     { pattern: /\bin\s+order\s+to\b/gi, replacement: 'to' },
     { pattern: /\bdue\s+to\s+the\s+fact\s+that\b/gi, replacement: 'because' },
-    { pattern: /\bfor\s+the\s+purpose\s+of\b/gi, replacement: 'to' },
     { pattern: /\bat\s+this\s+point\s+in\s+time\b/gi, replacement: 'now' },
     { pattern: /\bin\s+the\s+event\s+that\b/gi, replacement: 'if' },
-    { pattern: /\bit\s+is\s+important\s+to\s+note\s+that\b/gi, replacement: 'note:' },
-    { pattern: /\bas\s+a\s+matter\s+of\s+fact\b/gi, replacement: '' },
   ];
 
   private verboseToConcise = new Map([
