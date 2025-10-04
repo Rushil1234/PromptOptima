@@ -84,19 +84,45 @@ export class UltraCompressor {
 
     // ===== LAYER 2: LLMLingua Compression =====
     console.log('🔄 Ultra Layer 2: LLMLingua AI Compression...');
-    const llmlinguaResult = await this.llmlinguaEngine.compress(hybridCompressed, 0.5);
-    const llmlinguaCompressed = llmlinguaResult.compressed;
-    const llmlinguaRatio = llmlinguaResult.compressionRatio;
-    const llmlinguaTokensSaved = llmlinguaResult.estimatedTokenSavings;
-    const llmlinguaSemanticScore = llmlinguaResult.semanticScore;
+    let llmlinguaCompressed = hybridCompressed;
+    let llmlinguaRatio = 0;
+    let llmlinguaTokensSaved = 0;
+    let llmlinguaSemanticScore = 95;
 
-    compressionJourney.push({
-      stage: 'After LLMLingua',
-      length: llmlinguaCompressed.length,
-      ratio: ((original.length - llmlinguaCompressed.length) / original.length) * 100
-    });
-
-    console.log(`✅ LLMLingua: ${hybridCompressed.length} → ${llmlinguaCompressed.length} chars (${llmlinguaRatio.toFixed(1)}% compression)`);
+    try {
+      const llmlinguaResult = await this.llmlinguaEngine.compress(hybridCompressed, 0.5);
+      
+      // Validate that LLMLingua actually compressed something
+      if (llmlinguaResult.compressed && llmlinguaResult.compressed.length > 0 && llmlinguaResult.compressed.length < hybridCompressed.length) {
+        llmlinguaCompressed = llmlinguaResult.compressed;
+        llmlinguaRatio = llmlinguaResult.compressionRatio;
+        llmlinguaTokensSaved = llmlinguaResult.estimatedTokenSavings;
+        llmlinguaSemanticScore = llmlinguaResult.semanticScore;
+        
+        compressionJourney.push({
+          stage: 'After LLMLingua',
+          length: llmlinguaCompressed.length,
+          ratio: ((original.length - llmlinguaCompressed.length) / original.length) * 100
+        });
+        
+        console.log(`✅ LLMLingua: ${hybridCompressed.length} → ${llmlinguaCompressed.length} chars (${llmlinguaRatio.toFixed(1)}% compression)`);
+      } else {
+        console.warn('⚠️ LLMLingua returned invalid result, skipping this layer');
+        compressionJourney.push({
+          stage: 'LLMLingua (Skipped)',
+          length: hybridCompressed.length,
+          ratio: ((original.length - hybridCompressed.length) / original.length) * 100
+        });
+      }
+    } catch (error) {
+      console.error('⚠️ LLMLingua compression failed:', error instanceof Error ? error.message : 'Unknown error');
+      console.log('📝 Continuing with Hybrid result only');
+      compressionJourney.push({
+        stage: 'LLMLingua (Failed)',
+        length: hybridCompressed.length,
+        ratio: ((original.length - hybridCompressed.length) / original.length) * 100
+      });
+    }
 
     // ===== LAYER 3: SynthLang Symbol Compression =====
     console.log('🔄 Ultra Layer 3: SynthLang Symbol Compression...');

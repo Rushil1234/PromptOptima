@@ -25,34 +25,53 @@ export const ai = {
 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${options.model}:generateContent?key=${apiKey}`;
     
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: options.prompt
-          }]
-        }],
-        generationConfig: {
-          temperature: options.config?.temperature ?? 0.7,
-          maxOutputTokens: options.config?.maxOutputTokens ?? 1024,
-        },
-      }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Gemini API Error Response:', errorText);
-      throw new Error(`Gemini API error: ${response.statusText} - ${errorText}`);
-    }
-
-    const data = await response.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    // Create abort controller for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
     
-    return { text };
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: options.prompt
+            }]
+          }],
+          generationConfig: {
+            temperature: options.config?.temperature ?? 0.7,
+            maxOutputTokens: options.config?.maxOutputTokens ?? 1024,
+          },
+        }),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Gemini API Error Response:', errorText);
+        throw new Error(`Gemini API error: ${response.statusText} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      
+      if (!text) {
+        console.warn('Gemini returned empty response');
+      }
+      
+      return { text };
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error('Gemini API request timed out after 30 seconds');
+      }
+      throw error;
+    }
   },
 };
 
