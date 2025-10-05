@@ -42,12 +42,22 @@ export async function POST(request: NextRequest) {
     let translatedPrompt = processedMessage;
     let languageTokensSaved = 0;
 
+    let routingReasoning = '';
+    
     if (useLanguageSwitching) {
       const routing = languageRouter.classifyTask(processedMessage);
       
-      if (routing.optimalLanguage !== 'english' && routing.confidence > 0.7) {
+      // Lower threshold to 0.3 to ensure Chinese is used for math problems
+      if (routing.optimalLanguage !== 'english' && routing.confidence > 0.3) {
         language = routing.optimalLanguage;
         taskType = routing.taskType;
+        routingReasoning = routing.reasoning;
+        
+        console.log(`🌍 Language Routing: ${taskType} task detected`);
+        console.log(`   → Using ${routing.optimalLanguage} (confidence: ${routing.confidence.toFixed(2)})`);
+        console.log(`   → Reasoning: ${routing.reasoning}`);
+        console.log(`   → Expected reduction: ${routing.expectedTokenReduction}%`);
+
         
         // Translate to optimal language
         const translation = await languageTranslator.translateTo(
@@ -132,6 +142,7 @@ Always respond in English, regardless of the input language.`;
       usedSymbols: usedSymbols.length > 0 ? usedSymbols : undefined,
       language,
       taskType,
+      routingReasoning: routingReasoning || undefined,
       tokensSaved: totalTokensSaved,
       compressionRatio,
       spellCorrected,

@@ -71,6 +71,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       original: result.original,
       compressed: result.compressed,
+      // Main metrics (using standard field names for frontend compatibility)
+      compressionRatio: result.totalCompressionRatio,
+      estimatedTokenSavings: result.totalTokensSaved,
+      semanticScore: result.overallSemanticScore,
+      // Also include prefixed versions for consistency
       totalCompressionRatio: result.totalCompressionRatio,
       totalTokensSaved: result.totalTokensSaved,
       overallSemanticScore: result.overallSemanticScore,

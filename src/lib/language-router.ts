@@ -100,8 +100,8 @@ export class LanguageRouter {
       return {
         taskType: 'mathematical',
         optimalLanguage: 'chinese',
-        confidence: Math.min(mathScore / 10, 0.95),
-        reasoning: 'Mathematical reasoning detected. Chinese shows 30-40% token efficiency for logical chains',
+        confidence: Math.min(mathScore / 5, 0.95), // Lower divisor for higher confidence
+        reasoning: 'Mathematical reasoning detected. Chinese consistently outperforms English with more direct and assertive logical progression. English chain-of-thought tends toward exploratory patterns ("Wait, let me check..."), while Chinese maintains straightforward reasoning chains that are 30-40% more token-efficient.',
         expectedTokenReduction: 35
       };
     }
@@ -112,8 +112,8 @@ export class LanguageRouter {
       return {
         taskType: 'creative',
         optimalLanguage: language,
-        confidence: Math.min(creativeScore / 8, 0.90),
-        reasoning: `Creative writing detected. ${language === 'spanish' ? 'Spanish' : 'Italian'} shows 15-20% token efficiency for creative content`,
+        confidence: Math.min(creativeScore / 6, 0.90), // Lower divisor for higher confidence
+        reasoning: `Creative writing detected. ${language === 'spanish' ? 'Spanish' : 'Italian'} demonstrates 15-20% efficiency improvements for creative content generation. Fine-tuned models in these languages can outperform average human writers in readability, understandability, and relevance metrics while maintaining competitive creativity scores.`,
         expectedTokenReduction: 17.5
       };
     }
@@ -122,8 +122,8 @@ export class LanguageRouter {
     return {
       taskType: 'technical',
       optimalLanguage: 'korean',
-      confidence: Math.min(technicalScore / 10, 0.92),
-      reasoning: 'Technical documentation detected. Korean shows 2x compression ratio for technical text',
+      confidence: Math.min(technicalScore / 7, 0.92), // Lower divisor for higher confidence
+      reasoning: 'Technical documentation detected. Korean shows exceptional 2x compression ratio for technical text processing. Note: Arabic offers even better 3x compression but has higher implementation complexity due to script complexity and limited high-quality translation resources.',
       expectedTokenReduction: 50
     };
   }

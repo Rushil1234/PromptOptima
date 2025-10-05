@@ -20,6 +20,7 @@ interface Message {
     compressedPrompt?: string;
     decodedPrompt?: string;
     originalLanguageResponse?: string; // Reasoning in original language
+    routingReasoning?: string; // Why this language was chosen
     usedSymbols?: Array<{ symbol: string; concept: string }>;
     language?: OptimalLanguage;
     taskType?: TaskType;
@@ -139,6 +140,7 @@ export default function Chatbot({
           originalPrompt: data.originalPrompt,
           translatedPrompt: data.translatedPrompt,
           originalLanguageResponse: data.originalLanguageResponse, // Reasoning in original language
+          routingReasoning: data.routingReasoning, // Why this language was chosen
           language: data.language,
           taskType: data.taskType,
           tokensSaved: data.tokensSaved,
@@ -181,9 +183,9 @@ export default function Chatbot({
   };
 
   return (
-    <GlassPanel className="flex flex-col h-[600px]">
+    <GlassPanel className="flex flex-col h-[600px] max-h-[600px]">
       {/* Header */}
-      <div className="mb-4 pb-4 border-b border-dark-700">
+      <div className="flex-shrink-0 mb-4 pb-4 border-b border-dark-700">
         <h2 className="text-2xl font-bold text-dark-50 flex items-center gap-2">
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
@@ -257,7 +259,7 @@ export default function Chatbot({
       </AnimatePresence>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4 scrollbar-thin pr-2">
+      <div className="flex-1 min-h-0 overflow-y-auto space-y-4 mb-4 scrollbar-thin pr-2">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <svg className="w-16 h-16 text-dark-600 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -431,6 +433,20 @@ export default function Chatbot({
                   
                   {message.metadata && (
                     <div className="mt-2 pt-2 border-t border-dark-700/50 text-xs text-dark-400 space-y-1">
+                      {message.metadata.routingReasoning && (
+                        <div className="mb-2 p-2 bg-info-500/10 border border-info-500/30 rounded text-info-400">
+                          <div className="flex items-start gap-1.5">
+                            <svg className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <circle cx="12" cy="12" r="10"/>
+                              <path d="M12 16v-4M12 8h.01"/>
+                            </svg>
+                            <div>
+                              <div className="font-semibold mb-1">💡 Why {message.metadata.language}?</div>
+                              <div className="text-dark-300 leading-relaxed">{message.metadata.routingReasoning}</div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       {message.metadata.language && message.metadata.language !== 'english' && (
                         <div className="flex items-center gap-1.5">
                           <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
