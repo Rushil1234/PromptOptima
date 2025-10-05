@@ -1,50 +1,98 @@
-# LLM Optimizer# LLM Optimizer# LLM Optimizer - Production-Ready Dual-Strategy Compression
+# LLM Optimizer# LLM Optimizer# LLM Optimizer# LLM Optimizer - Production-Ready Dual-Strategy Compression
 
 
 
-![LLM Optimizer](https://img.shields.io/badge/compression-up%20to%2095%25-brightgreen)
+![Compression](https://img.shields.io/badge/compression-up%20to%2095%25-brightgreen)
 
-![Semantic Preservation](https://img.shields.io/badge/semantic%20preservation-95%25%2B-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-Next.js%2014-blue)
 
-![TypeScript](https://img.shields.io/badge/TypeScript-Next.js%2014-blue)Advanced token compression system for Large Language Models with multiple compression strategies, intelligent language routing, and comprehensive analytics.A sophisticated, dual-strategy optimization layer that acts as intelligent middleware between your application and large language models (LLMs). Transform long prompts into hyper-efficient, token-minimized formats while maintaining 95%+ semantic preservation.
-
-![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-MIT-green)![LLM Optimizer](https://img.shields.io/badge/compression-up%20to%2095%25-brightgreen)
 
 
 
-An advanced token compression system for Large Language Models featuring multiple compression strategies, intelligent language routing, and real-time analytics. Transform verbose prompts into hyper-efficient formats while maintaining semantic accuracy.
-
-## Features**Now with enterprise-grade tokenizer training, bidirectional translation, and comprehensive testing framework!**
-
-## 🌟 Key Features
+Advanced token compression system for Large Language Models. Achieve up to 95% token reduction while maintaining semantic accuracy.![Semantic Preservation](https://img.shields.io/badge/semantic%20preservation-95%25%2B-blue)
 
 
 
-### Multi-Strategy Compression
+## ✨ Features![TypeScript](https://img.shields.io/badge/TypeScript-Next.js%2014-blue)Advanced token compression system for Large Language Models with multiple compression strategies, intelligent language routing, and comprehensive analytics.A sophisticated, dual-strategy optimization layer that acts as intelligent middleware between your application and large language models (LLMs). Transform long prompts into hyper-efficient, token-minimized formats while maintaining 95%+ semantic preservation.
 
-### Multi-Strategy Compression![LLM Optimizer](https://img.shields.io/badge/compression-up%20to%2090%25-brightgreen)
+
+
+- **Multi-Strategy Compression**: LLMLingua (60-80%), SynthLang (80-90%), Hybrid (70-85%), Ultra (90-95%)![License](https://img.shields.io/badge/license-MIT-green)
+
+- **Smart Language Routing**: Automatically optimizes prompts using Chinese, Korean, or Spanish based on task type
+
+- **AI Chat (Optimus)**: Interactive chatbot with real-time compression and analytics
+
+- **Analytics Dashboard**: Track performance, compression ratios, and token savings
+
+- **Modern UI**: Glassmorphic design with smooth animationsAn advanced token compression system for Large Language Models featuring multiple compression strategies, intelligent language routing, and real-time analytics. Transform verbose prompts into hyper-efficient formats while maintaining semantic accuracy.
+
+
+
+## 🚀 Quick Start## Features**Now with enterprise-grade tokenizer training, bidirectional translation, and comprehensive testing framework!**
+
+
+
+```bash## 🌟 Key Features
+
+git clone https://github.com/Rushil1234/harvardhackdesgin1.git
+
+cd tuff
+
+npm install
+
+cp .env.example .env### Multi-Strategy Compression
+
+# Add your GOOGLE_GENAI_API_KEY to .env
+
+npm run dev### Multi-Strategy Compression![LLM Optimizer](https://img.shields.io/badge/compression-up%20to%2090%25-brightgreen)
+
+```
 
 - **LLMLingua**: Context-aware compression preserving semantic meaning (60-80% reduction)
 
+Visit [http://localhost:3001](http://localhost:3001)
+
 - **SynthLang**: Symbol-based compression using Japanese Kanji characters (80-90% reduction)![Semantic Preservation](https://img.shields.io/badge/semantic%20preservation-95%25%2B-blue)
+
+## 🛠️ Tech Stack
 
 - **Hybrid**: Intelligent combination of multiple strategies (70-85% reduction)
 
+Next.js 14 • TypeScript • Tailwind CSS • Framer Motion • Google Gemini 1.5 Flash
+
 - **Ultra**: Maximum compression achieving up to 95% token reduction- **LLMLingua**: Context-aware compression that preserves semantic meaning while reducing token count by 60-80%![TypeScript](https://img.shields.io/badge/TypeScript-Next.js%2014-blue)
 
+## 📊 Performance
 
 
-### Intelligent Language Routing- **SynthLang**: Symbol-based compression using kanji and custom characters for 80-90% compression ratios![Symbols](https://img.shields.io/badge/Kanji%20Symbols-500%2B-orange)
 
+| Strategy | Compression | Speed |
 
+|----------|-------------|-------|### Intelligent Language Routing- **SynthLang**: Symbol-based compression using kanji and custom characters for 80-90% compression ratios![Symbols](https://img.shields.io/badge/Kanji%20Symbols-500%2B-orange)
+
+| LLMLingua | 68% | Fast |
+
+| SynthLang | 85% | Very Fast |
+
+| Ultra | 92% | Fast |
 
 Automatically routes prompts to optimal languages based on task type:- **Hybrid**: Intelligently combines LLMLingua and SynthLang for optimal results (70-85% compression)![Tests](https://img.shields.io/badge/tests-30%2B-success)
 
+## 📝 License
+
 - **Chinese**: Mathematical and logical operations (30-40% more efficient)
+
+MIT License
 
 - **Spanish/Italian**: Creative and narrative content (15-20% more efficient)- **Ultra**: Maximum compression strategy achieving 90-95% token reduction while maintaining context
 
+---
+
 - **Korean**: Technical documentation (2x token efficiency)
+
+Built with Next.js and Google Gemini
 
 ## 🚀 Features
 
