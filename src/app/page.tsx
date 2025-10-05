@@ -187,18 +187,21 @@ export default function Home() {
   return (
     <>
       {/* WebGL Threads Background - Smooth flowing lines with mouse interaction */}
-      <div style={{ 
-        position: 'fixed', 
+      <div style={{
+        position: 'fixed',
         top: 0,
         left: 0,
-        right: 0,
-        bottom: 0,
+        width: '100vw',
+        height: '100vh',
         zIndex: 0,
         pointerEvents: 'none',
-        transform: 'translateZ(0)',
-        willChange: 'transform',
+        transform: 'translate3d(0, 0, 0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
         isolation: 'isolate',
-        backgroundColor: '#0a0a0a'
+        backgroundColor: '#0a0a0a',
+        willChange: 'transform',
+        overflow: 'hidden'
       }}>
         <Threads
           color={[0.5, 0.2, 0.9]}  // Deep purple (RGB 0-1 scale)
@@ -207,10 +210,17 @@ export default function Home() {
           enableMouseInteraction={false}
         />
       </div>
-      
-            <main className="min-h-screen relative" style={{ position: 'relative', zIndex: 1 }}>
+
+      <main className="min-h-screen relative" style={{
+        position: 'relative',
+        zIndex: 1,
+        backgroundColor: 'transparent',
+        minHeight: '100vh'
+      }}>
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl">
+        <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl" style={{
+          backgroundColor: 'transparent'
+        }}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}

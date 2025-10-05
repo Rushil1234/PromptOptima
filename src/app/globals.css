@@ -7,17 +7,73 @@
 
 @layer base {
   html {
-    background: #0a0a0a;
+    background: #0a0a0a !important;
     overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
   }
-  
+
   body {
     @apply text-dark-100 antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
-    background: #0a0a0a;
+    background: #0a0a0a !important;
     position: relative;
     overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* CRITICAL: Prevent white flicker during scroll */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  #__next {
+    background: #0a0a0a !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    isolation: isolate;
+    overscroll-behavior: none;
+  }
+
+  main {
+    background: transparent !important;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    will-change: transform;
+    perspective: 1000px;
+  }
+
+  /* Force all scrollable areas to have dark background */
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a !important;
+  }
+
+  /* Prevent any white gaps */
+  div, section, article, main, header, footer {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* NUCLEAR OPTION: Force dark everywhere */
+  * {
+    background-color: transparent;
+  }
+
+  html, body, #__next {
+    background: #0a0a0a !important;
+    background-color: #0a0a0a !important;
   }
 }
 
