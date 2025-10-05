@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ai } from '@/lib/genkit';
-import { languageRouter } f    const response = await ai.generate({
-      model: 'gemini-1.5-flash-latest',
-      prompt: fullPrompt,
-      config: {
-        temperature: 0.7,
-        maxOutputTokens: 2048,
-      }
-    });ib/language-router';
+import { languageRouter } from '@/lib/language-router';
 import { languageTranslator } from '@/lib/language-translator';
 import { SynthLangEngine } from '@/lib/synthlang';
 import { spellChecker } from '@/lib/spell-checker';
@@ -127,7 +120,7 @@ Always respond in English, regardless of the input language.`;
     const fullPrompt = `${systemPrompt}\n\n${dictionaryContext}${contextPrompt}User: ${decodedPrompt}`;
 
     const response = await ai.generate({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-1.5-flash',
       prompt: fullPrompt,
       config: {
         temperature: 0.7,

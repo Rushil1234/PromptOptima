@@ -190,7 +190,7 @@ export default function Chatbot({
   };
 
   return (
-    <GlassPanel className="flex flex-col h-[600px]">
+    <GlassPanel className="flex flex-col h-[600px] overflow-hidden">
       {/* Header */}
       <div className="flex-shrink-0 mb-3 pb-3 border-b border-dark-700">
         <div className="flex items-center justify-between">
@@ -248,9 +248,10 @@ export default function Chatbot({
 
       {/* Messages */}
       <div 
-        className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2" 
+        className="flex-1 overflow-y-auto overflow-x-hidden space-y-4 mb-4 pr-2" 
         style={{ 
-          minHeight: 0
+          minHeight: 0,
+          maxHeight: '100%'
         }}
       >
         {messages.length === 0 ? (
