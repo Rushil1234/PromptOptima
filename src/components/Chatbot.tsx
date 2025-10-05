@@ -247,7 +247,33 @@ export default function Chatbot({
       </AnimatePresence>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-thin scrollbar-thumb-dark-700 scrollbar-track-dark-900" style={{ minHeight: 0, maxHeight: '100%' }}>
+      <style jsx>{`
+        .chatbot-messages {
+          scrollbar-width: thin;
+          scrollbar-color: #4B5563 #1F2937;
+        }
+        .chatbot-messages::-webkit-scrollbar {
+          width: 8px;
+        }
+        .chatbot-messages::-webkit-scrollbar-track {
+          background: #1F2937;
+          border-radius: 4px;
+        }
+        .chatbot-messages::-webkit-scrollbar-thumb {
+          background: #4B5563;
+          border-radius: 4px;
+        }
+        .chatbot-messages::-webkit-scrollbar-thumb:hover {
+          background: #6B7280;
+        }
+      `}</style>
+      <div 
+        className="chatbot-messages flex-1 overflow-y-scroll space-y-4 mb-4 pr-2" 
+        style={{ 
+          minHeight: 0, 
+          maxHeight: '100%'
+        }}
+      >
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <svg className="w-16 h-16 text-dark-600 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
