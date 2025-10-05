@@ -73,10 +73,12 @@ export default function AnalyticsPage() {
   // Prepare strategy comparison data
   const strategyComparisonData = Object.entries(analytics.strategyStats).map(([name, stats]: [string, any]) => ({
     name: name.replace('-', ' ').toUpperCase(),
-    compressionRatio: stats.avgCompressionRatio.toFixed(1),
+    compressionRatio: parseFloat(stats.avgCompressionRatio.toFixed(1)),
     tokensSaved: stats.totalTokensSaved,
-    successRate: stats.successRate.toFixed(1),
-    avgTime: stats.avgProcessingTime.toFixed(0)
+    successRate: parseFloat(stats.successRate.toFixed(1)),
+    avgTime: parseFloat(stats.avgProcessingTime.toFixed(0)),
+    // Normalize processing time to 0-100 scale for radar chart
+    normalizedTime: Math.min(100, (100 - (stats.avgProcessingTime / 10))) // Invert so faster = better
   }));
 
   // Prepare cost savings data
@@ -333,28 +335,62 @@ export default function AnalyticsPage() {
                 </div>
                 <span className="bg-gradient-to-r from-white to-primary-200 bg-clip-text text-transparent">Multi-Dimensional Analysis</span>
               </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <RadarChart data={strategyComparisonData}>
-                <PolarGrid stroke="#2a2a40" />
-                <PolarAngleAxis dataKey="name" stroke="#64748b" />
-                <PolarRadiusAxis stroke="#64748b" />
+            <ResponsiveContainer width="100%" height={350}>
+              <RadarChart data={strategyComparisonData} margin={{ top: 20, right: 80, bottom: 20, left: 80 }}>
+                <PolarGrid 
+                  stroke="#2a2a40" 
+                  strokeWidth={1}
+                  gridType="polygon"
+                />
+                <PolarAngleAxis 
+                  dataKey="name" 
+                  stroke="#94a3b8" 
+                  fontSize={12}
+                  fontWeight="600"
+                />
+                <PolarRadiusAxis 
+                  stroke="#475569" 
+                  fontSize={10}
+                  tickCount={6}
+                  domain={[0, 100]}
+                  angle={0}
+                />
                 <Radar 
-                  name="Compression Ratio" 
+                  name="Compression Ratio %" 
                   dataKey="compressionRatio" 
                   stroke="#6366f1" 
                   fill="#6366f1" 
-                  fillOpacity={0.6} 
+                  fillOpacity={0.15}
+                  strokeWidth={2}
+                  dot={{ fill: '#6366f1', strokeWidth: 2, r: 4 }}
                 />
+                
                 <Radar 
-                  name="Success Rate" 
-                  dataKey="successRate" 
-                  stroke="#8b5cf6" 
-                  fill="#8b5cf6" 
-                  fillOpacity={0.6} 
+                  name="Performance Score" 
+                  dataKey="normalizedTime" 
+                  stroke="#f59e0b" 
+                  fill="#f59e0b" 
+                  fillOpacity={0.15}
+                  strokeWidth={2}
+                  dot={{ fill: '#f59e0b', strokeWidth: 2, r: 4 }}
                 />
-                <Legend />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#1e1e2e', 
+                    border: '1px solid #6366f1',
+                    borderRadius: '8px'
+                  }}
+                  formatter={(value: any, name: string) => [
+                    `${value}${name.includes('%') ? '%' : ''}`, 
+                    name
+                  ]}
+                />
+                <Legend 
+                  wrapperStyle={{ paddingTop: '20px' }}
+                />
               </RadarChart>
             </ResponsiveContainer>
+            
             </motion.div>
           </GlassPanel>
         </div>

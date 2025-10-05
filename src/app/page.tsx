@@ -222,13 +222,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-500/10 to-purple-500/10 border border-primary-400/20 rounded-full px-5 py-2.5 mb-8 backdrop-blur-xl">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gradient-to-r from-primary-400 to-purple-400"></span>
-            </span>
-            <span className="text-sm font-semibold bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">AI-Powered Optimization</span>
-          </div>
+          
           
           <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
             <TypeText
@@ -882,7 +876,7 @@ export default function Home() {
             <span>•</span>
             <span className="text-primary-400 font-semibold">Tailwind CSS</span>
             <span>•</span>
-            <span className="text-primary-400 font-semibold">Google Gemini</span>
+            <span className="text-primary-400 font-semibold">Google API</span>
           </div>
           <p className="text-dark-600 text-xs">
             Powered by LLMLingua compression, SynthLang optimization & strategic language switching
