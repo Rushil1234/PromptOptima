@@ -25,8 +25,8 @@ export default function AnalyticsPage() {
       if (!loading) setRefreshing(true);
       
       const [overviewRes, timeSeriesRes] = await Promise.all([
-        fetch('/api/analytics?type=overview'),
-        fetch(`/api/analytics?type=timeseries&hours=${timeRange === '24h' ? 24 : timeRange === '7d' ? 168 : 720}`)
+        fetch('/api/analytics?type=overview', { cache: 'no-store' }),
+        fetch(`/api/analytics?type=timeseries&hours=${timeRange === '24h' ? 24 : timeRange === '7d' ? 168 : 720}`, { cache: 'no-store' })
       ]);
 
       const analyticsData = await overviewRes.json();
@@ -40,6 +40,25 @@ export default function AnalyticsPage() {
     } catch (error) {
       console.error('Failed to fetch analytics:', error);
       setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  const loadDemoData = async () => {
+    try {
+      setRefreshing(true);
+      const response = await fetch('/api/analytics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'generateMock', data: { count: 500 } })
+      });
+      
+      if (response.ok) {
+        await fetchAnalytics();
+      }
+    } catch (error) {
+      console.error('Failed to load demo data:', error);
+    } finally {
       setRefreshing(false);
     }
   };
@@ -176,8 +195,26 @@ export default function AnalyticsPage() {
                 </div>
               </div>
               {lastUpdate && (
-                <div className="text-gray-500 text-sm font-medium bg-dark-800/40 px-4 py-2 rounded-xl border border-dark-700/50 backdrop-blur-sm inline-block">
-                  Last updated: {lastUpdate.toLocaleTimeString()}
+                <div className="flex items-center gap-3">
+                  <div className="text-gray-500 text-sm font-medium bg-dark-800/40 px-4 py-2 rounded-xl border border-dark-700/50 backdrop-blur-sm inline-block">
+                    Last updated: {lastUpdate.toLocaleTimeString()}
+                  </div>
+                  <button
+                    onClick={fetchAnalytics}
+                    disabled={refreshing}
+                    className="px-4 py-2 rounded-xl font-medium bg-primary-500/10 hover:bg-primary-500/20 text-primary-400 border border-primary-500/30 transition-all duration-300 disabled:opacity-50"
+                  >
+                    {refreshing ? 'Refreshing...' : 'Refresh Now'}
+                  </button>
+                  {analytics.totalCompressions === 0 && (
+                    <button
+                      onClick={loadDemoData}
+                      disabled={refreshing}
+                      className="px-4 py-2 rounded-xl font-medium bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 transition-all duration-300 disabled:opacity-50"
+                    >
+                      Load Demo Data
+                    </button>
+                  )}
                 </div>
               )}
             </div>
@@ -200,6 +237,48 @@ export default function AnalyticsPage() {
             </div>
           </div>
         </motion.div>
+
+        {/* Empty State Banner */}
+        {analytics.totalCompressions === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <GlassPanel className="p-8 border-2 border-yellow-500/30 bg-gradient-to-br from-yellow-500/10 to-orange-500/10">
+              <div className="flex items-center gap-6">
+                <div className="p-4 rounded-2xl bg-yellow-500/20 border border-yellow-500/30">
+                  <svg className="w-12 h-12 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">No Analytics Data Yet</h3>
+                  <p className="text-gray-300 text-lg mb-4">
+                    Start compressing prompts to see real-time analytics, or load demo data to explore the dashboard.
+                  </p>
+                  <div className="flex gap-3">
+                    <a
+                      href="/"
+                      className="px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-primary-500 to-purple-500 text-white hover:shadow-lg hover:shadow-primary-500/50 transition-all duration-300"
+                    >
+                      Go to Compression Tool
+                    </a>
+                    <button
+                      onClick={loadDemoData}
+                      disabled={refreshing}
+                      className="px-6 py-3 rounded-xl font-bold bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-400 border border-yellow-500/30 transition-all duration-300 disabled:opacity-50"
+                    >
+                      Load Demo Data (500 entries)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </GlassPanel>
+          </motion.div>
+        )}
 
         {/* Key Metrics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
