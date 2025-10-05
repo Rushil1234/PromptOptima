@@ -8,6 +8,8 @@ import {
   Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area
 } from 'recharts';
 import { AnalyticsData } from '@/lib/analytics-service';
+import Threads from '@/components/Threads';
+import GlassPanel from '@/components/GlassPanel';
 
 export default function AnalyticsPage() {
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
@@ -99,8 +101,34 @@ export default function AnalyticsPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 py-12 px-4">
-      <div className="max-w-[1800px] mx-auto">
+    <>
+      {/* WebGL Threads Background */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 0,
+        pointerEvents: 'none',
+        transform: 'translate3d(0, 0, 0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        isolation: 'isolate',
+        backgroundColor: '#0a0a0a',
+        willChange: 'transform',
+        overflow: 'hidden'
+      }}>
+        <Threads
+          color={[0.5, 0.2, 0.9]}
+          amplitude={2.5}
+          distance={0}
+          enableMouseInteraction={false}
+        />
+      </div>
+
+      <div className="min-h-screen relative py-12 px-4" style={{ zIndex: 1, backgroundColor: 'transparent' }}>
+        <div className="max-w-[1800px] mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -110,8 +138,14 @@ export default function AnalyticsPage() {
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-4xl font-bold text-white">
-                  📊 Analytics Dashboard
+                <h1 className="text-5xl font-bold bg-gradient-to-r from-white via-primary-200 to-purple-200 bg-clip-text text-transparent flex items-center gap-3">
+                  <svg className="w-12 h-12 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                  </svg>
+                  Analytics Dashboard
                 </h1>
                 {refreshing && (
                   <div className="flex items-center gap-2 text-primary-400 text-sm">
@@ -121,7 +155,7 @@ export default function AnalyticsPage() {
                 )}
               </div>
               <div className="flex items-center gap-4">
-                <p className="text-dark-300">
+                <p className="text-dark-300 text-lg">
                   Real-time performance metrics and cost analytics
                 </p>
                 {lastUpdate && (
@@ -131,50 +165,22 @@ export default function AnalyticsPage() {
                 )}
               </div>
             </div>
-            
-            <div className="flex flex-col gap-4">
-              <div className="flex gap-2">
-                {/* Time Range Selector */}
-                <div className="flex gap-2 bg-dark-800/50 rounded-xl p-2">
-                  {(['24h', '7d', '30d'] as const).map((range) => (
-                    <button
-                      key={range}
-                      onClick={() => setTimeRange(range)}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                        timeRange === range
-                          ? 'bg-primary-500 text-white'
-                          : 'text-dark-300 hover:text-white hover:bg-dark-700'
-                      }`}
-                    >
-                      {range}
-                    </button>
-                  ))}
-                </div>
 
-                {/* Auto Refresh Toggle */}
+            {/* Time Range Selector */}
+            <div className="flex gap-2 bg-dark-800/30 backdrop-blur-xl rounded-xl p-2 border border-dark-700/50">
+              {(['24h', '7d', '30d'] as const).map((range) => (
                 <button
-                  onClick={() => setAutoRefresh(!autoRefresh)}
-                  className={`px-4 py-2 rounded-xl font-medium transition-all relative ${
-                    autoRefresh
-                      ? 'bg-green-500/20 text-green-400 border border-green-500/50'
-                      : 'bg-dark-800/50 text-dark-300 border border-dark-700'
+                  key={range}
+                  onClick={() => setTimeRange(range)}
+                  className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                    timeRange === range
+                      ? 'bg-gradient-to-r from-primary-500 to-purple-500 text-white shadow-lg shadow-primary-500/50'
+                      : 'text-dark-300 hover:text-white hover:bg-dark-700/50'
                   }`}
                 >
-                  {autoRefresh && (
-                    <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                    </span>
-                  )}
-                  {autoRefresh ? '🔄 Live' : '⏸️ Paused'}
+                  {range}
                 </button>
-              </div>
-              
-              {autoRefresh && (
-                <div className="text-right text-xs text-dark-500">
-                  Auto-refresh every 10 seconds
-                </div>
-              )}
+              ))}
             </div>
           </div>
         </motion.div>
@@ -185,41 +191,44 @@ export default function AnalyticsPage() {
             title="Total Compressions"
             value={analytics.totalCompressions.toLocaleString()}
             subtitle={`${analytics.daily.compressions} today`}
-            icon="🚀"
+            icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M12 2l-4 4M12 2l4 4M5 12l14-7M19 12l-14 7"/></svg>}
             trend="+12%"
           />
           <MetricCard
             title="Tokens Saved"
             value={formatNumber(analytics.totalTokensSaved)}
             subtitle={`${formatNumber(analytics.daily.tokensSaved)} today`}
-            icon="⚡"
+            icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>}
             trend="+18%"
           />
           <MetricCard
             title="Cost Savings"
             value={`$${analytics.totalCostSaved.toFixed(2)}`}
             subtitle={`$${analytics.daily.costSaved.toFixed(2)} today`}
-            icon="💰"
+            icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 18V6"/></svg>}
             trend="+22%"
           />
           <MetricCard
             title="Avg Compression"
             value={`${analytics.averageCompressionRatio.toFixed(1)}%`}
             subtitle={`${analytics.avgSemanticScore.toFixed(1)}% quality`}
-            icon="📈"
+            icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
             trend="+5%"
           />
         </div>
 
         {/* Time Series Chart - Token Savings Over Time */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="card p-6 mb-8"
-        >
-          <h2 className="text-2xl font-bold text-white mb-4">
-            📈 Token Savings Trend
-          </h2>
+        <GlassPanel className="p-6 mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <svg className="w-6 h-6 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+              Token Savings Trend
+            </h2>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={timeSeriesData}>
               <defs>
@@ -253,19 +262,23 @@ export default function AnalyticsPage() {
               />
             </AreaChart>
           </ResponsiveContainer>
-        </motion.div>
+          </motion.div>
+        </GlassPanel>
 
         {/* Strategy Performance Comparison */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Compression Ratio by Strategy */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="card p-6"
-          >
-            <h2 className="text-2xl font-bold text-white mb-4">
-              ⚡ Strategy Performance
-            </h2>
+          <GlassPanel className="p-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+                Strategy Performance
+              </h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={strategyComparisonData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#2a2a40" />
@@ -283,17 +296,23 @@ export default function AnalyticsPage() {
                 <Bar dataKey="successRate" fill="#8b5cf6" name="Success %" />
               </BarChart>
             </ResponsiveContainer>
-          </motion.div>
+            </motion.div>
+          </GlassPanel>
 
           {/* Radar Chart - Strategy Comparison */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="card p-6"
-          >
-            <h2 className="text-2xl font-bold text-white mb-4">
-              🎯 Multi-Dimensional Analysis
-            </h2>
+          <GlassPanel className="p-6">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+                Multi-Dimensional Analysis
+              </h2>
             <ResponsiveContainer width="100%" height={300}>
               <RadarChart data={strategyComparisonData}>
                 <PolarGrid stroke="#2a2a40" />
@@ -316,18 +335,23 @@ export default function AnalyticsPage() {
                 <Legend />
               </RadarChart>
             </ResponsiveContainer>
-          </motion.div>
+            </motion.div>
+          </GlassPanel>
         </div>
 
         {/* Cost Analytics */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="card p-6 mb-8"
-        >
-          <h2 className="text-2xl font-bold text-white mb-4">
-            💰 Cost Savings by Provider
-          </h2>
+        <GlassPanel className="p-6 mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <svg className="w-6 h-6 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 18V6"/>
+              </svg>
+              Cost Savings by Provider
+            </h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={costSavingsData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#2a2a40" />
@@ -347,19 +371,23 @@ export default function AnalyticsPage() {
               <Bar dataKey="saved" fill="#6366f1" name="Cost Saved" />
             </BarChart>
           </ResponsiveContainer>
-        </motion.div>
+          </motion.div>
+        </GlassPanel>
 
         {/* Category Performance & Symbol Usage */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Popular Categories */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="card p-6"
-          >
-            <h2 className="text-2xl font-bold text-white mb-4">
-              📋 Top Prompt Categories
-            </h2>
+          <GlassPanel className="p-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9l2 2 4-4"/>
+                </svg>
+                Top Prompt Categories
+              </h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={categoryData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="#2a2a40" />
@@ -375,17 +403,23 @@ export default function AnalyticsPage() {
                 <Bar dataKey="count" fill="#6366f1" name="Usage Count" />
               </BarChart>
             </ResponsiveContainer>
-          </motion.div>
+            </motion.div>
+          </GlassPanel>
 
           {/* Top Symbols */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="card p-6"
-          >
-            <h2 className="text-2xl font-bold text-white mb-4">
-              🔤 Top 5 Symbols Used
-            </h2>
+          <GlassPanel className="p-6">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="4 7 4 4 20 4 20 7"/>
+                  <line x1="9" y1="20" x2="15" y2="20"/>
+                  <line x1="12" y1="4" x2="12" y2="20"/>
+                </svg>
+                Top 5 Symbols Used
+              </h2>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -418,18 +452,26 @@ export default function AnalyticsPage() {
                 </span> ({analytics.topSymbols.length} of 753 symbols used)
               </p>
             </div>
-          </motion.div>
+            </motion.div>
+          </GlassPanel>
         </div>
 
         {/* System Health & Quality Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="card p-6"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4">🎯 Quality Score</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <GlassPanel className="p-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <svg className="w-5 h-5 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+                Quality Score
+              </h3>
             <div className="flex items-center justify-center">
               <div className="relative w-32 h-32">
                 <svg className="w-full h-full transform -rotate-90">
@@ -460,15 +502,21 @@ export default function AnalyticsPage() {
               </div>
             </div>
             <p className="text-center text-dark-300 mt-4">Semantic Preservation</p>
-          </motion.div>
+            </motion.div>
+          </GlassPanel>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="card p-6"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4">✅ Success Rate</h3>
+          <GlassPanel className="p-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Success Rate
+              </h3>
             <div className="flex items-center justify-center">
               <div className="relative w-32 h-32">
                 <svg className="w-full h-full transform -rotate-90">
@@ -499,47 +547,23 @@ export default function AnalyticsPage() {
               </div>
             </div>
             <p className="text-center text-dark-300 mt-4">Overall Success</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="card p-6"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4">⏰ Peak Hours</h3>
-            <div className="space-y-2">
-              {analytics.peakHours.slice(0, 5).map((hour, idx) => (
-                <div key={hour} className="flex items-center justify-between">
-                  <span className="text-dark-300">
-                    {hour.toString().padStart(2, '0')}:00 - {(hour + 1).toString().padStart(2, '0')}:00
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <div className="w-24 h-2 bg-dark-700 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-primary-500 rounded-full transition-all duration-1000"
-                        style={{ width: `${100 - idx * 20}%` }}
-                      />
-                    </div>
-                    <span className="text-primary-400 font-medium text-sm">
-                      #{idx + 1}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </GlassPanel>
         </div>
 
         {/* Recent Activity */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="card p-6"
-        >
-          <h2 className="text-2xl font-bold text-white mb-4">
-            🕐 Recent Compressions
-          </h2>
+        <GlassPanel className="p-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <svg className="w-6 h-6 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Recent Compressions
+            </h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -584,9 +608,14 @@ export default function AnalyticsPage() {
                     </td>
                     <td className="py-3 px-4 text-center">
                       {compression.success ? (
-                        <span className="text-green-400">✓</span>
+                        <svg className="w-5 h-5 text-green-400 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
                       ) : (
-                        <span className="text-red-400">✗</span>
+                        <svg className="w-5 h-5 text-red-400 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <line x1="18" y1="6" x2="6" y2="18"/>
+                          <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
                       )}
                     </td>
                   </motion.tr>
@@ -594,47 +623,51 @@ export default function AnalyticsPage() {
               </tbody>
             </table>
           </div>
-        </motion.div>
+          </motion.div>
+        </GlassPanel>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
 // Metric Card Component
-function MetricCard({ 
-  title, 
-  value, 
-  subtitle, 
-  icon, 
-  trend 
-}: { 
-  title: string; 
-  value: string; 
-  subtitle: string; 
-  icon: string; 
+function MetricCard({
+  title,
+  value,
+  subtitle,
+  icon,
+  trend
+}: {
+  title: string;
+  value: string;
+  subtitle: string;
+  icon: React.ReactNode;
   trend?: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ scale: 1.02 }}
-      className="card p-6"
-    >
-      <div className="flex items-start justify-between mb-4">
-        <span className="text-4xl">{icon}</span>
-        {trend && (
-          <span className={`text-sm font-medium ${
-            trend.startsWith('+') ? 'text-green-400' : 'text-red-400'
-          }`}>
-            {trend}
-          </span>
-        )}
-      </div>
-      <h3 className="text-dark-400 text-sm font-medium mb-2">{title}</h3>
-      <p className="text-3xl font-bold text-white mb-1">{value}</p>
-      <p className="text-dark-500 text-sm">{subtitle}</p>
-    </motion.div>
+    <GlassPanel>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.02 }}
+        className="p-6"
+      >
+        <div className="flex items-start justify-between mb-4">
+          <div className="text-primary-400">{icon}</div>
+          {trend && (
+            <span className={`text-sm font-medium ${
+              trend.startsWith('+') ? 'text-green-400' : 'text-red-400'
+            }`}>
+              {trend}
+            </span>
+          )}
+        </div>
+        <h3 className="text-dark-400 text-sm font-medium mb-2">{title}</h3>
+        <p className="text-3xl font-bold text-white mb-1">{value}</p>
+        <p className="text-dark-500 text-sm">{subtitle}</p>
+      </motion.div>
+    </GlassPanel>
   );
 }
 

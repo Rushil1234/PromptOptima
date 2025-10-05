@@ -246,7 +246,7 @@ export default function Home() {
                 <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent font-bold">
                   <DecryptedText
                     text="multi-strategy optimization"
-                    speed={30}
+                    speed={80}
                     delay={200}
                   />
                 </span>
