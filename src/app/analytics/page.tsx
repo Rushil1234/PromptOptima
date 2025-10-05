@@ -206,13 +206,37 @@ export default function AnalyticsPage() {
                   >
                     {refreshing ? 'Refreshing...' : 'Refresh Now'}
                   </button>
-                  {analytics.totalCompressions === 0 && (
+                  {analytics.totalCompressions === 0 ? (
                     <button
                       onClick={loadDemoData}
                       disabled={refreshing}
                       className="px-4 py-2 rounded-xl font-medium bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 transition-all duration-300 disabled:opacity-50"
                     >
                       Load Demo Data
+                    </button>
+                  ) : (
+                    <button
+                      onClick={async () => {
+                        if (confirm('Are you sure you want to clear all analytics data?')) {
+                          setRefreshing(true);
+                          try {
+                            await fetch('/api/analytics', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ action: 'reset' })
+                            });
+                            await fetchAnalytics();
+                          } catch (error) {
+                            console.error('Failed to clear data:', error);
+                          } finally {
+                            setRefreshing(false);
+                          }
+                        }
+                      }}
+                      disabled={refreshing}
+                      className="px-4 py-2 rounded-xl font-medium bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 transition-all duration-300 disabled:opacity-50"
+                    >
+                      Clear Data
                     </button>
                   )}
                 </div>

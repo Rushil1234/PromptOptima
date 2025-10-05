@@ -126,10 +126,16 @@ export default function Chatbot({
       });
 
       if (!response.ok) {
-        throw new Error('Chat request failed');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || errorData.details || 'Chat request failed');
       }
 
       const data = await response.json();
+
+      // Check if we got a valid response
+      if (!data.response) {
+        throw new Error('Empty response from AI');
+      }
 
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,
@@ -152,10 +158,11 @@ export default function Chatbot({
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Chat error:', error);
+      const errorDetails = error instanceof Error ? error.message : 'Unknown error';
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
+        content: `Sorry, I encountered an error: ${errorDetails}. Please check your API configuration and try again.`,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -191,7 +198,7 @@ export default function Chatbot({
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          AI Chat Assistant
+          Optimus
         </h2>
         <p className="text-sm text-dark-400 mt-1 flex items-start gap-2">
           <svg className="w-4 h-4 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -259,7 +266,7 @@ export default function Chatbot({
       </AnimatePresence>
 
       {/* Messages */}
-      <div className="flex-1 min-h-0 overflow-y-auto space-y-4 mb-4 scrollbar-thin pr-2">
+      <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2" style={{ minHeight: 0 }}>
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <svg className="w-16 h-16 text-dark-600 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
