@@ -192,44 +192,25 @@ export default function Chatbot({
   return (
     <GlassPanel className="flex flex-col h-[600px] max-h-[600px]">
       {/* Header */}
-      <div className="flex-shrink-0 mb-4 pb-4 border-b border-dark-700">
-        <h2 className="text-2xl font-bold text-dark-50 flex items-center gap-2">
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          Optimus
-        </h2>
-        <p className="text-sm text-dark-400 mt-1 flex items-start gap-2">
-          <svg className="w-4 h-4 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 16v-4M12 8h.01"/>
-          </svg>
-          <span><strong>Smart Token Optimization:</strong> This chatbot uses advanced compression to reduce token usage by up to <span className="text-primary-400 font-semibold">95%</span></span>
-        </p>
-        <div className="mt-2 text-xs text-dark-500 space-y-1">
-          <p className="flex items-start gap-2">
-            <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      <div className="flex-shrink-0 mb-3 pb-3 border-b border-dark-700">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-dark-50 flex items-center gap-2">
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
-            <span><strong>SynthLang Compression:</strong> Converts verbose text to symbolic tokens (60-93% reduction)</span>
-          </p>
-          <p className="flex items-start gap-2">
-            <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="2" y1="12" x2="22" y2="12"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-            <span><strong>Language Switching:</strong> Translates to token-efficient languages like Japanese/Chinese (40% reduction)</span>
-          </p>
-          <p className="flex items-start gap-2">
-            <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg>
-            <span><strong>Auto Spell-Check:</strong> Fixes typos to improve compression quality</span>
-          </p>
+            Optimus
+          </h2>
+          <button
+            onClick={clearChat}
+            className="text-xs text-dark-500 hover:text-dark-300 transition-colors px-3 py-1 rounded-lg hover:bg-dark-800/50"
+          >
+            Clear Chat
+          </button>
         </div>
+        <p className="text-xs text-dark-400 mt-1">
+          AI-powered chat with up to <span className="text-primary-400 font-semibold">95% token compression</span>
+        </p>
       </div>
 
       {/* Settings Panel */}
@@ -266,7 +247,7 @@ export default function Chatbot({
       </AnimatePresence>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2" style={{ minHeight: 0 }}>
+      <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-thin scrollbar-thumb-dark-700 scrollbar-track-dark-900" style={{ minHeight: 0, maxHeight: '100%' }}>
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <svg className="w-16 h-16 text-dark-600 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -582,7 +563,7 @@ export default function Chatbot({
       </AnimatePresence>
 
       {/* Input */}
-      <div className="flex gap-2 relative z-50">
+      <div className="flex gap-2 relative z-50 flex-shrink-0">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
