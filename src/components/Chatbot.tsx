@@ -248,8 +248,13 @@ export default function Chatbot({
 
       {/* Messages */}
       <div 
-        className="flex-1 overflow-y-scroll space-y-4 mb-4 pr-2" 
-        style={{ minHeight: 0 }}
+        className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2" 
+        style={{ 
+          minHeight: 0,
+          height: 0,
+          flexGrow: 1,
+          overflowY: 'auto'
+        }}
       >
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">

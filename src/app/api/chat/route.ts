@@ -120,7 +120,7 @@ Always respond in English, regardless of the input language.`;
     const fullPrompt = `${systemPrompt}\n\n${dictionaryContext}${contextPrompt}User: ${decodedPrompt}`;
 
     const response = await ai.generate({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-1.5-flash',
       prompt: fullPrompt,
       config: {
         temperature: 0.7,
