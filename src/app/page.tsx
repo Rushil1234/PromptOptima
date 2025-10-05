@@ -252,7 +252,7 @@ export default function Home() {
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
               </svg>
-              Up to 95% token reduction
+              40% to 85% token reduction
             </span>
             <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-400/20 text-cyan-300 backdrop-blur-xl">
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
