@@ -11,6 +11,8 @@ import Chatbot from '@/components/Chatbot';
 import CopyButton from '@/components/CopyButton';
 import { ToastContainer } from '@/components/Toast';
 import Threads from '@/components/Threads';
+import TypeText from '@/components/TypeText';
+import DecryptedText from '@/components/DecryptedText';
 
 type Strategy = 'llmlingua' | 'synthlang' | 'hybrid' | 'ultra';
 type Tab = 'compress' | 'chat';
@@ -66,6 +68,7 @@ export default function Home() {
     estimatedSavings: number;
   } | null>(null);
   const [toasts, setToasts] = useState<Array<{ id: string; message: string; type?: 'success' | 'error' | 'info' }>>([]);
+  const [showSubheading, setShowSubheading] = useState(false);
 
   const addToast = (message: string, type: 'success' | 'error' | 'info' = 'success') => {
     const id = Date.now().toString();
@@ -75,15 +78,6 @@ export default function Home() {
   const removeToast = (id: string) => {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   };
-
-  // Parallax effect
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleCompress = async () => {
     if (!prompt.trim()) return;
@@ -123,7 +117,7 @@ export default function Home() {
       if (errorMessage.includes('API key') || errorMessage.includes('Not Found')) {
         setError(
           strategy === 'llmlingua'
-            ? '🔑 API Key Required: LLMLingua needs a Google Gemini API key. Add GOOGLE_GENAI_API_KEY to your .env.local file. Get a free key at https://aistudio.google.com/app/apikey'
+            ? 'API Key Required: LLMLingua needs a Google Gemini API key. Add GOOGLE_GENAI_API_KEY to your .env.local file. Get a free key at https://aistudio.google.com/app/apikey'
             : errorMessage
         );
       } else {
@@ -170,7 +164,7 @@ export default function Home() {
       const errorMessage = err instanceof Error ? err.message : 'Failed to analyze prompt';
       
       if (errorMessage.includes('API key') || errorMessage.includes('Not Found')) {
-        setError('🔑 API Key Required: AI Suggest needs a Google Gemini API key. Add GOOGLE_GENAI_API_KEY to your .env.local file. Get a free key at https://aistudio.google.com/app/apikey');
+        setError('API Key Required: AI Suggest needs a Google Gemini API key. Add GOOGLE_GENAI_API_KEY to your .env.local file. Get a free key at https://aistudio.google.com/app/apikey');
       } else {
         setError(errorMessage);
       }
@@ -205,7 +199,7 @@ export default function Home() {
       }}>
         <Threads
           color={[0.5, 0.2, 0.9]}  // Deep purple (RGB 0-1 scale)
-          amplitude={1.0}
+          amplitude={2.5}
           distance={0}
           enableMouseInteraction={false}
         />
@@ -237,25 +231,48 @@ export default function Home() {
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
-            <span className="bg-gradient-to-r from-white via-primary-200 to-purple-200 bg-clip-text text-transparent">
-              LLM Optimizer
-            </span>
+            <TypeText
+              text="Prompt Optima"
+              className="bg-gradient-to-r from-white via-primary-200 to-purple-200 bg-clip-text text-transparent"
+              speed={80}
+              delay={300}
+              onComplete={() => setShowSubheading(true)}
+            />
           </h1>
-          <p className="text-xl md:text-2xl text-dark-300 font-medium max-w-3xl mx-auto mb-10 leading-relaxed">
-            Intelligent middleware for prompt compression using{' '}
-            <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent font-bold">
-              multi-strategy optimization
-            </span>
+          <p className="text-xl md:text-2xl text-dark-300 font-medium max-w-3xl mx-auto mb-10 leading-relaxed min-h-[3.5rem]">
+            {showSubheading && (
+              <>
+                Intelligent middleware for prompt compression using{' '}
+                <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent font-bold">
+                  <DecryptedText
+                    text="multi-strategy optimization"
+                    speed={30}
+                    delay={200}
+                  />
+                </span>
+              </>
+            )}
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border border-emerald-400/20 text-emerald-300 backdrop-blur-xl">
-              ⚡ Up to 95% token reduction
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+              Up to 95% token reduction
             </span>
             <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-400/20 text-cyan-300 backdrop-blur-xl">
-              🎯 95%+ semantic preservation
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+              95%+ semantic preservation
             </span>
             <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-purple-500/10 to-pink-600/10 border border-purple-400/20 text-purple-300 backdrop-blur-xl">
-              🚀 4 compression strategies
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M12 2v20M12 2l-4 4M12 2l4 4M5 12l14-7M19 12l-14 7"/>
+              </svg>
+              4 compression strategies
             </span>
           </div>
           <a
@@ -263,7 +280,13 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-purple-500 hover:from-primary-600 hover:to-purple-600 text-white font-bold rounded-2xl transition-all duration-300 shadow-2xl shadow-primary-500/30 hover:shadow-primary-500/50 hover:scale-105 active:scale-95 relative overflow-hidden group"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></span>
-            <span className="relative">📊 View Analytics Dashboard</span>
+            <svg className="relative w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            <span className="relative">View Analytics Dashboard</span>
           </a>
         </motion.div>
 
@@ -285,7 +308,9 @@ export default function Home() {
                 }`}
               >
                 <span className="flex items-center justify-center gap-2">
-                  <span>🔧</span>
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                  </svg>
                   <span>Compression Lab</span>
                 </span>
               </button>
@@ -298,7 +323,9 @@ export default function Home() {
                 }`}
               >
                 <span className="flex items-center justify-center gap-2">
-                  <span>💬</span>
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
                   <span>AI Chat</span>
                 </span>
               </button>
@@ -325,7 +352,7 @@ export default function Home() {
             <StrategyCard
               title="LLMLingua"
               description="General-purpose compression using AI-powered semantic analysis to remove non-essential words"
-              icon="🧠"
+              icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>}
               compression="60-80%"
               bestFor="Any prompt"
               selected={strategy === 'llmlingua'}
@@ -334,7 +361,7 @@ export default function Home() {
             <StrategyCard
               title="SynthLang"
               description="Symbolic language system using custom glyphs to represent complex concepts"
-              icon="⟐"
+              icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 15h6M12 9v6"/></svg>}
               compression="80-90%"
               bestFor="Structured tasks"
               selected={strategy === 'synthlang'}
@@ -343,7 +370,7 @@ export default function Home() {
             <StrategyCard
               title="Hybrid Semantic"
               description="Enhanced multi-layer approach with AI-powered deep learning pass for maximum semantic preservation"
-              icon="🔀"
+              icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>}
               compression="70-85%"
               bestFor="Complex prompts"
               selected={strategy === 'hybrid'}
@@ -352,7 +379,7 @@ export default function Home() {
             <StrategyCard
               title="Ultra"
               description="Maximum compression! Chains all three strategies: Hybrid → LLMLingua → SynthLang for ultimate token savings"
-              icon="⚡"
+              icon={<svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>}
               compression="90-95%"
               bestFor="Maximum savings"
               selected={strategy === 'ultra'}
@@ -404,7 +431,9 @@ export default function Home() {
                 </>
               ) : (
                 <>
-                  <span>✨</span>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
                   Compress Prompt
                 </>
               )}
@@ -422,7 +451,10 @@ export default function Home() {
                 </>
               ) : (
                 <>
-                  <span>🤖</span>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
                   AI Suggest Strategy
                 </>
               )}
@@ -439,7 +471,11 @@ export default function Home() {
           >
             <GlassPanel className="border-red-500/30 bg-red-500/5">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 text-3xl">⚠️</div>
+                <svg className="flex-shrink-0 w-8 h-8 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-red-400 mb-2">Error</h3>
                   <p className="text-dark-200 whitespace-pre-line leading-relaxed">{error}</p>
@@ -452,7 +488,13 @@ export default function Home() {
                         <li>Add it to <code className="bg-dark-900 px-2 py-0.5 rounded text-primary-400">.env.local</code> file</li>
                         <li>Restart the dev server</li>
                       </ol>
-                      <p className="text-xs text-dark-500 mt-3">💡 Tip: SynthLang works offline without an API key!</p>
+                      <p className="text-xs text-dark-500 mt-3 flex items-center gap-1.5">
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                        Tip: SynthLang works offline without an API key!
+                      </p>
                     </div>
                   )}
                   <button
@@ -477,7 +519,10 @@ export default function Home() {
           >
             <GlassPanel className="border-primary-500/30 bg-primary-500/5">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 text-3xl">🤖</div>
+                <svg className="flex-shrink-0 w-8 h-8 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-primary-400 mb-2">AI Recommendation</h3>
                   <div className="space-y-3">
@@ -535,20 +580,20 @@ export default function Home() {
                 label="Compression Ratio"
                 value={result.compressionRatio != null ? result.compressionRatio.toFixed(1) : '0'}
                 suffix="%"
-                icon="📉"
+                icon={<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
                 color="success"
               />
               <MetricCard
                 label="Tokens Saved"
                 value={result.estimatedTokenSavings || 0}
-                icon="💾"
+                icon={<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>}
                 color="info"
               />
               <MetricCard
                 label="Semantic Preservation"
                 value={result.semanticScore != null ? result.semanticScore.toFixed(1) : '0'}
                 suffix="%"
-                icon="🎯"
+                icon={<svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>}
                 color="accent"
               />
             </div>
@@ -566,7 +611,11 @@ export default function Home() {
                   onClick={() => copyToClipboard(result.compressed)}
                   className="btn-secondary text-sm px-4 py-2 flex items-center gap-2"
                 >
-                  📋 Copy
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                  Copy
                 </button>
               </div>
               <div className="bg-dark-900/50 border border-dark-700 rounded-xl p-4 font-mono text-dark-100 text-sm leading-relaxed">
@@ -577,8 +626,12 @@ export default function Home() {
             {/* Symbols Used (SynthLang only) */}
             {result.usedSymbols && result.usedSymbols.length > 0 && (
               <GlassPanel>
-                <h2 className="text-2xl font-bold text-dark-50 mb-4">
-                  🎌 Kanji Symbols Used
+                <h2 className="text-2xl font-bold text-dark-50 mb-4 flex items-center gap-2">
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                    <line x1="4" y1="22" x2="4" y2="15"/>
+                  </svg>
+                  Kanji Symbols Used
                 </h2>
                 <p className="text-sm text-dark-400 mb-6">
                   {result.usedSymbols.length} unique symbols replaced {result.usedSymbols.reduce((acc, s) => acc + s.originalWords.length, 0)} words
@@ -625,7 +678,10 @@ export default function Home() {
                     <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="font-semibold text-dark-100 flex items-center gap-2">
-                          <span className="text-xl">🏗️</span>
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+                            <path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/>
+                          </svg>
                           Structural Analysis
                         </h3>
                         <span className="text-sm text-emerald-400 font-semibold">
@@ -657,7 +713,11 @@ export default function Home() {
                     <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="font-semibold text-dark-100 flex items-center gap-2">
-                          <span className="text-xl">🔄</span>
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <polyline points="1 20 1 14 7 14"/>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                          </svg>
                           Semantic Deduplication
                         </h3>
                         <span className="text-sm text-emerald-400 font-semibold">
@@ -686,7 +746,10 @@ export default function Home() {
                     <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="font-semibold text-dark-100 flex items-center gap-2">
-                          <span className="text-xl">🔗</span>
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                          </svg>
                           Context Preservation
                         </h3>
                         <span className="text-sm text-cyan-400 font-semibold">
@@ -713,7 +776,9 @@ export default function Home() {
                     <div className="bg-dark-900/50 border border-dark-700 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="font-semibold text-dark-100 flex items-center gap-2">
-                          <span className="text-xl">✨</span>
+                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                          </svg>
                           Format Optimization
                         </h3>
                         <span className="text-sm text-emerald-400 font-semibold">

@@ -1,11 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface StrategyCardProps {
   title: string;
   description: string;
-  icon: string;
+  icon: ReactNode;
   compression: string;
   bestFor: string;
   selected: boolean;
@@ -46,7 +47,7 @@ export default function StrategyCard({
       )}
       
       <div className="relative flex items-start gap-4">
-        <div className={`text-5xl flex-shrink-0 transition-transform duration-500 ${selected ? 'scale-110' : ''}`}>
+        <div className={`flex-shrink-0 transition-transform duration-500 ${selected ? 'scale-110' : ''}`}>
           {icon}
         </div>
         <div className="flex-1 space-y-3">
@@ -58,11 +59,20 @@ export default function StrategyCard({
           </p>
           <div className="flex flex-wrap gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-emerald-500/10 to-emerald-600/10 border border-emerald-400/20 text-emerald-300 backdrop-blur-xl">
-              <span className="text-dark-400">📊</span>
+              <svg className="w-3 h-3 text-dark-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
               <span className="font-bold">{compression}</span>
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-400/20 text-cyan-300 backdrop-blur-xl">
-              <span className="text-dark-400">🎯</span>
+              <svg className="w-3 h-3 text-dark-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                <line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
               <span className="font-semibold">{bestFor}</span>
             </span>
           </div>

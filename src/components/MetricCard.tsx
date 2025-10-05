@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface MetricCardProps {
   label: string;
   value: string | number;
   suffix?: string;
-  icon?: string;
+  icon?: ReactNode;
   color?: 'primary' | 'success' | 'info' | 'accent';
 }
 
