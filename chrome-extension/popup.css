@@ -1,0 +1,549 @@
+/* ============================================
+   LLM Optimizer - Chrome Extension Styles
+   Dark theme matching the Next.js app design
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  width: 450px;
+  max-height: 600px;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #e0e0e0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+header {
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(138, 43, 226, 0.3);
+}
+
+h1 {
+  font-size: 1.6em;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 0.85em;
+  color: #a0a0b0;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.1em;
+  color: #b0c4de;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1em;
+  color: #e0e0e0;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+/* ============================================
+   Strategy Selection
+   ============================================ */
+
+.strategy-section {
+  margin-bottom: 5px;
+}
+
+.strategy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.strategy-card {
+  background: rgba(43, 43, 77, 0.6);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(90, 90, 138, 0.5);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.strategy-card:hover {
+  border-color: rgba(138, 43, 226, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+.strategy-card.active {
+  border-color: #8a2be2;
+  background: rgba(138, 43, 226, 0.15);
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+}
+
+.strategy-card:focus {
+  outline: 2px solid #8a2be2;
+  outline-offset: 2px;
+}
+
+.strategy-icon {
+  font-size: 2em;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.strategy-card p {
+  font-size: 0.75em;
+  line-height: 1.4;
+  color: #a0a0b0;
+  margin-bottom: 10px;
+  min-height: 42px;
+}
+
+.strategy-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(74, 74, 109, 0.8);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7em;
+  color: #b0c4de;
+  font-weight: 500;
+}
+
+/* ============================================
+   Input Section
+   ============================================ */
+
+.input-section label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.char-counter {
+  font-size: 0.8em;
+  color: #7b68ee;
+  font-weight: 500;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 2px solid rgba(90, 90, 138, 0.5);
+  border-radius: 8px;
+  background: rgba(43, 43, 77, 0.6);
+  backdrop-filter: blur(10px);
+  color: #e0e0e0;
+  font-size: 0.9em;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #8a2be2;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+}
+
+textarea::placeholder {
+  color: #6a6a8a;
+}
+
+textarea[readonly] {
+  cursor: default;
+  background: rgba(43, 43, 77, 0.4);
+}
+
+#compressedPromptOutput {
+  min-height: 80px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85em;
+}
+
+.input-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+button {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  padding: 12px 16px;
+  background: rgba(74, 74, 109, 0.6);
+  color: #e0e0e0;
+}
+
+.btn-secondary:hover {
+  background: rgba(90, 90, 138, 0.8);
+  transform: translateY(-2px);
+}
+
+.btn-icon-small {
+  background: rgba(74, 74, 109, 0.8);
+  color: #e0e0e0;
+  padding: 6px 12px;
+  font-size: 0.85em;
+  border-radius: 6px;
+}
+
+.btn-icon-small:hover {
+  background: rgba(138, 43, 226, 0.6);
+  transform: scale(1.05);
+}
+
+.btn-icon {
+  font-size: 1.1em;
+}
+
+/* ============================================
+   Loading State
+   ============================================ */
+
+#loadingState {
+  text-align: center;
+  padding: 20px;
+  background: rgba(43, 43, 77, 0.6);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 15px;
+  border: 4px solid rgba(138, 43, 226, 0.2);
+  border-top-color: #8a2be2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+#loadingState p {
+  color: #a0a0b0;
+  font-size: 0.9em;
+}
+
+/* ============================================
+   Error Messages
+   ============================================ */
+
+.error-banner {
+  background: rgba(220, 38, 38, 0.15);
+  border: 2px solid rgba(220, 38, 38, 0.5);
+  border-radius: 8px;
+  padding: 12px;
+  color: #fca5a5;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-banner::before {
+  content: '⚠️';
+  font-size: 1.2em;
+}
+
+/* ============================================
+   Results Section
+   ============================================ */
+
+#results {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.stat-card {
+  background: rgba(43, 43, 77, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(90, 90, 138, 0.3);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+}
+
+.stat-value {
+  font-size: 1.8em;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.75em;
+  color: #a0a0b0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Cost Card */
+.cost-card {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(21, 128, 61, 0.2) 100%);
+  border: 2px solid rgba(34, 197, 94, 0.4);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+}
+
+.cost-label {
+  font-size: 0.85em;
+  color: #86efac;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.cost-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+/* Output Section */
+.output-section {
+  background: rgba(43, 43, 77, 0.4);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(90, 90, 138, 0.3);
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.output-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Comparison Section */
+.comparison-section {
+  background: rgba(43, 43, 77, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.comparison-item {
+  background: rgba(43, 43, 77, 0.6);
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid rgba(90, 90, 138, 0.3);
+}
+
+.comparison-item h4 {
+  margin-bottom: 8px;
+  font-size: 0.9em;
+}
+
+.comparison-meta {
+  font-size: 0.75em;
+  color: #7b68ee;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.comparison-item textarea {
+  min-height: 100px;
+  font-size: 0.8em;
+}
+
+/* Symbol Reference */
+#symbolReference {
+  background: rgba(43, 43, 77, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(90, 90, 138, 0.3);
+}
+
+.symbols-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.symbol-item {
+  background: rgba(74, 74, 109, 0.6);
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  font-size: 0.75em;
+  transition: transform 0.2s ease;
+}
+
+.symbol-item:hover {
+  transform: scale(1.1);
+  background: rgba(138, 43, 226, 0.4);
+}
+
+.symbol-char {
+  font-size: 1.5em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.symbol-meaning {
+  color: #a0a0b0;
+  font-size: 0.85em;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(90, 90, 138, 0.3);
+  font-size: 0.8em;
+}
+
+.settings-link {
+  color: #7b68ee;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+}
+
+.settings-link:hover {
+  color: #a78bfa;
+}
+
+.version {
+  color: #6a6a8a;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(43, 43, 77, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(138, 43, 226, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(138, 43, 226, 0.7);
+}

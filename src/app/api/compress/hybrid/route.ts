@@ -5,8 +5,10 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { hybridCompressor } from '@/lib/hybrid-compressor';
+import { analyticsService } from '@/lib/analytics-service';
 
 export async function POST(request: NextRequest) {
+  const startTime = Date.now();
   try {
     const { prompt } = await request.json();
 
@@ -26,6 +28,24 @@ export async function POST(request: NextRequest) {
 
     // Apply hybrid semantic compression with AI deep learning pass
     const result = await hybridCompressor.compress(prompt, true);
+
+    // Track analytics
+    const processingTime = Date.now() - startTime;
+    const originalTokens = Math.ceil(result.original.length / 4);
+    const compressedTokens = Math.ceil(result.compressed.length / 4);
+    
+    analyticsService.trackCompression({
+      timestamp: Date.now(),
+      strategy: 'hybrid',
+      originalTokens,
+      compressedTokens,
+      compressionRatio: result.compressionRatio,
+      tokensSaved: result.estimatedTokenSavings,
+      processingTime,
+      semanticScore: result.semanticScore,
+      promptCategory: 'general',
+      success: true
+    });
 
     return NextResponse.json({
       original: result.original,
@@ -63,6 +83,22 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Hybrid compression error:', error);
+    
+    // Track failed compression
+    analyticsService.trackCompression({
+      timestamp: Date.now(),
+      strategy: 'hybrid',
+      originalTokens: 0,
+      compressedTokens: 0,
+      compressionRatio: 0,
+      tokensSaved: 0,
+      processingTime: Date.now() - startTime,
+      semanticScore: 0,
+      promptCategory: 'general',
+      success: false,
+      errorType: error instanceof Error ? error.message : 'Unknown error'
+    });
+    
     return NextResponse.json(
       {
         error: 'Failed to compress prompt',

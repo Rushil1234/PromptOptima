@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { LLMLinguaEngine } from '@/lib/llmlingua';
+import { analyticsService } from '@/lib/analytics-service';
 
 export async function POST(request: NextRequest) {
+  const startTime = Date.now();
   try {
     const { prompt, targetRatio = 0.5 } = await request.json();
 
@@ -36,11 +38,45 @@ export async function POST(request: NextRequest) {
       timeoutPromise
     ]) as any;
 
+    // Track analytics
+    const processingTime = Date.now() - startTime;
+    const originalTokens = Math.ceil(prompt.length / 4);
+    const compressedTokens = Math.ceil(result.compressed.length / 4);
+    const tokensSaved = originalTokens - compressedTokens;
+    
+    analyticsService.trackCompression({
+      timestamp: Date.now(),
+      strategy: 'llmlingua',
+      originalTokens,
+      compressedTokens,
+      compressionRatio: result.compressionRatio,
+      tokensSaved,
+      processingTime,
+      semanticScore: result.semanticScore || 95,
+      promptCategory: 'general',
+      success: true
+    });
+
     return NextResponse.json(result);
   } catch (error) {
     console.error('LLMLingua compression error:', error);
     
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    
+    // Track failed compression
+    analyticsService.trackCompression({
+      timestamp: Date.now(),
+      strategy: 'llmlingua',
+      originalTokens: 0,
+      compressedTokens: 0,
+      compressionRatio: 0,
+      tokensSaved: 0,
+      processingTime: Date.now() - startTime,
+      semanticScore: 0,
+      promptCategory: 'general',
+      success: false,
+      errorType: errorMessage
+    });
     
     if (errorMessage.includes('timeout')) {
       return NextResponse.json(

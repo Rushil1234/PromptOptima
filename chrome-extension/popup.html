@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Optimizer</title>
+  <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🚀 LLM Optimizer</h1>
+      <p class="subtitle">Intelligent middleware for prompt compression</p>
+    </header>
+
+    <!-- Strategy Selection -->
+    <section class="strategy-section">
+      <h3>Select Optimization Strategy</h3>
+      <div class="strategy-grid">
+        <div class="strategy-card active" id="llmlingua-card" data-strategy="llmlingua" role="radio" aria-checked="true" tabindex="0">
+          <div class="strategy-icon">🤖</div>
+          <h4>LLMLingua</h4>
+          <p>AI-powered semantic analysis removes non-essential words while preserving meaning</p>
+          <div class="strategy-badges">
+            <span class="badge">60-80% compression</span>
+            <span class="badge">Best for: Any prompt</span>
+          </div>
+        </div>
+        
+        <div class="strategy-card" id="synthlang-card" data-strategy="synthlang" role="radio" aria-checked="false" tabindex="0">
+          <div class="strategy-icon">📊</div>
+          <h4>SynthLang</h4>
+          <p>Symbol-based compression using 753 kanji characters for ultra-dense encoding</p>
+          <div class="strategy-badges">
+            <span class="badge">60-93% compression</span>
+            <span class="badge">Best for: Technical content</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Input Section -->
+    <section class="input-section">
+      <label for="promptInput">
+        <h3>Enter Your Prompt</h3>
+        <span class="char-counter" id="charCounter">0 characters (~0 tokens)</span>
+      </label>
+      <textarea 
+        id="promptInput" 
+        placeholder="Enter the prompt you want to optimize and compress..."
+        aria-label="Prompt input"
+        aria-describedby="charCounter"
+      ></textarea>
+      
+      <div class="input-actions">
+        <button id="compressButton" class="btn-primary">
+          <span class="btn-icon">⚡</span>
+          Compress Prompt
+        </button>
+        <button id="clearButton" class="btn-secondary" title="Clear input">
+          <span class="btn-icon">🗑️</span>
+          Clear
+        </button>
+      </div>
+    </section>
+
+    <!-- Loading State -->
+    <div id="loadingState" style="display: none;">
+      <div class="loading-spinner"></div>
+      <p>Compressing your prompt...</p>
+    </div>
+
+    <!-- Error Messages -->
+    <div id="errorMessages" class="error-banner" style="display: none;"></div>
+
+    <!-- Results Section -->
+    <section id="results" style="display: none;">
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="compressionRatio">--%</div>
+          <div class="stat-label">Compression Ratio</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="tokensSaved">--</div>
+          <div class="stat-label">Tokens Saved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="originalLength">--</div>
+          <div class="stat-label">Original Chars</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="compressedLength">--</div>
+          <div class="stat-label">Compressed Chars</div>
+        </div>
+      </div>
+
+      <!-- Cost Savings -->
+      <div class="cost-card">
+        <div class="cost-label">💰 Estimated Cost Savings</div>
+        <div class="cost-value" id="costSavings">$0.0000</div>
+      </div>
+
+      <!-- Compressed Output -->
+      <div class="output-section">
+        <div class="output-header">
+          <h3>Compressed Prompt</h3>
+          <div class="output-actions">
+            <button id="copyButton" class="btn-icon-small" title="Copy to clipboard">
+              📋 Copy
+            </button>
+            <button id="exportButton" class="btn-icon-small" title="Export as JSON">
+              💾 Export
+            </button>
+          </div>
+        </div>
+        <textarea id="compressedPromptOutput" readonly aria-label="Compressed prompt output"></textarea>
+      </div>
+
+      <!-- Before & After Comparison -->
+      <div class="comparison-section">
+        <h3>Before & After Comparison</h3>
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <h4>📝 Original</h4>
+            <div class="comparison-meta" id="originalMeta">-- chars</div>
+            <textarea id="originalPromptDisplay" readonly></textarea>
+          </div>
+          <div class="comparison-item">
+            <h4>✨ Compressed</h4>
+            <div class="comparison-meta" id="compressedMeta">-- chars</div>
+            <textarea id="compressedPromptDisplay" readonly></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Symbol Reference (for SynthLang) -->
+      <div id="symbolReference" style="display: none;">
+        <h3>Symbol Reference</h3>
+        <div id="symbolsList" class="symbols-grid"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <a href="options.html" target="_blank" class="settings-link">⚙️ Settings</a>
+      <span class="version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

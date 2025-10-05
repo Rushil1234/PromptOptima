@@ -8,6 +8,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { ultraCompressor } from '@/lib/ultra-compressor';
+import { analyticsService } from '@/lib/analytics-service';
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,6 +51,23 @@ export async function POST(request: NextRequest) {
     // Get detailed stats
     const stats = ultraCompressor.getCompressionStats(result);
 
+    // Track analytics
+    const originalTokens = Math.ceil(result.original.length / 4);
+    const compressedTokens = Math.ceil(result.compressed.length / 4);
+    
+    analyticsService.trackCompression({
+      timestamp: Date.now(),
+      strategy: 'hybrid', // Track as hybrid since ultra is hybrid + more
+      originalTokens,
+      compressedTokens,
+      compressionRatio: result.totalCompressionRatio,
+      tokensSaved: result.totalTokensSaved,
+      processingTime: Date.now() - startTime,
+      semanticScore: result.overallSemanticScore,
+      promptCategory: 'general',
+      success: true
+    });
+
     return NextResponse.json({
       original: result.original,
       compressed: result.compressed,
@@ -83,6 +101,22 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Ultra compression error:', error);
+    
+    // Track failed compression
+    analyticsService.trackCompression({
+      timestamp: Date.now(),
+      strategy: 'hybrid',
+      originalTokens: 0,
+      compressedTokens: 0,
+      compressionRatio: 0,
+      tokensSaved: 0,
+      processingTime: 0,
+      semanticScore: 0,
+      promptCategory: 'general',
+      success: false,
+      errorType: error instanceof Error ? error.message : 'Unknown error'
+    });
+    
     return NextResponse.json(
       {
         error: 'Failed to compress prompt with Ultra strategy',

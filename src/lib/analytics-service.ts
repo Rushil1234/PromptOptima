@@ -392,5 +392,6 @@ class AnalyticsService {
 // Export singleton instance
 export const analyticsService = new AnalyticsService();
 
-// Generate mock data for demo (works on both client and server)
-analyticsService.generateMockData(500);
+// NO FAKE DATA - Dashboard will only show real compression data
+// Analytics will be empty until you compress prompts
+
