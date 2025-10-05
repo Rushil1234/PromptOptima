@@ -190,7 +190,8 @@ export default function Chatbot({
   };
 
   return (
-    <GlassPanel className="flex flex-col h-[600px] overflow-hidden">
+    <div className="h-[600px] flex flex-col">
+      <GlassPanel className="flex flex-col h-full overflow-hidden">
       {/* Header */}
       <div className="flex-shrink-0 mb-3 pb-3 border-b border-dark-700">
         <div className="flex items-center justify-between">
@@ -601,6 +602,7 @@ export default function Chatbot({
 
       {/* Toast Notifications */}
       <ToastContainer toasts={toasts} removeToast={removeToast} />
-    </GlassPanel>
+      </GlassPanel>
+    </div>
   );
 }
